@@ -54,7 +54,10 @@ export function Contact() {
   };
 
   return (
-    <section id="contacto" className="scroll-mt-24 border-t border-border bg-muted/40 py-24 md:py-32">
+    <section
+      id="contacto"
+      className="scroll-mt-24 border-t border-border bg-muted/40 py-24 md:py-32"
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Contacto"

@@ -1,7 +1,6 @@
 export const SITE = {
   name: "D&C Innovación",
-  tagline:
-    "Personalizamos tus ideas con grabado láser, impresión 3D y productos únicos.",
+  tagline: "Personalizamos tus ideas con grabado láser, impresión 3D y productos únicos.",
   whatsapp: "618 444 4686",
   whatsappUrl: "https://wa.me/526184444686",
   facebook: "https://www.facebook.com/profile.php?id=61567450161287",

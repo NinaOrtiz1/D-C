@@ -87,11 +87,7 @@ export function AIDesigner() {
 
               <div className="mt-6 flex items-center gap-3">
                 <Button variant="wine" size="xl" onClick={handleGenerate} disabled={loading}>
-                  {loading ? (
-                    <RefreshCcw className="animate-spin" />
-                  ) : (
-                    <Wand2 />
-                  )}
+                  {loading ? <RefreshCcw className="animate-spin" /> : <Wand2 />}
                   {loading ? "Generando…" : "Generar Diseño"}
                 </Button>
                 <p className="text-xs text-muted-foreground">Vista previa conceptual</p>
@@ -138,7 +134,12 @@ export function AIDesigner() {
                         </li>
                       ))}
                     </ul>
-                    <Button asChild variant="wineGhost" size="lg" className="mt-6 w-full rounded-full">
+                    <Button
+                      asChild
+                      variant="wineGhost"
+                      size="lg"
+                      className="mt-6 w-full rounded-full"
+                    >
                       <a href="#contacto">Cotizar este diseño</a>
                     </Button>
                   </motion.article>

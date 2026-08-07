@@ -13,7 +13,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 
-
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -82,8 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "D&C Innovación" },
       {
         name: "description",
-        content:
-          "Productos personalizados con grabado láser, impresión 3D y diseño a medida.",
+        content: "Productos personalizados con grabado láser, impresión 3D y diseño a medida.",
       },
       { name: "author", content: "D&C Innovación" },
       { property: "og:type", content: "website" },
@@ -135,4 +133,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

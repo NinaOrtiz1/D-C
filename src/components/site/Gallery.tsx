@@ -13,13 +13,7 @@ import empresarial from "@/assets/g-empresarial.jpg";
 import tazas from "@/assets/g-tazas.jpg";
 
 type Category =
-  | "Todos"
-  | "Vasos"
-  | "Grabado Láser"
-  | "Impresión 3D"
-  | "Llaveros"
-  | "Termos"
-  | "Empresarial";
+  "Todos" | "Vasos" | "Grabado Láser" | "Impresión 3D" | "Llaveros" | "Termos" | "Empresarial";
 
 const categories: Category[] = [
   "Todos",
@@ -33,11 +27,26 @@ const categories: Category[] = [
 
 const items: { src: string; alt: string; category: Exclude<Category, "Todos">; ratio: string }[] = [
   { src: vasos, alt: "Vaso térmico negro personalizado", category: "Vasos", ratio: "4/5" },
-  { src: laser, alt: "Grabado láser sobre placa de madera", category: "Grabado Láser", ratio: "1/1" },
-  { src: tridi, alt: "Impresora 3D imprimiendo una pieza geométrica", category: "Impresión 3D", ratio: "3/4" },
+  {
+    src: laser,
+    alt: "Grabado láser sobre placa de madera",
+    category: "Grabado Láser",
+    ratio: "1/1",
+  },
+  {
+    src: tridi,
+    alt: "Impresora 3D imprimiendo una pieza geométrica",
+    category: "Impresión 3D",
+    ratio: "3/4",
+  },
   { src: llaveros, alt: "Llaveros metálicos grabados", category: "Llaveros", ratio: "1/1" },
   { src: termos, alt: "Termos de acero personalizados", category: "Termos", ratio: "4/5" },
-  { src: empresarial, alt: "Kit de regalos empresariales personalizados", category: "Empresarial", ratio: "8/9" },
+  {
+    src: empresarial,
+    alt: "Kit de regalos empresariales personalizados",
+    category: "Empresarial",
+    ratio: "8/9",
+  },
   { src: tazas, alt: "Tazas de cerámica personalizadas", category: "Vasos", ratio: "1/1" },
 ];
 
@@ -67,7 +76,10 @@ export function Gallery() {
   const filtered = active === "Todos" ? items : items.filter((i) => i.category === active);
 
   return (
-    <section id="galeria" className="scroll-mt-24 border-t border-border bg-muted/40 py-24 md:py-32">
+    <section
+      id="galeria"
+      className="scroll-mt-24 border-t border-border bg-muted/40 py-24 md:py-32"
+    >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Galería"

@@ -4,10 +4,22 @@ import { Reveal, SectionHeading } from "@/components/motion/Reveal";
 
 const steps = [
   { title: "Nos contactas", text: "Por WhatsApp, redes sociales o el formulario de cotización." },
-  { title: "Nos envías tu idea", text: "Una foto, un boceto, un logotipo o simplemente una descripción." },
-  { title: "Diseñamos una propuesta", text: "Preparamos el arte y te mostramos cómo se verá en el producto." },
-  { title: "Apruebas el diseño", text: "Ajustamos los detalles hasta que quede exactamente como lo imaginas." },
-  { title: "Fabricamos", text: "Grabado láser, impresión 3D o sublimación con control de calidad." },
+  {
+    title: "Nos envías tu idea",
+    text: "Una foto, un boceto, un logotipo o simplemente una descripción.",
+  },
+  {
+    title: "Diseñamos una propuesta",
+    text: "Preparamos el arte y te mostramos cómo se verá en el producto.",
+  },
+  {
+    title: "Apruebas el diseño",
+    text: "Ajustamos los detalles hasta que quede exactamente como lo imaginas.",
+  },
+  {
+    title: "Fabricamos",
+    text: "Grabado láser, impresión 3D o sublimación con control de calidad.",
+  },
   { title: "Entregamos", text: "Entrega local o envío a todo México, empacado y protegido." },
 ];
 
@@ -38,9 +50,7 @@ export function Process() {
                     whileHover={{ y: -4 }}
                     className="rounded-3xl border border-border bg-card p-6 shadow-soft"
                   >
-                    <span className="font-display text-sm font-semibold text-wine">
-                      0{i + 1}
-                    </span>
+                    <span className="font-display text-sm font-semibold text-wine">0{i + 1}</span>
                     <h3 className="mt-2 font-display text-xl font-semibold">{step.title}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {step.text}
