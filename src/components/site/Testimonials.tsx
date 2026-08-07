@@ -37,7 +37,7 @@ export function Testimonials() {
     return () => window.clearInterval(id);
   }, []);
 
-  const item = testimonials[index];
+  const item = testimonials[index] ?? testimonials[0]!;
 
   return (
     <section className="border-t border-border bg-muted/40 py-24 md:py-32">
