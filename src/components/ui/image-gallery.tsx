@@ -62,7 +62,7 @@ function Lightbox({ images, index, onClose, onChange }: {
   onClose: () => void;
   onChange: (nextIndex: number) => void;
 }) {
-  const image = images[index];
+  const image = images[index] ?? images[0]!;
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
   const pointerMap = useRef(new Map<number, Point>());
@@ -388,9 +388,11 @@ function Lightbox({ images, index, onClose, onChange }: {
 export function ImageGallery({ images, children }: ImageGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
+  const validImages = images.filter((image) => image.src.trim());
+
   const open = useCallback((index: number) => {
-    if (images[index]) setActiveIndex(index);
-  }, [images]);
+    if (validImages[index]) setActiveIndex(index);
+  }, [validImages]);
 
   const close = useCallback(() => setActiveIndex(null), []);
 
@@ -398,10 +400,10 @@ export function ImageGallery({ images, children }: ImageGalleryProps) {
     <>
       {children({ open })}
       <AnimatePresence>
-        {activeIndex !== null ? (
+        {activeIndex !== null && validImages.length > 0 ? (
           <Lightbox
-            images={images}
-            index={activeIndex}
+            images={validImages}
+            index={Math.min(activeIndex, validImages.length - 1)}
             onClose={close}
             onChange={setActiveIndex}
           />
