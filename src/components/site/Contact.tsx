@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Reveal, SectionHeading } from "@/components/motion/Reveal";
 import { SITE } from "@/lib/site";
+import { apiUrl, fetchWithTimeout } from "@/lib/api";
 
 const schema = z.object({
   name: z.string().min(2, "Escribe tu nombre completo."),
@@ -40,15 +41,40 @@ export function Contact() {
     defaultValues: { name: "", phone: "", message: "" },
   });
 
-  // Preparado para conectarse a un endpoint del backend (Express + PostgreSQL).
   const onSubmit = async (values: FormValues) => {
     setSending(true);
-    await new Promise((r) => setTimeout(r, 900));
-    setSending(false);
-    toast.success("Solicitud enviada", {
-      description: `Gracias ${values.name}, te contactaremos muy pronto.`,
-    });
-    form.reset();
+
+    try {
+      const response = await fetchWithTimeout(apiUrl("/contact"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: values.name,
+          telefono: values.phone,
+          mensaje: values.message,
+        }),
+      });
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(payload?.message || "No se pudo enviar la solicitud.");
+      }
+
+      toast.success("Solicitud enviada", {
+        description: `Gracias ${values.name}, te contactaremos muy pronto.`,
+      });
+      form.reset();
+    } catch (submitError) {
+      toast.error(
+        submitError instanceof DOMException && submitError.name === "AbortError"
+          ? "El servidor tardó demasiado en responder. Inténtalo de nuevo."
+          : submitError instanceof Error
+            ? submitError.message
+            : "No se pudo enviar la solicitud. Inténtalo de nuevo.",
+      );
+    } finally {
+      setSending(false);
+    }
   };
 
   return (

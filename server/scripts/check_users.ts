@@ -7,10 +7,9 @@ dotenv.config();
 const API_BASE = process.env.VITE_API_URL ?? 'http://localhost:4000';
 
 const knownCredentials: Record<string, string> = {
-  'admin@dcinnovacion.mx': 'D&C123!',
-  'editor@dcinnovacion.mx': 'Editor123!@#',
-  'cliente1@dcinnovacion.mx': 'Cliente123!@#',
-  'cliente2@dcinnovacion.mx': 'Cliente123!@#',
+  [process.env.SEED_ADMIN_EMAIL ?? '']: process.env.SEED_ADMIN_PASSWORD ?? '',
+  [process.env.SEED_EDITOR_EMAIL ?? '']: process.env.SEED_EDITOR_PASSWORD ?? '',
+  [process.env.SEED_CLIENT_EMAIL ?? '']: process.env.SEED_CLIENT_PASSWORD ?? '',
 };
 
 function fmt(v: any) {

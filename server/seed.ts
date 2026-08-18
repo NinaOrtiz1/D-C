@@ -6,6 +6,15 @@ import { ActivityLog, Banner, Category, Comment, Contact, FAQ, LoginHistory, New
 
 dotenv.config();
 
+function getSeedPassword(name: string) {
+  const password = process.env[name]?.trim();
+  if (!password) {
+    throw new Error(`${name} no está configurada. Define las contraseñas del seed antes de ejecutarlo.`);
+  }
+
+  return password;
+}
+
 async function seed() {
   await connectDatabase();
 
@@ -15,9 +24,9 @@ async function seed() {
     process.exit(0);
   }
 
-  const adminPassword = await hashPassword("D&C123!");
-  const editorPassword = await hashPassword("Editor123!@#");
-  const clientPassword = await hashPassword("Cliente123!@#");
+  const adminPassword = await hashPassword(getSeedPassword("SEED_ADMIN_PASSWORD"));
+  const editorPassword = await hashPassword(getSeedPassword("SEED_EDITOR_PASSWORD"));
+  const clientPassword = await hashPassword(getSeedPassword("SEED_CLIENT_PASSWORD"));
 
   const admin = await User.create({
     nombre: "Administrador",
@@ -163,8 +172,6 @@ async function seed() {
   ]);
 
   console.log("Seed ejecutado correctamente.");
-  console.log("Admin credentials: admin@dcinnovacion.mx / D&C123!");
-  console.log("Editor credentials: editor@dcinnovacion.mx / Editor123!@#");
   process.exit(0);
 }
 

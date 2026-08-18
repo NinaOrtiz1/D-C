@@ -224,6 +224,50 @@
   box-shadow: var(--shadow-premium);
 }
 
+@utility viewer-button {
+  display: inline-flex;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid oklch(1 0 0 / 20%);
+  background-color: oklch(0 0 0 / 35%);
+  color: white;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+@utility viewer-nav-button {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: inline-flex;
+  height: 3rem;
+  width: 3rem;
+  transform: translateY(-50%);
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid oklch(1 0 0 / 20%);
+  background-color: oklch(0 0 0 / 40%);
+  color: white;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+@media (hover: hover) {
+  .viewer-button:hover,
+  .viewer-nav-button:hover {
+    border-color: oklch(1 0 0 / 45%);
+    background-color: oklch(1 0 0 / 18%);
+  }
+}
+
+.viewer-button:focus-visible,
+.viewer-nav-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
 @utility skeleton-shimmer {
   position: relative;
   overflow: hidden;

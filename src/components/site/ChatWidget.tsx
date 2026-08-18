@@ -5,7 +5,7 @@ import { MessageSquare, Send, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { apiUrl } from "@/lib/api";
+import { apiUrl, fetchWithTimeout } from "@/lib/api";
 
 type Message = { id: string; role: "bot" | "user"; text: string };
 
@@ -91,7 +91,7 @@ export function ChatWidget() {
     setTyping(true);
 
     try {
-      const response = await fetch(apiUrl('/chat'), {
+      const response = await fetchWithTimeout(apiUrl('/chat'), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

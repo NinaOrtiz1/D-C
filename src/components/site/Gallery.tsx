@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { X } from "lucide-react";
 
 import { Reveal, SectionHeading } from "@/components/motion/Reveal";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ImageGallery } from "@/components/ui/image-gallery";
 import {
   Carousel,
   CarouselContent,
@@ -101,7 +101,7 @@ function GalleryImage({ src, alt, ratio }: { src: string; alt: string; ratio: st
         <Skeleton className="absolute inset-0 h-full w-full rounded-[1.4rem]" />
       ) : null}
       {failed ? (
-        <div className="flex h-full w-full items-center justify-center rounded-[1.4rem] bg-gradient-to-br from-wine-soft to-muted px-4 text-center text-sm font-medium text-muted-foreground">
+          <div className="flex h-full w-full items-center justify-center rounded-[1.4rem] bg-linear-to-br from-wine-soft to-muted px-4 text-center text-sm font-medium text-muted-foreground">
           {alt}
         </div>
       ) : (
@@ -123,9 +123,9 @@ function GalleryImage({ src, alt, ratio }: { src: string; alt: string; ratio: st
 
 export function Gallery() {
   const [active, setActive] = useState<Category>("Todos");
-  const [lightbox, setLightbox] = useState<{ src: string; alt: string } | null>(null);
 
   const filtered = active === "Todos" ? items : items.filter((i) => i.category === active);
+  const viewerImages = filtered.map(({ src, alt }) => ({ src, alt }));
 
   return (
     <section
@@ -164,94 +164,67 @@ export function Gallery() {
         </Reveal>
 
         <div className="mt-12">
-          <div className="hidden lg:block">
-            <motion.div
-              layout
-              className="columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4 *:mb-5"
-            >
-              <AnimatePresence mode="popLayout">
-                {filtered.map((item) => (
-                  <motion.button
-                    key={item.src}
+          <ImageGallery images={viewerImages}>
+            {({ open }) => (
+              <>
+                <div className="hidden lg:block">
+                  <motion.div
                     layout
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    onClick={() => setLightbox({ src: item.src, alt: item.alt })}
-                    aria-label={`Ampliar imagen: ${item.alt}`}
-                    className="group relative block w-full break-inside-avoid overflow-hidden rounded-[1.9rem] border border-border bg-card p-1.5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float"
+                    className="columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4 *:mb-5"
                   >
-                    <GalleryImage src={item.src} alt={item.alt} ratio={item.ratio} />
-                  </motion.button>
-                ))}
-              </AnimatePresence>
-            </motion.div>
-          </div>
+                    <AnimatePresence mode="popLayout">
+                      {filtered.map((item, index) => (
+                        <motion.button
+                          key={item.src}
+                          layout
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                          onClick={() => open(index)}
+                          aria-label={`Ampliar imagen: ${item.alt}`}
+                          className="group relative block w-full break-inside-avoid overflow-hidden rounded-[1.9rem] border border-border bg-card p-1.5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float"
+                        >
+                          <GalleryImage src={item.src} alt={item.alt} ratio={item.ratio} />
+                        </motion.button>
+                      ))}
+                    </AnimatePresence>
+                  </motion.div>
+                </div>
 
-          <div className="lg:hidden">
-            <Carousel className="relative">
-              <CarouselContent className="flex touch-pan-x pb-4">
-                {filtered.map((item) => (
-                  <CarouselItem key={item.src} className="px-4">
-                    <motion.button
-                      layout
-                      initial={{ opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      onClick={() => setLightbox({ src: item.src, alt: item.alt })}
-                      aria-label={`Ampliar imagen: ${item.alt}`}
-                      className="group relative w-[min(92vw,320px)] overflow-hidden rounded-[1.9rem] border border-border bg-card p-1.5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float"
-                    >
-                      <GalleryImage src={item.src} alt={item.alt} ratio={item.ratio} />
-                    </motion.button>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
+                <div className="lg:hidden">
+                  <Carousel className="relative">
+                    <CarouselContent className="flex touch-pan-x pb-4">
+                      {filtered.map((item, index) => (
+                        <CarouselItem key={item.src} className="px-4">
+                          <motion.button
+                            layout
+                            initial={{ opacity: 0, scale: 0.96 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                            onClick={() => open(index)}
+                            aria-label={`Ampliar imagen: ${item.alt}`}
+                            className="group relative w-[min(92vw,320px)] overflow-hidden rounded-[1.9rem] border border-border bg-card p-1.5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float"
+                          >
+                            <GalleryImage src={item.src} alt={item.alt} ratio={item.ratio} />
+                          </motion.button>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
 
-              {filtered.length > 1 ? (
-                <>
-                  <CarouselPrevious className="-left-2 top-1/2 hidden h-10 w-10 rounded-full border border-border bg-background/95 text-foreground shadow-soft md:flex" />
-                  <CarouselNext className="-right-2 top-1/2 hidden h-10 w-10 rounded-full border border-border bg-background/95 text-foreground shadow-soft md:flex" />
-                </>
-              ) : null}
-            </Carousel>
-          </div>
+                    {filtered.length > 1 ? (
+                      <>
+                        <CarouselPrevious className="-left-2 top-1/2 hidden h-10 w-10 rounded-full border border-border bg-background/95 text-foreground shadow-soft md:flex" />
+                        <CarouselNext className="-right-2 top-1/2 hidden h-10 w-10 rounded-full border border-border bg-background/95 text-foreground shadow-soft md:flex" />
+                      </>
+                    ) : null}
+                  </Carousel>
+                </div>
+              </>
+            )}
+          </ImageGallery>
         </div>
       </div>
-
-      <AnimatePresence>
-        {lightbox ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            role="dialog"
-            aria-modal="true"
-            aria-label={lightbox.alt}
-            onClick={() => setLightbox(null)}
-            className="fixed inset-0 z-70 flex items-center justify-center bg-black/80 p-5 backdrop-blur-sm"
-          >
-            <button
-              onClick={() => setLightbox(null)}
-              aria-label="Cerrar imagen"
-              className="absolute top-5 right-5 inline-flex size-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10"
-            >
-              <X className="size-5" />
-            </button>
-            <motion.img
-              initial={{ scale: 0.92, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.94, opacity: 0 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              src={lightbox.src}
-              alt={lightbox.alt}
-              onClick={(e) => e.stopPropagation()}
-              className="max-h-[90vh] max-w-[min(92vw,900px)] w-full rounded-[2rem] border border-white/10 object-contain shadow-float"
-            />
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
     </section>
   );
 }

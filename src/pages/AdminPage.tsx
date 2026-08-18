@@ -21,7 +21,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useQuery } from '@tanstack/react-query';
-import { apiUrl } from '@/lib/api';
+import { apiUrl, fetchWithTimeout } from '@/lib/api';
 
 // Import new components
 import { DashboardStats } from '@/components/admin/DashboardStats';
@@ -33,9 +33,10 @@ import { QuickActions } from '@/components/admin/QuickActions';
 import { GlobalSearch } from '@/components/admin/GlobalSearch';
 
 const STORAGE_KEY = 'dyc-admin';
+const LOGIN_TIMEOUT_MS = 15000;
 
 interface DashboardData {
-  totals: {
+  totals?: {
     usuarios: number;
     productos: number;
     productosBajoStock: number;
@@ -43,6 +44,8 @@ interface DashboardData {
     noticias: number;
     mensajes: number;
   };
+  totalUsers?: number;
+  totalProducts?: number;
   categories?: number;
 }
 
@@ -117,7 +120,7 @@ export default function AdminPage() {
   const { data: dashboardData, isLoading: dashboardLoading, refetch: refetchDashboard } = useQuery({
     queryKey: ['dashboard-stats'],
     queryFn: async () => {
-      const res = await fetch(apiUrl('/dashboard'), {
+      const res = await fetchWithTimeout(apiUrl('/dashboard'), {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -127,12 +130,14 @@ export default function AdminPage() {
     },
     enabled: isAuthenticated && Boolean(authToken),
     staleTime: 30000,
+    retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   const { data: productsData, isLoading: productsLoading, refetch: refetchProducts } = useQuery({
     queryKey: ['products'],
     queryFn: async () => {
-      const res = await fetch(apiUrl('/products'), {
+      const res = await fetchWithTimeout(apiUrl('/products'), {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -141,12 +146,15 @@ export default function AdminPage() {
       return res.json();
     },
     enabled: isAuthenticated && Boolean(authToken),
+    staleTime: 30000,
+    retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   const { data: categoriesData, isLoading: categoriesLoading, refetch: refetchCategories } = useQuery({
     queryKey: ['categories'],
     queryFn: async () => {
-      const res = await fetch(apiUrl('/categories'), {
+      const res = await fetchWithTimeout(apiUrl('/categories'), {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -155,12 +163,15 @@ export default function AdminPage() {
       return res.json();
     },
     enabled: isAuthenticated && Boolean(authToken),
+    staleTime: 30000,
+    retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   const { data: newsData, isLoading: newsLoading, refetch: refetchNews } = useQuery({
     queryKey: ['news'],
     queryFn: async () => {
-      const res = await fetch(apiUrl('/news'), {
+      const res = await fetchWithTimeout(apiUrl('/news'), {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -169,12 +180,15 @@ export default function AdminPage() {
       return res.json();
     },
     enabled: isAuthenticated && Boolean(authToken),
+    staleTime: 30000,
+    retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   const { data: contactsData, isLoading: contactsLoading, refetch: refetchContacts } = useQuery({
     queryKey: ['contacts'],
     queryFn: async () => {
-      const res = await fetch(apiUrl('/contact'), {
+      const res = await fetchWithTimeout(apiUrl('/contact'), {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
@@ -183,6 +197,9 @@ export default function AdminPage() {
       return res.json();
     },
     enabled: isAuthenticated && Boolean(authToken),
+    staleTime: 30000,
+    retry: 1,
+    refetchOnWindowFocus: false,
   });
 
   const products = productsData?.data || [];
@@ -190,6 +207,8 @@ export default function AdminPage() {
   const news = newsData?.data || [];
   const contacts = contactsData?.data || [];
   const stats = dashboardData?.data;
+  const totalProducts = stats?.totals?.productos ?? stats?.totalProducts ?? 0;
+  const totalUsers = stats?.totals?.usuarios ?? stats?.totalUsers ?? 0;
 
   // Restore auth state
   useEffect(() => {
@@ -217,6 +236,9 @@ export default function AdminPage() {
     setIsSubmitting(true);
     setError('');
 
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), LOGIN_TIMEOUT_MS);
+
     try {
       const response = await fetch(apiUrl('/auth/login'), {
         method: 'POST',
@@ -224,6 +246,7 @@ export default function AdminPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        signal: controller.signal,
       });
 
       const payload = await response.json();
@@ -238,9 +261,14 @@ export default function AdminPage() {
       setIsAuthenticated(true);
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ isAuthenticated: true, token }));
       setForm({ email: '', password: '' });
-    } catch {
-      setError('No se pudo conectar con el servidor. Inténtalo de nuevo.');
+    } catch (loginError) {
+      if (loginError instanceof DOMException && loginError.name === 'AbortError') {
+        setError('El servidor tardó demasiado en responder. Inténtalo de nuevo.');
+      } else {
+        setError('No se pudo conectar con el servidor. Inténtalo de nuevo.');
+      }
     } finally {
+      window.clearTimeout(timeoutId);
       setIsSubmitting(false);
     }
   };
@@ -256,7 +284,7 @@ export default function AdminPage() {
     return [
       {
         label: 'Productos',
-        value: stats.totals?.productos || 0,
+        value: totalProducts,
         icon: <Package className="size-5 text-aether" />,
         description: 'registrados',
         color: 'bg-gradient-to-br from-aether/5 to-transparent',
@@ -270,7 +298,7 @@ export default function AdminPage() {
       },
       {
         label: 'Usuarios',
-        value: stats.totals?.usuarios || 0,
+        value: totalUsers,
         icon: <Users className="size-5 text-aether" />,
         description: 'registrados',
         color: 'bg-gradient-to-br from-aether/5 to-transparent',

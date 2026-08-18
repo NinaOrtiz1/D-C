@@ -5,8 +5,9 @@ import { Wand2, ImageIcon, RefreshCcw, AlertCircle, Download, RotateCcw } from "
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ImageGallery } from "@/components/ui/image-gallery";
 import { Reveal, SectionHeading } from "@/components/motion/Reveal";
-import { apiUrl } from "@/lib/api";
+import { apiUrl, fetchWithTimeout } from "@/lib/api";
 
 const suggestions = [
   "Quiero un vaso negro con un dragón rojo estilo japonés.",
@@ -35,7 +36,7 @@ export function AIDesigner() {
     setLastPrompt(value);
 
     try {
-      const response = await fetch(apiUrl('/generar-diseno'), {
+      const response = await fetchWithTimeout(apiUrl('/generar-diseno'), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: value }),
@@ -68,7 +69,7 @@ export function AIDesigner() {
 
   const handleDownload = async (imageUrl: string, fileName: string) => {
     try {
-      const response = await fetch(imageUrl);
+      const response = await fetchWithTimeout(imageUrl);
       const blob = await response.blob();
       const objectUrl = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
@@ -76,8 +77,12 @@ export function AIDesigner() {
       anchor.download = `${fileName}.png`;
       anchor.click();
       URL.revokeObjectURL(objectUrl);
-    } catch {
-      setError("No se pudo descargar la imagen. Intenta de nuevo.");
+    } catch (downloadError) {
+      setError(
+        downloadError instanceof DOMException && downloadError.name === "AbortError"
+          ? "La descarga tardó demasiado. Intenta de nuevo."
+          : "No se pudo descargar la imagen. Intenta de nuevo.",
+      );
     }
   };
 
@@ -163,7 +168,7 @@ export function AIDesigner() {
           </Reveal>
 
           <Reveal direction="left" delay={0.1}>
-            <div className="min-h-[520px] h-full rounded-[2rem] border border-border bg-muted/50 p-8 sm:p-10">
+            <div className="min-h-130 h-full rounded-[2rem] border border-border bg-muted/50 p-8 sm:p-10">
               <AnimatePresence mode="wait">
                 {loading ? (
                   <motion.div
@@ -197,40 +202,59 @@ export function AIDesigner() {
                     <p className="mt-4 font-display text-lg leading-snug font-semibold">
                       “{result.prompt}”
                     </p>
-                    <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                      {result.proposals.map((proposal) => (
-                        <div
-                          key={proposal.id}
-                          className="rounded-2xl border border-border bg-muted/40 p-3"
-                        >
-                          <div className="overflow-hidden rounded-xl border border-border bg-background">
-                            {proposal.failed ? (
-                              <div className="flex h-48 items-center justify-center px-4 text-center text-sm text-muted-foreground">
-                                No se pudo cargar esta propuesta.
-                              </div>
-                            ) : (
-                              <img
-                                src={proposal.imageUrl}
-                                alt={proposal.title}
-                                onError={() => markProposalAsFailed(proposal.id)}
-                                className="h-48 w-full object-cover"
-                              />
-                            )}
-                          </div>
-                          <div className="mt-3 flex items-center justify-between gap-2">
-                            <p className="text-sm font-medium">{proposal.title}</p>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => handleDownload(proposal.imageUrl, proposal.title)}
-                              className="h-8 rounded-full"
+                    <ImageGallery
+                      images={result.proposals.map((proposal) => ({
+                        src: proposal.imageUrl,
+                        alt: proposal.title,
+                        downloadName: proposal.title,
+                      }))}
+                    >
+                      {({ open }) => (
+                        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                          {result.proposals.map((proposal, index) => (
+                            <div
+                              key={proposal.id}
+                              className="rounded-2xl border border-border bg-muted/40 p-3"
                             >
-                              <Download className="size-3.5" />
-                            </Button>
-                          </div>
+                              <div className="overflow-hidden rounded-xl border border-border bg-background">
+                                {proposal.failed ? (
+                                  <div className="flex h-48 items-center justify-center px-4 text-center text-sm text-muted-foreground">
+                                    No se pudo cargar esta propuesta.
+                                  </div>
+                                ) : (
+                                  <button
+                                    type="button"
+                                    onClick={() => open(index)}
+                                    aria-label={`Ampliar propuesta: ${proposal.title}`}
+                                    className="group block w-full cursor-zoom-in"
+                                  >
+                                    <img
+                                      src={proposal.imageUrl}
+                                      alt={proposal.title}
+                                      loading="lazy"
+                                      decoding="async"
+                                      onError={() => markProposalAsFailed(proposal.id)}
+                                      className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                                    />
+                                  </button>
+                                )}
+                              </div>
+                              <div className="mt-3 flex items-center justify-between gap-2">
+                                <p className="text-sm font-medium">{proposal.title}</p>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => handleDownload(proposal.imageUrl, proposal.title)}
+                                  className="h-8 rounded-full"
+                                >
+                                  <Download className="size-3.5" />
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      )}
+                    </ImageGallery>
                     <ul className="mt-5 space-y-2.5">
                       {result.details.map((d) => (
                         <li key={d} className="flex gap-3 text-sm text-muted-foreground">

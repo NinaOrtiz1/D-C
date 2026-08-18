@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Layers3, ShieldCheck, Star, TrendingUp } from
 
 import { Button } from "@/components/ui/button";
 import { Reveal, SectionHeading } from "@/components/motion/Reveal";
+import { ImageGallery, InteractiveImage } from "@/components/ui/image-gallery";
 import { productCatalog, serviceCatalog, siteStats } from "@/lib/site-data";
 import { SITE, SOCIALS } from "@/lib/site";
 
@@ -58,10 +59,12 @@ export function HomePage() {
             >
               <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-card p-3 shadow-premium">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.12),transparent_30%)]" />
-                <img
-                  src={productCatalog[0]?.image}
+                <InteractiveImage
+                  src={productCatalog[0]?.image ?? ""}
                   alt="Productos personalizados"
-                  className="relative h-[440px] w-full rounded-[1.5rem] object-cover sm:h-[520px]"
+                  loading="eager"
+                  className="relative z-10 overflow-hidden rounded-[1.5rem]"
+                  imageClassName="relative h-[440px] w-full object-cover sm:h-[520px]"
                 />
               </div>
               <div className="absolute -left-3 bottom-6 rounded-2xl border border-border bg-background/90 p-4 shadow-premium backdrop-blur-sm">
@@ -87,10 +90,11 @@ export function HomePage() {
               <Reveal key={item.title} delay={index * 0.08}>
                 <article className="group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float">
                   <div className="overflow-hidden">
-                    <img
+                    <InteractiveImage
                       src={item.image}
                       alt={item.title}
-                      className="h-64 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="overflow-hidden"
+                      imageClassName="h-64 w-full object-cover"
                     />
                   </div>
                   <div className="p-6">
@@ -167,7 +171,12 @@ export function ProductsPage() {
         {productCatalog.map((product, index) => (
           <Reveal key={product.id} delay={index * 0.05}>
             <div className="overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float">
-              <img src={product.image} alt={product.name} className="h-60 w-full object-cover" />
+              <InteractiveImage
+                src={product.image}
+                alt={product.name}
+                className="overflow-hidden"
+                imageClassName="h-60 w-full object-cover"
+              />
               <div className="p-6">
                 <div className="flex items-center justify-between gap-3">
                   <span className="rounded-full bg-wine-soft px-2.5 py-1 text-xs font-medium text-wine">
@@ -217,7 +226,12 @@ export function ServicesPage() {
         {serviceCatalog.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.08}>
             <article className="overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium">
-              <img src={item.image} alt={item.title} className="h-64 w-full object-cover" />
+              <InteractiveImage
+                src={item.image}
+                alt={item.title}
+                className="overflow-hidden"
+                imageClassName="h-64 w-full object-cover"
+              />
               <div className="p-6">
                 <span className="inline-flex rounded-full bg-wine-soft px-3 py-1 text-xs font-semibold text-wine">
                   {item.accent}
@@ -255,10 +269,11 @@ export function AboutPage() {
     <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center">
         <div className="overflow-hidden rounded-[2rem] border border-border bg-card p-3 shadow-float">
-          <img
-            src={productCatalog[0]?.image}
+          <InteractiveImage
+            src={productCatalog[0]?.image ?? ""}
             alt="Sobre DYC"
-            className="h-[520px] w-full rounded-[1.5rem] object-cover"
+            className="overflow-hidden rounded-[1.5rem]"
+            imageClassName="h-[520px] w-full object-cover"
           />
         </div>
         <div>
@@ -293,6 +308,8 @@ export function AboutPage() {
 }
 
 export function GalleryPage() {
+  const galleryItems = productCatalog.concat(productCatalog);
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <SectionHeading
@@ -300,27 +317,44 @@ export function GalleryPage() {
         title="Trabajos que muestran nuestra identidad"
         description="Explora proyectos reales, piezas grabadas, regalos y prototipos con acabados premium."
       />
-      <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {productCatalog.concat(productCatalog).map((item, index) => (
-          <motion.div
-            key={`${item.id}-${index}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.04 }}
-            className="overflow-hidden rounded-[1.7rem] border border-border/80 bg-card shadow-premium"
-          >
-            <img src={item.image} alt={item.name} className="h-72 w-full object-cover" />
-            <div className="p-4">
-              <div className="flex items-center justify-between">
-                <h3 className="font-display text-xl font-semibold">{item.name}</h3>
-                <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {item.category}
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+      <ImageGallery images={galleryItems.map((item) => ({ src: item.image, alt: item.name }))}>
+        {({ open }) => (
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {galleryItems.map((item, index) => (
+              <motion.div
+                key={`${item.id}-${index}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.04 }}
+                className="overflow-hidden rounded-[1.7rem] border border-border/80 bg-card shadow-premium"
+              >
+                <button
+                  type="button"
+                  onClick={() => open(index)}
+                  aria-label={`Ampliar imagen: ${item.name}`}
+                  className="group block w-full cursor-zoom-in overflow-hidden text-left"
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </button>
+                <div className="p-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-display text-xl font-semibold">{item.name}</h3>
+                    <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                      {item.category}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </ImageGallery>
     </section>
   );
 }

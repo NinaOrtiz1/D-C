@@ -1,5 +1,14 @@
-const base = "http://localhost:4000";
+const base = process.env.AUDIT_API_BASE ?? "http://localhost:4000";
+const diegoEmail = process.env.AUDIT_DIEGO_EMAIL;
+const diegoPassword = process.env.AUDIT_DIEGO_PASSWORD;
+const celesteEmail = process.env.AUDIT_CELESTE_EMAIL;
+const celestePassword = process.env.AUDIT_CELESTE_PASSWORD;
 const tests = [];
+
+if (!diegoEmail || !diegoPassword || !celesteEmail || !celestePassword) {
+  console.error("Define AUDIT_DIEGO_EMAIL, AUDIT_DIEGO_PASSWORD, AUDIT_CELESTE_EMAIL y AUDIT_CELESTE_PASSWORD para ejecutar esta auditoría.");
+  process.exit(1);
+}
 
 // TEST 1: Login Diego
 console.log("\n========== TEST 1: LOGIN DIEGO ==========");
@@ -7,7 +16,7 @@ try {
   const loginRes = await fetch(`${base}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ correo: "DiegoReyes@gmail.com", password: "M@el89" }),
+    body: JSON.stringify({ correo: diegoEmail, password: diegoPassword }),
   });
   const loginData = await loginRes.json();
   const diegoToken = loginData.data?.token;
@@ -41,7 +50,7 @@ try {
   const loginRes2 = await fetch(`${base}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ correo: "CelesteJimenez@gmail.com", password: "K@to45" }),
+    body: JSON.stringify({ correo: celesteEmail, password: celestePassword }),
   });
   const loginData2 = await loginRes2.json();
   const celesteToken = loginData2.data?.token;

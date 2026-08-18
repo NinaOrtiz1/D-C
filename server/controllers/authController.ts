@@ -63,16 +63,22 @@ export async function registerUser(req: Request, res: Response) {
 }
 
 export async function loginUser(req: Request, res: Response) {
+  const startedAt = Date.now();
+  let outcome = "error";
+
+  console.info("[AUTH_LOGIN_START]", { method: req.method, path: req.originalUrl });
+
   try {
     const correo = String(req.body.correo ?? req.body.email ?? "").trim().toLowerCase();
     const password = String(req.body.password ?? "");
     const metadata = getClientMetadata(req);
 
     if (!correo || !password) {
+      outcome = "invalid_request";
       return sendError(res, 400, "Correo y contraseña son obligatorios.");
     }
 
-    const user = await User.findOne({ correo: { $regex: new RegExp(`^${correo}$`, "i") } });
+    const user = await User.findOne({ correo }).maxTimeMS(10000);
 
     if (!user) {
       await LoginHistory.create({
@@ -82,6 +88,7 @@ export async function loginUser(req: Request, res: Response) {
         fecha: new Date(),
         exitoso: false,
       });
+      outcome = "invalid_credentials";
       return sendError(res, 401, "Credenciales incorrectas.");
     }
 
@@ -94,44 +101,52 @@ export async function loginUser(req: Request, res: Response) {
         fecha: new Date(),
         exitoso: false,
       });
+      outcome = "invalid_credentials";
       return sendError(res, 401, "Credenciales incorrectas.");
     }
 
     if (!user.activo) {
+      outcome = "inactive_user";
       return sendError(res, 401, "Usuario inactivo.");
     }
 
-    user.ultimoLogin = new Date();
-    user.lastLogin = new Date();
-    await user.save();
+    const loginDate = new Date();
+    await User.updateOne(
+      { _id: user._id },
+      { $set: { ultimoLogin: loginDate, lastLogin: loginDate } },
+    ).maxTimeMS(10000);
 
     const token = signToken({ sub: String(user._id), role: user.rol, email: user.correo });
 
-    await LoginHistory.create({
-      usuario: user._id,
-      ip: metadata.ip,
-      userAgent: metadata.userAgent,
-      fecha: new Date(),
-      exitoso: true,
-    });
-
-    await ActivityLog.create({
-      usuario: user._id,
-      accion: "LOGIN",
-      recurso: "Auth",
-      recursoId: String(user._id),
-      fecha: new Date(),
-      ip: metadata.ip,
-      userAgent: metadata.userAgent,
-    });
+    await Promise.all([
+      LoginHistory.create({
+        usuario: user._id,
+        ip: metadata.ip,
+        userAgent: metadata.userAgent,
+        fecha: loginDate,
+        exitoso: true,
+      }),
+      ActivityLog.create({
+        usuario: user._id,
+        accion: "LOGIN",
+        recurso: "Auth",
+        recursoId: String(user._id),
+        fecha: loginDate,
+        ip: metadata.ip,
+        userAgent: metadata.userAgent,
+      }),
+    ]);
 
     const safeUser = user.toObject();
     delete safeUser.password;
 
+    outcome = "success";
     return sendSuccess(res, "Inicio de sesión correcto.", { user: safeUser, token });
   } catch (error) {
     console.error("loginUser", error);
     return sendError(res, 500, "No se pudo iniciar sesión.");
+  } finally {
+    console.info("[AUTH_LOGIN_END]", { durationMs: Date.now() - startedAt, outcome });
   }
 }
 

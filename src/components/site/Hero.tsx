@@ -3,6 +3,7 @@ import { ArrowRight, Sparkle } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
+import { ImageGallery } from "@/components/ui/image-gallery";
 import heroImage from "@/assets/vasos.jpg?url";
 import { SITE } from "@/lib/site";
 
@@ -127,24 +128,33 @@ export function Hero() {
             transition={{ duration: 1, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="relative overflow-hidden rounded-[2.35rem] border border-border bg-muted/40 shadow-float"
           >
-            {imageError ? (
-              <div className="flex h-104 w-full items-center justify-center bg-linear-to-br from-wine-soft via-background to-muted px-6 text-center text-lg font-medium text-muted-foreground sm:h-128 lg:h-152">
-                Imagen no disponible en este momento. Pronto tendremos nuevas fotos del catálogo.
-              </div>
-            ) : (
-              <img
-                src={heroImage}
-                alt="Composición de productos personalizados: vaso térmico grabado, termo, taza, piezas de impresión 3D y llaveros"
-                width={1200}
-                height={1408}
-                loading="lazy"
-                decoding="async"
-                onError={() => setImageError(true)}
-                // Improve LCP by preloading the hero image when component mounts
-                // and allow browser to decode asynchronously.
-                className="h-104 w-full object-cover object-center sm:h-128 lg:h-152"
-              />
-            )}
+            <ImageGallery images={[{ src: heroImage, alt: "Composición de productos personalizados" }]}>
+              {({ open }) =>
+                imageError ? (
+                  <div className="flex h-104 w-full items-center justify-center bg-linear-to-br from-wine-soft via-background to-muted px-6 text-center text-lg font-medium text-muted-foreground sm:h-128 lg:h-152">
+                    Imagen no disponible en este momento. Pronto tendremos nuevas fotos del catálogo.
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => open(0)}
+                    aria-label="Ampliar imagen de productos personalizados"
+                    className="block w-full cursor-zoom-in"
+                  >
+                    <img
+                      src={heroImage}
+                      alt="Composición de productos personalizados: vaso térmico grabado, termo, taza, piezas de impresión 3D y llaveros"
+                      width={1200}
+                      height={1408}
+                      loading="eager"
+                      decoding="async"
+                      onError={() => setImageError(true)}
+                      className="h-104 w-full object-cover object-center sm:h-128 lg:h-152"
+                    />
+                  </button>
+                )
+              }
+            </ImageGallery>
           </motion.div>
 
           <motion.div
