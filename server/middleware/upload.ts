@@ -48,5 +48,8 @@ export const upload = multer({
 });
 
 export function buildUploadUrl(filename: string) {
-  return `${process.env.APP_URL ?? "http://localhost:4000"}/uploads/${filename}`;
+  const appUrl = process.env.APP_URL?.trim();
+  const baseUrl = appUrl || (process.env.VERCEL === "1" ? "" : "http://localhost:4000");
+
+  return `${baseUrl}/uploads/${filename}`;
 }

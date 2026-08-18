@@ -18,6 +18,7 @@ const port = Number(process.env.PORT ?? 4000);
 const allowedOrigins = [
   process.env.CLIENT_URL,
   process.env.APP_URL,
+  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
   "http://localhost:5173",
   "http://localhost:8080",
   "http://127.0.0.1:5173",

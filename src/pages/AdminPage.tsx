@@ -477,7 +477,7 @@ export default function AdminPage() {
                     autoComplete="email"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="admin@dcinnovacion.mx"
+                    placeholder="tu-correo@ejemplo.com"
                     aria-invalid={Boolean(error)}
                     className="h-12 w-full rounded-xl border border-input bg-background/80 px-3.5 text-[0.95rem] text-foreground shadow-sm focus:border-aether focus:outline-none focus:ring-2 focus:ring-aether/20"
                   />
@@ -535,9 +535,6 @@ export default function AdminPage() {
                 </Button>
               </form>
 
-              <div className="mt-6 rounded-xl border border-border/60 bg-muted/40 p-3 text-xs text-muted-foreground">
-                <span className="font-medium text-foreground">Credenciales de prueba:</span> admin@dcinnovacion.mx / D&C123!
-              </div>
             </div>
           </div>
         </div>

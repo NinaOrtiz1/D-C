@@ -125,7 +125,15 @@ router.post("/chat", async (req, res) => {
     return sendError(res, 400, "El mensaje excede el límite permitido.");
   }
 
-  const pythonServiceUrl = process.env.PYTHON_CHAT_SERVICE_URL ?? "http://localhost:8001";
+  const configuredPythonServiceUrl = process.env.PYTHON_CHAT_SERVICE_URL?.trim();
+  const pythonServiceUrl = configuredPythonServiceUrl ?? (process.env.VERCEL === "1" ? undefined : "http://localhost:8001");
+
+  if (!pythonServiceUrl) {
+    return sendSuccess(res, "El servicio de IA no está disponible en este momento.", {
+      response:
+        "Gracias por tu mensaje. El asistente inteligente está temporalmente no disponible, pero puedes escribirnos por WhatsApp al 618 444 4686.",
+    });
+  }
 
   try {
     const controller = new AbortController();
