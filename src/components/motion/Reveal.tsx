@@ -67,11 +67,13 @@ export function SectionHeading({
           {eyebrow}
         </span>
       ) : null}
-      <h2 className="mt-5 font-display text-3xl leading-tight font-semibold text-balance-tight sm:text-4xl md:text-5xl">
+      <h2 className="mt-5 font-display text-3xl leading-tight font-semibold text-balance-tight sm:text-4xl md:text-5xl lg:text-[3.4rem]">
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground">{description}</p>
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground sm:text-xl">
+          {description}
+        </p>
       ) : null}
     </Reveal>
   );

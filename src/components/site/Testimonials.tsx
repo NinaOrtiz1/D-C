@@ -1,86 +1,49 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { Star } from "lucide-react";
 
 import { SectionHeading } from "@/components/motion/Reveal";
 
 const testimonials = [
   {
-    name: "Mariana Ríos",
-    role: "Cliente particular",
-    text: "Pedí unos vasos grabados para el cumpleaños de mi papá y quedaron impecables. El detalle del grabado es finísimo.",
+    name: "Julia Margarita Jimenez Irungaray",
+    date: "7 de junio de 2025",
+    text: "Excelente calidad de trabajo",
   },
   {
-    name: "Carlos Medina",
-    role: "Gerente, Grupo Sierra",
-    text: "Nos entregaron 120 termos con nuestro logotipo en tiempo récord. Excelente comunicación durante todo el proceso.",
-  },
-  {
-    name: "Ana Lucía Torres",
-    role: "Organizadora de eventos",
-    text: "Los llaveros personalizados fueron el detalle favorito de los invitados. Ya son mi proveedor de confianza.",
-  },
-  {
-    name: "Jorge Peña",
-    role: "Fundador, Café Norte",
-    text: "La impresión 3D de nuestros display nos ahorró muchísimo. Diseño y acabado de primer nivel.",
+    name: "Alma Ponce",
+    date: "29 de noviembre de 2025",
+    text: "Excelente trabajo! hicieron mi vaso con el logo de mi negocio y quedó padrísimo y también uno personalizado para el cumpleaños de mi esposo, los recomiendo ampliamente 😍😍🤞",
   },
 ];
 
 export function Testimonials() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setIndex((i) => (i + 1) % testimonials.length);
-    }, 5000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  const item = testimonials[index] ?? testimonials[0]!;
-
   return (
-    <section className="border-t border-border bg-muted/40 py-24 md:py-32">
-      <div className="mx-auto max-w-4xl px-5 sm:px-8">
+    <section className="border-t border-border bg-muted/40 py-24 md:py-32 lg:py-36">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading eyebrow="Testimonios" title="Lo que dicen nuestros clientes" />
 
-        <div className="relative mt-14 min-h-64">
-          <AnimatePresence mode="wait">
-            <motion.figure
+        <div className="mt-14 grid gap-6 lg:grid-cols-2">
+          {testimonials.map((item, i) => (
+            <motion.article
               key={item.name}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-3xl border border-border bg-card p-8 text-center shadow-soft sm:p-12"
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.15 }}
+              viewport={{ once: true, margin: "-80px" }}
+              className="rounded-[1.8rem] border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:border-wine/30 hover:shadow-float sm:p-8"
             >
-              <div className="flex justify-center gap-1" aria-label="Calificación 5 de 5 estrellas">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="size-4 fill-wine text-wine" aria-hidden />
+              <div className="flex gap-1 text-wine">
+                {Array.from({ length: 5 }).map((_, star) => (
+                  <Star key={star} className="size-4 fill-wine text-wine" aria-hidden />
                 ))}
               </div>
-              <blockquote className="mt-6 font-display text-xl leading-relaxed text-balance-tight sm:text-2xl">
-                “{item.text}”
-              </blockquote>
-              <figcaption className="mt-6 text-sm">
-                <span className="font-semibold">{item.name}</span>
-                <span className="block text-muted-foreground">{item.role}</span>
-              </figcaption>
-            </motion.figure>
-          </AnimatePresence>
-        </div>
-
-        <div className="mt-8 flex justify-center gap-2">
-          {testimonials.map((t, i) => (
-            <button
-              key={t.name}
-              onClick={() => setIndex(i)}
-              aria-label={`Ver testimonio de ${t.name}`}
-              aria-current={i === index}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === index ? "w-8 bg-wine" : "w-3 bg-border hover:bg-muted-foreground/40"
-              }`}
-            />
+              <div className="mt-4 flex items-center gap-2">
+                <p className="font-semibold text-foreground">{item.name}</p>
+                <span className="text-lg">⭐</span>
+              </div>
+              <p className="text-sm text-muted-foreground">recomienda D&C. · {item.date} · 🌐</p>
+              <p className="mt-5 text-base leading-7 text-foreground sm:text-lg">"{item.text}"</p>
+            </motion.article>
           ))}
         </div>
       </div>

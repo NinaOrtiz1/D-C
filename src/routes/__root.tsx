@@ -12,6 +12,10 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { Navbar } from "@/components/site/Navbar";
+import { Footer } from "@/components/site/Footer";
+import { ScrollToTop } from "@/components/site/ScrollToTop";
+import { ChatWidget } from "@/components/site/ChatWidget";
 
 function NotFoundComponent() {
   return (
@@ -78,20 +82,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "D&C Innovación" },
+      { title: "DYC" },
       {
         name: "description",
-        content: "Productos personalizados con grabado láser, impresión 3D y diseño a medida.",
+        content: "Productos personalizados, grabado láser, impresión 3D y diseño a medida con DYC.",
       },
-      { name: "author", content: "D&C Innovación" },
+      { name: "author", content: "DYC" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "D&C Innovación" },
-      { name: "twitter:title", content: "D&C Innovación" },
-      { property: "og:description", content: "Productos personalizados con grabado láser, impresión 3D y diseño a medida." },
-      { name: "twitter:description", content: "Productos personalizados con grabado láser, impresión 3D y diseño a medida." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/77d4748649dc754c9f361a8b583e1cae/id-preview-3680ca1d--736c37ed-cffc-4c7d-ad28-b39915d1a8de.lovable.app-1786089379712.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/77d4748649dc754c9f361a8b583e1cae/id-preview-3680ca1d--736c37ed-cffc-4c7d-ad28-b39915d1a8de.lovable.app-1786089379712.png" },
+      { property: "og:title", content: "DYC" },
+      { name: "twitter:title", content: "DYC" },
+      {
+        property: "og:description",
+        content: "Productos personalizados, grabado láser, impresión 3D y diseño a medida con DYC.",
+      },
+      {
+        name: "twitter:description",
+        content: "Productos personalizados, grabado láser, impresión 3D y diseño a medida con DYC.",
+      },
+      {
+        property: "og:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/77d4748649dc754c9f361a8b583e1cae/id-preview-3680ca1d--736c37ed-cffc-4c7d-ad28-b39915d1a8de.lovable.app-1786089379712.png",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/77d4748649dc754c9f361a8b583e1cae/id-preview-3680ca1d--736c37ed-cffc-4c7d-ad28-b39915d1a8de.lovable.app-1786089379712.png",
+      },
     ],
     links: [
       {
@@ -131,10 +149,35 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+        // Prevent browser from restoring scroll position on reload
+        window.history.scrollRestoration = "manual";
+      }
+    } catch {
+      /* ignore */
+    }
+
+    // Ensure we start at the top on initial mount (fixes reload landing mid-page)
+    try {
+      if (typeof window !== "undefined") window.scrollTo({ top: 0, left: 0 });
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen bg-background text-foreground">
+        <Navbar />
+        <main className="pt-20">
+          <Outlet />
+        </main>
+        <Footer />
+        <ScrollToTop />
+        <ChatWidget />
+      </div>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>
   );

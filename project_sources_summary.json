@@ -1,0 +1,6232 @@
+[
+  {
+    "path": ".lovable/project.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "{",
+      "  \"schemaVersion\": 1,",
+      "  \"template\": \"tanstack_start_ts_current\",",
+      "  \"revision\": \"tanstack_start_ts_current-4c753965f703\"",
+      "}",
+      ""
+    ],
+    "size": 124
+  },
+  {
+    "path": ".wrangler/deploy/config.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": ["{\"configPath\":\"..\\\\..\\\\.output\\\\server\\\\wrangler.json\"}"],
+    "size": 55
+  },
+  {
+    "path": "AGENTS.md",
+    "ext": ".md",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "<!-- LOVABLE:BEGIN -->",
+      "",
+      "> [!IMPORTANT]",
+      "> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting",
+      "> published git history — force pushing, or rebasing/amending/squashing commits",
+      "> that are already pushed — as it rewrites history on Lovable's side and the",
+      "> user will likely lose their project history.",
+      ">",
+      "> Commits you push to the connected branch sync back to Lovable and show up in",
+      "> the editor, so keep the branch in a working state.",
+      "",
+      "<!-- LOVABLE:END -->",
+      ""
+    ],
+    "size": 478
+  },
+  {
+    "path": "bunfig.toml",
+    "ext": ".toml",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "[install]\r",
+      "saveTextLockfile = true\r",
+      "# 24h supply-chain guard: skip package versions published less than a day ago.\r",
+      "minimumReleaseAge = 86400\r",
+      "# Each entry bypasses the 24h guard for one package — confirm with the user\r",
+      "# before adding any.\r",
+      "minimumReleaseAgeExcludes = [\"@lovable.dev/vite-tanstack-config\", \"@lovable.dev/mcp-js\", \"@lovable.dev/vite-plugin-dev-server-bridge\", \"@lovable.dev/vite-plugin-hmr-gate\", \"@lovable.dev/email-js\", \"@lovable.dev/webhooks-js\"]\r",
+      ""
+    ],
+    "size": 468
+  },
+  {
+    "path": "components.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "{",
+      "  \"$schema\": \"https://ui.shadcn.com/schema.json\",",
+      "  \"style\": \"new-york\",",
+      "  \"rsc\": false,",
+      "  \"tsx\": true,",
+      "  \"tailwind\": {",
+      "    \"css\": \"src/styles.css\",",
+      "    \"baseColor\": \"slate\",",
+      "    \"cssVariables\": true,",
+      "    \"prefix\": \"\"",
+      "  },",
+      "  \"iconLibrary\": \"lucide\",",
+      "  \"rtl\": false,",
+      "  \"aliases\": {",
+      "    \"components\": \"@/components\",",
+      "    \"utils\": \"@/lib/utils\",",
+      "    \"ui\": \"@/components/ui\",",
+      "    \"lib\": \"@/lib\",",
+      "    \"hooks\": \"@/hooks\"",
+      "  },"
+    ],
+    "size": 443
+  },
+  {
+    "path": "eslint.config.js",
+    "ext": ".js",
+    "imports": [
+      {
+        "module": "@eslint/js",
+        "names": ["default"]
+      },
+      {
+        "module": "eslint-plugin-prettier/recommended",
+        "names": ["default"]
+      },
+      {
+        "module": "globals",
+        "names": ["default"]
+      },
+      {
+        "module": "eslint-plugin-react-hooks",
+        "names": ["default"]
+      },
+      {
+        "module": "eslint-plugin-react-refresh",
+        "names": ["default"]
+      },
+      {
+        "module": "typescript-eslint",
+        "names": ["default"]
+      }
+    ],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "import js from \"@eslint/js\";",
+      "import eslintPluginPrettier from \"eslint-plugin-prettier/recommended\";",
+      "import globals from \"globals\";",
+      "import reactHooks from \"eslint-plugin-react-hooks\";",
+      "import reactRefresh from \"eslint-plugin-react-refresh\";",
+      "import tseslint from \"typescript-eslint\";",
+      "",
+      "export default tseslint.config(",
+      "  { ignores: [\"dist\", \".output\", \".vinxi\"] },",
+      "  {",
+      "    extends: [js.configs.recommended, ...tseslint.configs.recommended],",
+      "    files: [\"**/*.{ts,tsx}\"],",
+      "    languageOptions: {",
+      "      ecmaVersion: 2020,",
+      "      globals: globals.browser,",
+      "    },",
+      "    plugins: {",
+      "      \"react-hooks\": reactHooks,",
+      "      \"react-refresh\": reactRefresh,",
+      "    },"
+    ],
+    "size": 1250
+  },
+  {
+    "path": "index.html",
+    "ext": ".html",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "<!doctype html>",
+      "<html lang=\"es\">",
+      "  <head>",
+      "    <meta charset=\"UTF-8\" />",
+      "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />",
+      "    <meta name=\"theme-color\" content=\"#ffffff\" />",
+      "    <title>D&C Innovación</title>",
+      "  </head>",
+      "  <body>",
+      "    <div id=\"root\"></div>",
+      "    <script type=\"module\" src=\"/src/main.tsx\"></script>",
+      "  </body>",
+      "</html>",
+      ""
+    ],
+    "size": 351
+  },
+  {
+    "path": "package-lock.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "{\r",
+      "  \"name\": \"tanstack_start_ts\",\r",
+      "  \"lockfileVersion\": 3,\r",
+      "  \"requires\": true,\r",
+      "  \"packages\": {\r",
+      "    \"\": {\r",
+      "      \"name\": \"tanstack_start_ts\",\r",
+      "      \"dependencies\": {\r",
+      "        \"@hookform/resolvers\": \"^5.2.2\",\r",
+      "        \"@radix-ui/react-accordion\": \"^1.2.12\",\r",
+      "        \"@radix-ui/react-alert-dialog\": \"^1.1.15\",\r",
+      "        \"@radix-ui/react-aspect-ratio\": \"^1.1.8\",\r",
+      "        \"@radix-ui/react-avatar\": \"^1.1.11\",\r",
+      "        \"@radix-ui/react-checkbox\": \"^1.3.3\",\r",
+      "        \"@radix-ui/react-collapsible\": \"^1.1.12\",\r",
+      "        \"@radix-ui/react-context-menu\": \"^2.2.16\",\r",
+      "        \"@radix-ui/react-dialog\": \"^1.1.15\",\r",
+      "        \"@radix-ui/react-dropdown-menu\": \"^2.1.16\",\r",
+      "        \"@radix-ui/react-hover-card\": \"^1.1.15\",\r",
+      "        \"@radix-ui/react-label\": \"^2.1.8\",\r"
+    ],
+    "size": 346252
+  },
+  {
+    "path": "package.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "{",
+      "  \"name\": \"tanstack_start_ts\",",
+      "  \"private\": true,",
+      "  \"sideEffects\": false,",
+      "  \"type\": \"module\",",
+      "  \"scripts\": {",
+      "    \"dev\": \"concurrently \\\"npm run dev:server\\\" \\\"vite dev\\\"\",",
+      "    \"dev:server\": \"tsx server/index.ts\",",
+      "    \"build\": \"vite build\",",
+      "    \"build:dev\": \"vite build --mode development\",",
+      "    \"preview\": \"vite preview\",",
+      "    \"lint\": \"eslint .\",",
+      "    \"format\": \"prettier --write .\"",
+      "  },",
+      "  \"dependencies\": {",
+      "    \"@hookform/resolvers\": \"^5.2.2\",",
+      "    \"@radix-ui/react-accordion\": \"^1.2.12\",",
+      "    \"@radix-ui/react-alert-dialog\": \"^1.1.15\",",
+      "    \"@radix-ui/react-aspect-ratio\": \"^1.1.8\",",
+      "    \"@radix-ui/react-avatar\": \"^1.1.11\","
+    ],
+    "size": 3216
+  },
+  {
+    "path": "README.md",
+    "ext": ".md",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "# D&C Innovation Studio",
+      "",
+      "aqui tienes el logo Actúa como un desarrollador Senior Full Stack especializado en React, TypeScript, UX/UI y aplicaciones modernas.",
+      "",
+      "Quiero crear un sitio web premium para una empresa llamada D&C Innovación, dedicada a:",
+      "",
+      "- Vasos personalizados",
+      "",
+      "- Grabado láser",
+      "",
+      "- Impresión 3D",
+      "",
+      "- Llaveros",
+      "",
+      "- Termos",
+      "",
+      "- Tazas",
+      "",
+      "- Regalos personalizados",
+      ""
+    ],
+    "size": 6018
+  },
+  {
+    "path": "server/index.ts",
+    "ext": ".ts",
+    "imports": [
+      {
+        "module": "express",
+        "names": ["default"]
+      },
+      {
+        "module": "cors",
+        "names": ["default"]
+      },
+      {
+        "module": "dotenv",
+        "names": ["default"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "app"
+      },
+      {
+        "kind": "variable",
+        "name": "port"
+      },
+      {
+        "kind": "function",
+        "name": "buildOptimizedPrompt"
+      },
+      {
+        "kind": "variable",
+        "name": "normalizedPrompt"
+      },
+      {
+        "kind": "function",
+        "name": "buildPollinationsUrl"
+      },
+      {
+        "kind": "variable",
+        "name": "styles"
+      },
+      {
+        "kind": "variable",
+        "name": "images"
+      },
+      {
+        "kind": "variable",
+        "name": "optimizedPrompt"
+      },
+      {
+        "kind": "variable",
+        "name": "message"
+      }
+    ],
+    "firstLines": [
+      "import express from \"express\";",
+      "import cors from \"cors\";",
+      "import dotenv from \"dotenv\";",
+      "",
+      "dotenv.config();",
+      "",
+      "const app = express();",
+      "const port = Number(process.env.PORT ?? 4000);",
+      "",
+      "app.use(cors());",
+      "app.use(express.json({ limit: \"10mb\" }));",
+      "",
+      "function buildOptimizedPrompt(userPrompt: string, style: string) {",
+      "  const normalizedPrompt = userPrompt.replace(/\\s+/g, \" \").trim();",
+      "",
+      "  return [",
+      "    \"Diseño para grabado láser sobre un vaso personalizado.\",",
+      "    `Tema: ${normalizedPrompt}.`,",
+      "    `Estilo: ${style}.`,",
+      "    \"Solo mostrar el diseño.\","
+    ],
+    "size": 1918
+  },
+  {
+    "path": "server/tsconfig.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "{",
+      "  \"compilerOptions\": {",
+      "    \"target\": \"ES2022\",",
+      "    \"module\": \"NodeNext\",",
+      "    \"moduleResolution\": \"NodeNext\",",
+      "    \"esModuleInterop\": true,",
+      "    \"strict\": true,",
+      "    \"skipLibCheck\": true,",
+      "    \"outDir\": \"dist\"",
+      "  },",
+      "  \"include\": [\"./**/*.ts\"]",
+      "}",
+      ""
+    ],
+    "size": 241
+  },
+  {
+    "path": "src/assets/dc-logo.png.asset.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "{",
+      "  \"version\": 1,",
+      "  \"asset_id\": \"1d262d61-706e-4e94-bf64-72661bf2b3c0\",",
+      "  \"project_id\": \"736c37ed-cffc-4c7d-ad28-b39915d1a8de\",",
+      "  \"url\": \"/__l5e/assets-v1/1d262d61-706e-4e94-bf64-72661bf2b3c0/dc-logo.png\",",
+      "  \"r2_key\": \"a/v1/736c37ed-cffc-4c7d-ad28-b39915d1a8de/1d262d61-706e-4e94-bf64-72661bf2b3c0/dc-logo.png\",",
+      "  \"original_filename\": \"dc-logo.png\",",
+      "  \"size\": 290698,",
+      "  \"content_type\": \"image/png\",",
+      "  \"created_at\": \"2026-08-07T07:48:15Z\"",
+      "}",
+      ""
+    ],
+    "size": 440
+  },
+  {
+    "path": "src/components/motion/Reveal.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "motion/react",
+        "names": ["motion", "Variants"]
+      },
+      {
+        "module": "react",
+        "names": ["ReactNode"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "type",
+        "name": "Direction"
+      },
+      {
+        "kind": "variable",
+        "name": "offsets"
+      },
+      {
+        "kind": "export function",
+        "name": "Reveal"
+      },
+      {
+        "kind": "variable",
+        "name": "o"
+      },
+      {
+        "kind": "variable",
+        "name": "variants"
+      },
+      {
+        "kind": "export function",
+        "name": "SectionHeading"
+      }
+    ],
+    "firstLines": [
+      "import { motion, type Variants } from \"motion/react\";",
+      "import type { ReactNode } from \"react\";",
+      "",
+      "type Direction = \"up\" | \"down\" | \"left\" | \"right\" | \"none\";",
+      "",
+      "const offsets: Record<Direction, { x: number; y: number }> = {",
+      "  up: { x: 0, y: 28 },",
+      "  down: { x: 0, y: -28 },",
+      "  left: { x: 28, y: 0 },",
+      "  right: { x: -28, y: 0 },",
+      "  none: { x: 0, y: 0 },",
+      "};",
+      "",
+      "export function Reveal({",
+      "  children,",
+      "  delay = 0,",
+      "  direction = \"up\",",
+      "  className,",
+      "  scale = 1,",
+      "}: {"
+    ],
+    "size": 1926
+  },
+  {
+    "path": "src/components/site/AIDesigner.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["useState"]
+      },
+      {
+        "module": "motion/react",
+        "names": ["AnimatePresence", "motion"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Wand2", "ImageIcon", "RefreshCcw", "AlertCircle", "Download", "RotateCcw"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button"]
+      },
+      {
+        "module": "@/components/ui/textarea",
+        "names": ["Textarea"]
+      },
+      {
+        "module": "@/components/ui/skeleton",
+        "names": ["Skeleton"]
+      },
+      {
+        "module": "@/components/motion/Reveal",
+        "names": ["Reveal", "SectionHeading"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "suggestions"
+      },
+      {
+        "kind": "type",
+        "name": "Proposal"
+      },
+      {
+        "kind": "type",
+        "name": "Result"
+      },
+      {
+        "kind": "export function",
+        "name": "AIDesigner"
+      },
+      {
+        "kind": "variable",
+        "name": "handleGenerate"
+      },
+      {
+        "kind": "variable",
+        "name": "value"
+      },
+      {
+        "kind": "variable",
+        "name": "apiBase"
+      },
+      {
+        "kind": "variable",
+        "name": "response"
+      },
+      {
+        "kind": "variable",
+        "name": "data"
+      },
+      {
+        "kind": "variable",
+        "name": "message"
+      },
+      {
+        "kind": "variable",
+        "name": "handleDownload"
+      },
+      {
+        "kind": "variable",
+        "name": "response"
+      },
+      {
+        "kind": "variable",
+        "name": "blob"
+      },
+      {
+        "kind": "variable",
+        "name": "objectUrl"
+      },
+      {
+        "kind": "variable",
+        "name": "anchor"
+      },
+      {
+        "kind": "variable",
+        "name": "markProposalAsFailed"
+      }
+    ],
+    "firstLines": [
+      "import { useState } from \"react\";",
+      "import { AnimatePresence, motion } from \"motion/react\";",
+      "import { Wand2, ImageIcon, RefreshCcw, AlertCircle, Download, RotateCcw } from \"lucide-react\";",
+      "",
+      "import { Button } from \"@/components/ui/button\";",
+      "import { Textarea } from \"@/components/ui/textarea\";",
+      "import { Skeleton } from \"@/components/ui/skeleton\";",
+      "import { Reveal, SectionHeading } from \"@/components/motion/Reveal\";",
+      "",
+      "const suggestions = [",
+      "  \"Quiero un vaso negro con un dragón rojo estilo japonés.\",",
+      "  \"Termo plateado con grabado minimalista de montañas.\",",
+      "  \"Taza blanca con caligrafía elegante y el nombre Sofía.\",",
+      "];",
+      "",
+      "type Proposal = { id: number; title: string; prompt: string; imageUrl: string; failed?: boolean };",
+      "",
+      "type Result = { prompt: string; title: string; details: string[]; proposals: Proposal[] };",
+      "",
+      "export function AIDesigner() {"
+    ],
+    "size": 12323
+  },
+  {
+    "path": "src/components/site/ChatWidget.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["useEffect", "useRef", "useState"]
+      },
+      {
+        "module": "motion/react",
+        "names": ["AnimatePresence", "motion"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["MessageSquare", "Send", "X"]
+      },
+      {
+        "module": "@/components/site/Logo",
+        "names": ["Logo"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button"]
+      },
+      {
+        "module": "@/components/ui/input",
+        "names": ["Input"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "type",
+        "name": "Message"
+      },
+      {
+        "kind": "variable",
+        "name": "WELCOME"
+      },
+      {
+        "kind": "variable",
+        "name": "QUICK"
+      },
+      {
+        "kind": "function",
+        "name": "getReply"
+      },
+      {
+        "kind": "variable",
+        "name": "t"
+      },
+      {
+        "kind": "export function",
+        "name": "ChatWidget"
+      },
+      {
+        "kind": "variable",
+        "name": "endRef"
+      },
+      {
+        "kind": "variable",
+        "name": "inputRef"
+      },
+      {
+        "kind": "variable",
+        "name": "send"
+      },
+      {
+        "kind": "variable",
+        "name": "value"
+      }
+    ],
+    "firstLines": [
+      "import { useEffect, useRef, useState } from \"react\";",
+      "import { AnimatePresence, motion } from \"motion/react\";",
+      "import { MessageSquare, Send, X } from \"lucide-react\";",
+      "",
+      "import { Logo } from \"@/components/site/Logo\";",
+      "import { Button } from \"@/components/ui/button\";",
+      "import { Input } from \"@/components/ui/input\";",
+      "",
+      "type Message = { id: string; role: \"bot\" | \"user\"; text: string };",
+      "",
+      "const WELCOME = `Hola. Soy el asistente virtual de D&C Innovacion.",
+      "",
+      "Puedo ayudarte con:",
+      "• Cotizaciones",
+      "• Grabado láser",
+      "• Vasos personalizados",
+      "• Impresión 3D",
+      "• Diseños",
+      "• Tiempo de entrega",
+      "• Métodos de pago`;"
+    ],
+    "size": 8704
+  },
+  {
+    "path": "src/components/site/Contact.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["useState"]
+      },
+      {
+        "module": "react-hook-form",
+        "names": ["useForm"]
+      },
+      {
+        "module": "@hookform/resolvers/zod",
+        "names": ["zodResolver"]
+      },
+      {
+        "module": "zod",
+        "names": ["z"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Facebook", "Instagram", "MapPin", "MessageCircle", "Send"]
+      },
+      {
+        "module": "sonner",
+        "names": ["toast"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button"]
+      },
+      {
+        "module": "@/components/ui/input",
+        "names": ["Input"]
+      },
+      {
+        "module": "@/components/ui/textarea",
+        "names": ["Textarea"]
+      },
+      {
+        "module": "@/components/ui/form",
+        "names": ["Form", "FormControl", "FormField", "FormItem", "FormLabel", "FormMessage"]
+      },
+      {
+        "module": "@/components/motion/Reveal",
+        "names": ["Reveal", "SectionHeading"]
+      },
+      {
+        "module": "@/lib/site",
+        "names": ["SITE"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "schema"
+      },
+      {
+        "kind": "type",
+        "name": "FormValues"
+      },
+      {
+        "kind": "variable",
+        "name": "socials"
+      },
+      {
+        "kind": "export function",
+        "name": "Contact"
+      },
+      {
+        "kind": "variable",
+        "name": "form"
+      },
+      {
+        "kind": "variable",
+        "name": "onSubmit"
+      }
+    ],
+    "firstLines": [
+      "import { useState } from \"react\";",
+      "import { useForm } from \"react-hook-form\";",
+      "import { zodResolver } from \"@hookform/resolvers/zod\";",
+      "import { z } from \"zod\";",
+      "import { Facebook, Instagram, MapPin, MessageCircle, Send } from \"lucide-react\";",
+      "import { toast } from \"sonner\";",
+      "",
+      "import { Button } from \"@/components/ui/button\";",
+      "import { Input } from \"@/components/ui/input\";",
+      "import { Textarea } from \"@/components/ui/textarea\";",
+      "import {",
+      "  Form,",
+      "  FormControl,",
+      "  FormField,",
+      "  FormItem,",
+      "  FormLabel,",
+      "  FormMessage,",
+      "} from \"@/components/ui/form\";",
+      "import { Reveal, SectionHeading } from \"@/components/motion/Reveal\";",
+      "import { SITE } from \"@/lib/site\";"
+    ],
+    "size": 7856
+  },
+  {
+    "path": "src/components/site/FAQ.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@/components/ui/accordion",
+        "names": ["Accordion", "AccordionContent", "AccordionItem", "AccordionTrigger"]
+      },
+      {
+        "module": "@/components/motion/Reveal",
+        "names": ["Reveal", "SectionHeading"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "faqs"
+      },
+      {
+        "kind": "export function",
+        "name": "FAQ"
+      }
+    ],
+    "firstLines": [
+      "import {",
+      "  Accordion,",
+      "  AccordionContent,",
+      "  AccordionItem,",
+      "  AccordionTrigger,",
+      "} from \"@/components/ui/accordion\";",
+      "import { Reveal, SectionHeading } from \"@/components/motion/Reveal\";",
+      "",
+      "const faqs = [",
+      "  {",
+      "    q: \"¿Cuánto tarda un pedido?\",",
+      "    a: \"Los pedidos individuales se entregan normalmente entre 2 y 5 días hábiles. Los pedidos empresariales por volumen se cotizan con un plazo específico según la cantidad y el tipo de personalización.\",",
+      "  },",
+      "  {",
+      "    q: \"¿Hacen envíos?\",",
+      "    a: \"Sí. Realizamos entregas locales en Durango y enviamos a todo México mediante paquetería. El costo de envío se calcula al momento de la cotización.\",",
+      "  },",
+      "  {",
+      "    q: \"¿Puedo llevar mi propio vaso?\",",
+      "    a: \"Claro. Puedes traer tu propio vaso, termo o taza y nosotros nos encargamos únicamente del diseño y la personalización. Revisamos previamente el material para asegurar un buen acabado.\","
+    ],
+    "size": 2333
+  },
+  {
+    "path": "src/components/site/Footer.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "lucide-react",
+        "names": ["Facebook", "Instagram", "MessageCircle"]
+      },
+      {
+        "module": "@/components/site/Logo",
+        "names": ["Logo"]
+      },
+      {
+        "module": "@/lib/site",
+        "names": ["NAV_LINKS", "SITE"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "socials"
+      },
+      {
+        "kind": "export function",
+        "name": "Footer"
+      }
+    ],
+    "firstLines": [
+      "import { Facebook, Instagram, MessageCircle } from \"lucide-react\";",
+      "",
+      "import { Logo } from \"@/components/site/Logo\";",
+      "import { NAV_LINKS, SITE } from \"@/lib/site\";",
+      "",
+      "const socials = [",
+      "  { icon: Facebook, label: \"Facebook\", href: SITE.facebook },",
+      "  { icon: MessageCircle, label: \"WhatsApp\", href: SITE.whatsappUrl },",
+      "  { icon: Instagram, label: \"Instagram\", href: SITE.instagram },",
+      "];",
+      "",
+      "export function Footer() {",
+      "  return (",
+      "    <footer className=\"border-t border-border py-16\">",
+      "      <div className=\"mx-auto max-w-7xl px-5 sm:px-8\">",
+      "        <div className=\"rounded-[2.2rem] border border-border bg-card/70 p-10 shadow-soft sm:p-12\">",
+      "          <div className=\"grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]\">",
+      "            <div>",
+      "              <Logo className=\"h-10 w-10 sm:h-11 sm:w-11\" />",
+      "              <p className=\"mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground\">"
+    ],
+    "size": 3090
+  },
+  {
+    "path": "src/components/site/Gallery.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["useState"]
+      },
+      {
+        "module": "motion/react",
+        "names": ["AnimatePresence", "motion"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["X"]
+      },
+      {
+        "module": "@/components/motion/Reveal",
+        "names": ["Reveal", "SectionHeading"]
+      },
+      {
+        "module": "@/components/ui/skeleton",
+        "names": ["Skeleton"]
+      },
+      {
+        "module": "@/components/ui/carousel",
+        "names": ["Carousel", "CarouselContent", "CarouselItem", "CarouselNext", "CarouselPrevious"]
+      },
+      {
+        "module": "@/assets/vasos.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/grabado.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/figuras.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/llaveros.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/termo.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/lampara.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/vaso.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/decorativa2.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/decorativa3.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/grabado2.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/termo2.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/termo3.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/llaveros2.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/assets/varios.jpg",
+        "names": ["default"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "type",
+        "name": "Category"
+      },
+      {
+        "kind": "variable",
+        "name": "categories"
+      },
+      {
+        "kind": "variable",
+        "name": "items"
+      },
+      {
+        "kind": "function",
+        "name": "GalleryImage"
+      },
+      {
+        "kind": "export function",
+        "name": "Gallery"
+      },
+      {
+        "kind": "variable",
+        "name": "filtered"
+      }
+    ],
+    "firstLines": [
+      "import { useState } from \"react\";",
+      "import { AnimatePresence, motion } from \"motion/react\";",
+      "import { X } from \"lucide-react\";",
+      "",
+      "import { Reveal, SectionHeading } from \"@/components/motion/Reveal\";",
+      "import { Skeleton } from \"@/components/ui/skeleton\";",
+      "import {",
+      "  Carousel,",
+      "  CarouselContent,",
+      "  CarouselItem,",
+      "  CarouselNext,",
+      "  CarouselPrevious,",
+      "} from \"@/components/ui/carousel\";",
+      "import vasos from \"@/assets/vasos.jpg\";",
+      "import laser from \"@/assets/grabado.jpg\";",
+      "import tridi from \"@/assets/figuras.jpg\";",
+      "import llaveros from \"@/assets/llaveros.jpg\";",
+      "import termos from \"@/assets/termo.jpg\";",
+      "import lamparas from \"@/assets/lampara.jpg\";",
+      "import tazas from \"@/assets/vaso.jpg\";"
+    ],
+    "size": 9883
+  },
+  {
+    "path": "src/components/site/Hero.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "motion/react",
+        "names": ["motion", "useScroll", "useTransform"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ArrowRight", "Sparkle"]
+      },
+      {
+        "module": "react",
+        "names": ["useRef", "useState"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button"]
+      },
+      {
+        "module": "@/assets/vasos.jpg",
+        "names": ["default"]
+      },
+      {
+        "module": "@/lib/site",
+        "names": ["SITE"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "words"
+      },
+      {
+        "kind": "export function",
+        "name": "Hero"
+      },
+      {
+        "kind": "variable",
+        "name": "ref"
+      },
+      {
+        "kind": "variable",
+        "name": "y"
+      },
+      {
+        "kind": "variable",
+        "name": "opacity"
+      }
+    ],
+    "firstLines": [
+      "import { motion, useScroll, useTransform } from \"motion/react\";",
+      "import { ArrowRight, Sparkle } from \"lucide-react\";",
+      "import { useRef, useState } from \"react\";",
+      "",
+      "import { Button } from \"@/components/ui/button\";",
+      "import heroImage from \"@/assets/vasos.jpg\";",
+      "import { SITE } from \"@/lib/site\";",
+      "",
+      "const words = \"D&C Innovacion\".split(\" \");",
+      "",
+      "export function Hero() {",
+      "  const ref = useRef<HTMLDivElement>(null);",
+      "  const [imageError, setImageError] = useState(false);",
+      "  const { scrollYProgress } = useScroll({ target: ref, offset: [\"start start\", \"end start\"] });",
+      "  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);",
+      "  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);",
+      "",
+      "  return (",
+      "    <section",
+      "      id=\"inicio\""
+    ],
+    "size": 6530
+  },
+  {
+    "path": "src/components/site/Logo.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@/assets/logo.png",
+        "names": ["default"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "export function",
+        "name": "Logo"
+      }
+    ],
+    "firstLines": [
+      "import logo from \"@/assets/logo.png\";",
+      "",
+      "export function Logo({",
+      "  className = \"h-10 w-10 sm:h-11 sm:w-11\",",
+      "  withName = true,",
+      "  nameClassName = \"\",",
+      "}: {",
+      "  className?: string;",
+      "  withName?: boolean;",
+      "  nameClassName?: string;",
+      "}) {",
+      "  return (",
+      "    <span className=\"flex items-center gap-3 sm:gap-4\">",
+      "      <img",
+      "        src={logo}",
+      "        alt=\"Logotipo de D&C Innovacion\"",
+      "        width={1024}",
+      "        height={1024}",
+      "        className={`${className} object-contain`}",
+      "      />"
+    ],
+    "size": 718
+  },
+  {
+    "path": "src/components/site/Navbar.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["useEffect", "useState"]
+      },
+      {
+        "module": "motion/react",
+        "names": ["AnimatePresence", "motion"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Menu", "X"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button"]
+      },
+      {
+        "module": "@/components/site/Logo",
+        "names": ["Logo"]
+      },
+      {
+        "module": "@/lib/site",
+        "names": ["NAV_LINKS"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "export function",
+        "name": "Navbar"
+      },
+      {
+        "kind": "variable",
+        "name": "onScroll"
+      }
+    ],
+    "firstLines": [
+      "import { useEffect, useState } from \"react\";",
+      "import { AnimatePresence, motion } from \"motion/react\";",
+      "import { Menu, X } from \"lucide-react\";",
+      "",
+      "import { Button } from \"@/components/ui/button\";",
+      "import { Logo } from \"@/components/site/Logo\";",
+      "import { NAV_LINKS } from \"@/lib/site\";",
+      "",
+      "export function Navbar() {",
+      "  const [scrolled, setScrolled] = useState(false);",
+      "  const [open, setOpen] = useState(false);",
+      "",
+      "  useEffect(() => {",
+      "    const onScroll = () => setScrolled(window.scrollY > 24);",
+      "    onScroll();",
+      "    window.addEventListener(\"scroll\", onScroll, { passive: true });",
+      "    return () => window.removeEventListener(\"scroll\", onScroll);",
+      "  }, []);",
+      "",
+      "  useEffect(() => {"
+    ],
+    "size": 4037
+  },
+  {
+    "path": "src/components/site/Process.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "motion/react",
+        "names": ["motion"]
+      },
+      {
+        "module": "@/components/motion/Reveal",
+        "names": ["Reveal", "SectionHeading"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "steps"
+      },
+      {
+        "kind": "export function",
+        "name": "Process"
+      }
+    ],
+    "firstLines": [
+      "import { motion } from \"motion/react\";",
+      "",
+      "import { Reveal, SectionHeading } from \"@/components/motion/Reveal\";",
+      "",
+      "const steps = [",
+      "  { title: \"Nos contactas\", text: \"Por WhatsApp, redes sociales o el formulario de cotización.\" },",
+      "  {",
+      "    title: \"Nos envías tu idea\",",
+      "    text: \"Una foto, un boceto, un logotipo o simplemente una descripción.\",",
+      "  },",
+      "  {",
+      "    title: \"Diseñamos una propuesta\",",
+      "    text: \"Preparamos el arte y te mostramos cómo se verá en el producto.\",",
+      "  },",
+      "  {",
+      "    title: \"Apruebas el diseño\",",
+      "    text: \"Ajustamos los detalles hasta que quede exactamente como lo imaginas.\",",
+      "  },",
+      "  {",
+      "    title: \"Fabricamos\","
+    ],
+    "size": 3211
+  },
+  {
+    "path": "src/components/site/ScrollToTop.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["useEffect", "useState"]
+      },
+      {
+        "module": "motion/react",
+        "names": ["AnimatePresence", "motion"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ArrowUp"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "export function",
+        "name": "ScrollToTop"
+      },
+      {
+        "kind": "variable",
+        "name": "onScroll"
+      }
+    ],
+    "firstLines": [
+      "import { useEffect, useState } from \"react\";",
+      "import { AnimatePresence, motion } from \"motion/react\";",
+      "import { ArrowUp } from \"lucide-react\";",
+      "",
+      "export function ScrollToTop() {",
+      "  const [visible, setVisible] = useState(false);",
+      "",
+      "  useEffect(() => {",
+      "    const onScroll = () => setVisible(window.scrollY > 600);",
+      "    onScroll();",
+      "    window.addEventListener(\"scroll\", onScroll, { passive: true });",
+      "    return () => window.removeEventListener(\"scroll\", onScroll);",
+      "  }, []);",
+      "",
+      "  return (",
+      "    <AnimatePresence>",
+      "      {visible ? (",
+      "        <motion.button",
+      "          initial={{ opacity: 0, scale: 0.8, y: 10 }}",
+      "          animate={{ opacity: 1, scale: 1, y: 0 }}"
+    ],
+    "size": 1113
+  },
+  {
+    "path": "src/components/site/Services.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "motion/react",
+        "names": ["motion"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Boxes", "Flame", "GlassWater", "Gift", "PenTool"]
+      },
+      {
+        "module": "@/components/motion/Reveal",
+        "names": ["Reveal", "SectionHeading"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "services"
+      },
+      {
+        "kind": "export function",
+        "name": "Services"
+      }
+    ],
+    "firstLines": [
+      "import { motion } from \"motion/react\";",
+      "import { Boxes, Flame, GlassWater, Gift, PenTool } from \"lucide-react\";",
+      "",
+      "import { Reveal, SectionHeading } from \"@/components/motion/Reveal\";",
+      "",
+      "const services = [",
+      "  {",
+      "    icon: Flame,",
+      "    title: \"Grabado Láser\",",
+      "    description:",
+      "      \"Grabado permanente de alta precisión en metal, madera, acrílico y vidrio. Detalle fino y acabado profesional.\",",
+      "  },",
+      "  {",
+      "    icon: Boxes,",
+      "    title: \"Impresión 3D\",",
+      "    description:",
+      "      \"Prototipos, piezas funcionales y figuras a medida impresas con tolerancias precisas y múltiples materiales.\",",
+      "  },",
+      "  {",
+      "    icon: GlassWater,"
+    ],
+    "size": 2934
+  },
+  {
+    "path": "src/components/site/Testimonials.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "motion/react",
+        "names": ["motion"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Star"]
+      },
+      {
+        "module": "@/components/motion/Reveal",
+        "names": ["SectionHeading"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "testimonials"
+      },
+      {
+        "kind": "export function",
+        "name": "Testimonials"
+      }
+    ],
+    "firstLines": [
+      "import { motion } from \"motion/react\";",
+      "import { Star } from \"lucide-react\";",
+      "",
+      "import { SectionHeading } from \"@/components/motion/Reveal\";",
+      "",
+      "const testimonials = [",
+      "  {",
+      "    name: \"Julia Margarita Jimenez Irungaray\",",
+      "    date: \"7 de junio de 2025\",",
+      "    text: \"Excelente calidad de trabajo\",",
+      "  },",
+      "  {",
+      "    name: \"Alma Ponce\",",
+      "    date: \"29 de noviembre de 2025\",",
+      "    text: \"Excelente trabajo! hicieron mi vaso con el logo de mi negocio y quedó padrísimo y también uno personalizado para el cumpleaños de mi esposo, los recomiendo ampliamente 😍😍🤞\",",
+      "  },",
+      "];",
+      "",
+      "export function Testimonials() {",
+      "  return ("
+    ],
+    "size": 2193
+  },
+  {
+    "path": "src/components/ui/accordion.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-accordion",
+        "names": ["* as AccordionPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ChevronDown"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Accordion", "AccordionItem", "AccordionTrigger", "AccordionContent"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Accordion"
+      },
+      {
+        "kind": "variable",
+        "name": "AccordionItem"
+      },
+      {
+        "kind": "variable",
+        "name": "AccordionTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "AccordionContent"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as AccordionPrimitive from \"@radix-ui/react-accordion\";",
+      "import { ChevronDown } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Accordion = AccordionPrimitive.Root;",
+      "",
+      "const AccordionItem = React.forwardRef<",
+      "  React.ElementRef<typeof AccordionPrimitive.Item>,",
+      "  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>",
+      ">(({ className, ...props }, ref) => (",
+      "  <AccordionPrimitive.Item ref={ref} className={cn(\"border-b\", className)} {...props} />",
+      "));",
+      "AccordionItem.displayName = \"AccordionItem\";",
+      "",
+      "const AccordionTrigger = React.forwardRef<",
+      "  React.ElementRef<typeof AccordionPrimitive.Trigger>,",
+      "  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>",
+      ">(({ className, children, ...props }, ref) => ("
+    ],
+    "size": 2015
+  },
+  {
+    "path": "src/components/ui/alert-dialog.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-alert-dialog",
+        "names": ["* as AlertDialogPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["buttonVariants"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "AlertDialog",
+          "AlertDialogPortal",
+          "AlertDialogOverlay",
+          "AlertDialogTrigger",
+          "AlertDialogContent",
+          "AlertDialogHeader",
+          "AlertDialogFooter",
+          "AlertDialogTitle",
+          "AlertDialogDescription",
+          "AlertDialogAction",
+          "AlertDialogCancel"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "AlertDialog"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogPortal"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogOverlay"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogContent"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogHeader"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogFooter"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogTitle"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogDescription"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogAction"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDialogCancel"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as AlertDialogPrimitive from \"@radix-ui/react-alert-dialog\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "import { buttonVariants } from \"@/components/ui/button\";",
+      "",
+      "const AlertDialog = AlertDialogPrimitive.Root;",
+      "",
+      "const AlertDialogTrigger = AlertDialogPrimitive.Trigger;",
+      "",
+      "const AlertDialogPortal = AlertDialogPrimitive.Portal;",
+      "",
+      "const AlertDialogOverlay = React.forwardRef<",
+      "  React.ElementRef<typeof AlertDialogPrimitive.Overlay>,",
+      "  React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>",
+      ">(({ className, ...props }, ref) => (",
+      "  <AlertDialogPrimitive.Overlay",
+      "    className={cn(",
+      "      \"fixed inset-0 z-50 bg-black/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0\",",
+      "      className,"
+    ],
+    "size": 4183
+  },
+  {
+    "path": "src/components/ui/alert.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva", "VariantProps"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Alert", "AlertTitle", "AlertDescription"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "alertVariants"
+      },
+      {
+        "kind": "variable",
+        "name": "Alert"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertTitle"
+      },
+      {
+        "kind": "variable",
+        "name": "AlertDescription"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const alertVariants = cva(",
+      "  \"relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7\",",
+      "  {",
+      "    variants: {",
+      "      variant: {",
+      "        default: \"bg-background text-foreground\",",
+      "        destructive:",
+      "          \"border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive\",",
+      "      },",
+      "    },",
+      "    defaultVariants: {",
+      "      variant: \"default\",",
+      "    },",
+      "  },",
+      ");"
+    ],
+    "size": 1589
+  },
+  {
+    "path": "src/components/ui/aspect-ratio.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@radix-ui/react-aspect-ratio",
+        "names": ["* as AspectRatioPrimitive"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["AspectRatio"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "AspectRatio"
+      }
+    ],
+    "firstLines": [
+      "import * as AspectRatioPrimitive from \"@radix-ui/react-aspect-ratio\";",
+      "",
+      "const AspectRatio = AspectRatioPrimitive.Root;",
+      "",
+      "export { AspectRatio };",
+      ""
+    ],
+    "size": 143
+  },
+  {
+    "path": "src/components/ui/avatar.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-avatar",
+        "names": ["* as AvatarPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Avatar", "AvatarImage", "AvatarFallback"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Avatar"
+      },
+      {
+        "kind": "variable",
+        "name": "AvatarImage"
+      },
+      {
+        "kind": "variable",
+        "name": "AvatarFallback"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as AvatarPrimitive from \"@radix-ui/react-avatar\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Avatar = React.forwardRef<",
+      "  React.ElementRef<typeof AvatarPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>",
+      ">(({ className, ...props }, ref) => (",
+      "  <AvatarPrimitive.Root",
+      "    ref={ref}",
+      "    className={cn(\"relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full\", className)}",
+      "    {...props}",
+      "  />",
+      "));",
+      "Avatar.displayName = AvatarPrimitive.Root.displayName;",
+      "",
+      "const AvatarImage = React.forwardRef<"
+    ],
+    "size": 1413
+  },
+  {
+    "path": "src/components/ui/badge.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva", "VariantProps"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Badge", "badgeVariants"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "badgeVariants"
+      },
+      {
+        "kind": "interface",
+        "name": "BadgeProps"
+      },
+      {
+        "kind": "function",
+        "name": "Badge"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const badgeVariants = cva(",
+      "  \"inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2\",",
+      "  {",
+      "    variants: {",
+      "      variant: {",
+      "        default: \"border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80\",",
+      "        secondary:",
+      "          \"border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80\",",
+      "        destructive:",
+      "          \"border-transparent bg-destructive text-destructive-foreground shadow hover:bg-destructive/80\",",
+      "        outline: \"text-foreground\",",
+      "      },",
+      "    },",
+      "    defaultVariants: {",
+      "      variant: \"default\","
+    ],
+    "size": 1123
+  },
+  {
+    "path": "src/components/ui/breadcrumb.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-slot",
+        "names": ["Slot"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ChevronRight", "MoreHorizontal"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Breadcrumb",
+          "BreadcrumbList",
+          "BreadcrumbItem",
+          "BreadcrumbLink",
+          "BreadcrumbPage",
+          "BreadcrumbSeparator",
+          "BreadcrumbEllipsis"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Breadcrumb"
+      },
+      {
+        "kind": "variable",
+        "name": "BreadcrumbList"
+      },
+      {
+        "kind": "variable",
+        "name": "BreadcrumbItem"
+      },
+      {
+        "kind": "variable",
+        "name": "BreadcrumbLink"
+      },
+      {
+        "kind": "variable",
+        "name": "Comp"
+      },
+      {
+        "kind": "variable",
+        "name": "BreadcrumbPage"
+      },
+      {
+        "kind": "variable",
+        "name": "BreadcrumbSeparator"
+      },
+      {
+        "kind": "variable",
+        "name": "BreadcrumbEllipsis"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { Slot } from \"@radix-ui/react-slot\";",
+      "import { ChevronRight, MoreHorizontal } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Breadcrumb = React.forwardRef<",
+      "  HTMLElement,",
+      "  React.ComponentPropsWithoutRef<\"nav\"> & {",
+      "    separator?: React.ReactNode;",
+      "  }",
+      ">(({ ...props }, ref) => <nav ref={ref} aria-label=\"breadcrumb\" {...props} />);",
+      "Breadcrumb.displayName = \"Breadcrumb\";",
+      "",
+      "const BreadcrumbList = React.forwardRef<HTMLOListElement, React.ComponentPropsWithoutRef<\"ol\">>(",
+      "  ({ className, ...props }, ref) => (",
+      "    <ol",
+      "      ref={ref}",
+      "      className={cn(",
+      "        \"flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5\","
+    ],
+    "size": 2749
+  },
+  {
+    "path": "src/components/ui/button.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-slot",
+        "names": ["Slot"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva", "VariantProps"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Button", "buttonVariants"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "buttonVariants"
+      },
+      {
+        "kind": "interface",
+        "name": "ButtonProps"
+      },
+      {
+        "kind": "variable",
+        "name": "Button"
+      },
+      {
+        "kind": "variable",
+        "name": "Comp"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { Slot } from \"@radix-ui/react-slot\";",
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const buttonVariants = cva(",
+      "  \"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",",
+      "  {",
+      "    variants: {",
+      "      variant: {",
+      "        default: \"bg-primary text-primary-foreground shadow hover:bg-primary/90\",",
+      "        destructive: \"bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90\",",
+      "        outline:",
+      "          \"border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground\",",
+      "        secondary: \"bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80\",",
+      "        ghost: \"hover:bg-accent hover:text-accent-foreground\",",
+      "        link: \"text-primary underline-offset-4 hover:underline\",",
+      "        wine: \"bg-wine text-wine-foreground shadow-soft hover:bg-wine/90\",",
+      "        wineGhost:"
+    ],
+    "size": 2142
+  },
+  {
+    "path": "src/components/ui/calendar.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ChevronDownIcon", "ChevronLeftIcon", "ChevronRightIcon"]
+      },
+      {
+        "module": "react-day-picker",
+        "names": ["DayButton", "DayPicker", "getDefaultClassNames"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button", "buttonVariants"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Calendar", "CalendarDayButton"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "function",
+        "name": "Calendar"
+      },
+      {
+        "kind": "variable",
+        "name": "defaultClassNames"
+      },
+      {
+        "kind": "function",
+        "name": "CalendarDayButton"
+      },
+      {
+        "kind": "variable",
+        "name": "defaultClassNames"
+      },
+      {
+        "kind": "variable",
+        "name": "ref"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\";",
+      "import { DayButton, DayPicker, getDefaultClassNames } from \"react-day-picker\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "import { Button, buttonVariants } from \"@/components/ui/button\";",
+      "",
+      "function Calendar({",
+      "  className,",
+      "  classNames,",
+      "  showOutsideDays = true,",
+      "  captionLayout = \"label\",",
+      "  buttonVariant = \"ghost\",",
+      "  formatters,",
+      "  components,",
+      "  ...props",
+      "}: React.ComponentProps<typeof DayPicker> & {",
+      "  buttonVariant?: React.ComponentProps<typeof Button>[\"variant\"];"
+    ],
+    "size": 7226
+  },
+  {
+    "path": "src/components/ui/card.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Card", "CardHeader", "CardFooter", "CardTitle", "CardDescription", "CardContent"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Card"
+      },
+      {
+        "kind": "variable",
+        "name": "CardHeader"
+      },
+      {
+        "kind": "variable",
+        "name": "CardTitle"
+      },
+      {
+        "kind": "variable",
+        "name": "CardDescription"
+      },
+      {
+        "kind": "variable",
+        "name": "CardContent"
+      },
+      {
+        "kind": "variable",
+        "name": "CardFooter"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(",
+      "  ({ className, ...props }, ref) => (",
+      "    <div",
+      "      ref={ref}",
+      "      className={cn(\"rounded-xl border bg-card text-card-foreground shadow\", className)}",
+      "      {...props}",
+      "    />",
+      "  ),",
+      ");",
+      "Card.displayName = \"Card\";",
+      "",
+      "const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(",
+      "  ({ className, ...props }, ref) => (",
+      "    <div ref={ref} className={cn(\"flex flex-col space-y-1.5 p-6\", className)} {...props} />",
+      "  ),",
+      ");"
+    ],
+    "size": 1817
+  },
+  {
+    "path": "src/components/ui/carousel.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "embla-carousel-react",
+        "names": ["default", "UseEmblaCarouselType"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ArrowLeft", "ArrowRight"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "CarouselApi",
+          "Carousel",
+          "CarouselContent",
+          "CarouselItem",
+          "CarouselPrevious",
+          "CarouselNext"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "type",
+        "name": "CarouselApi"
+      },
+      {
+        "kind": "type",
+        "name": "UseCarouselParameters"
+      },
+      {
+        "kind": "type",
+        "name": "CarouselOptions"
+      },
+      {
+        "kind": "type",
+        "name": "CarouselPlugin"
+      },
+      {
+        "kind": "type",
+        "name": "CarouselProps"
+      },
+      {
+        "kind": "type",
+        "name": "CarouselContextProps"
+      },
+      {
+        "kind": "variable",
+        "name": "CarouselContext"
+      },
+      {
+        "kind": "function",
+        "name": "useCarousel"
+      },
+      {
+        "kind": "variable",
+        "name": "context"
+      },
+      {
+        "kind": "variable",
+        "name": "Carousel"
+      },
+      {
+        "kind": "variable",
+        "name": "onSelect"
+      },
+      {
+        "kind": "variable",
+        "name": "scrollPrev"
+      },
+      {
+        "kind": "variable",
+        "name": "scrollNext"
+      },
+      {
+        "kind": "variable",
+        "name": "handleKeyDown"
+      },
+      {
+        "kind": "variable",
+        "name": "CarouselContent"
+      },
+      {
+        "kind": "variable",
+        "name": "CarouselItem"
+      },
+      {
+        "kind": "variable",
+        "name": "CarouselPrevious"
+      },
+      {
+        "kind": "variable",
+        "name": "CarouselNext"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import useEmblaCarousel, { type UseEmblaCarouselType } from \"embla-carousel-react\";",
+      "import { ArrowLeft, ArrowRight } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "import { Button } from \"@/components/ui/button\";",
+      "",
+      "type CarouselApi = UseEmblaCarouselType[1];",
+      "type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;",
+      "type CarouselOptions = UseCarouselParameters[0];",
+      "type CarouselPlugin = UseCarouselParameters[1];",
+      "",
+      "type CarouselProps = {",
+      "  opts?: CarouselOptions;",
+      "  plugins?: CarouselPlugin;",
+      "  orientation?: \"horizontal\" | \"vertical\";",
+      "  setApi?: (api: CarouselApi) => void;",
+      "};",
+      "",
+      "type CarouselContextProps = {"
+    ],
+    "size": 6200
+  },
+  {
+    "path": "src/components/ui/chart.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "recharts",
+        "names": ["* as RechartsPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "ChartContainer",
+          "ChartTooltip",
+          "ChartTooltipContent",
+          "ChartLegend",
+          "ChartLegendContent",
+          "ChartStyle"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "THEMES"
+      },
+      {
+        "kind": "type",
+        "name": "ChartConfig"
+      },
+      {
+        "kind": "type",
+        "name": "ChartContextProps"
+      },
+      {
+        "kind": "variable",
+        "name": "ChartContext"
+      },
+      {
+        "kind": "function",
+        "name": "useChart"
+      },
+      {
+        "kind": "variable",
+        "name": "context"
+      },
+      {
+        "kind": "variable",
+        "name": "ChartContainer"
+      },
+      {
+        "kind": "variable",
+        "name": "uniqueId"
+      },
+      {
+        "kind": "variable",
+        "name": "chartId"
+      },
+      {
+        "kind": "variable",
+        "name": "ChartStyle"
+      },
+      {
+        "kind": "variable",
+        "name": "colorConfig"
+      },
+      {
+        "kind": "variable",
+        "name": "color"
+      },
+      {
+        "kind": "variable",
+        "name": "ChartTooltip"
+      },
+      {
+        "kind": "variable",
+        "name": "ChartTooltipContent"
+      },
+      {
+        "kind": "variable",
+        "name": "tooltipLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "key"
+      },
+      {
+        "kind": "variable",
+        "name": "itemConfig"
+      },
+      {
+        "kind": "variable",
+        "name": "value"
+      },
+      {
+        "kind": "variable",
+        "name": "nestLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "key"
+      },
+      {
+        "kind": "variable",
+        "name": "itemConfig"
+      },
+      {
+        "kind": "variable",
+        "name": "indicatorColor"
+      },
+      {
+        "kind": "variable",
+        "name": "ChartLegend"
+      },
+      {
+        "kind": "variable",
+        "name": "ChartLegendContent"
+      },
+      {
+        "kind": "variable",
+        "name": "key"
+      },
+      {
+        "kind": "variable",
+        "name": "itemConfig"
+      },
+      {
+        "kind": "function",
+        "name": "getPayloadConfigFromPayload"
+      },
+      {
+        "kind": "variable",
+        "name": "payloadPayload"
+      },
+      {
+        "kind": "variable",
+        "name": "configLabelKey"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as RechartsPrimitive from \"recharts\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "// Format: { THEME_NAME: CSS_SELECTOR }",
+      "const THEMES = { light: \"\", dark: \".dark\" } as const;",
+      "",
+      "export type ChartConfig = {",
+      "  [k in string]: {",
+      "    label?: React.ReactNode;",
+      "    icon?: React.ComponentType;",
+      "  } & (",
+      "    | { color?: string; theme?: never }",
+      "    | { color?: never; theme: Record<keyof typeof THEMES, string> }",
+      "  );",
+      "};",
+      "",
+      "type ChartContextProps = {",
+      "  config: ChartConfig;"
+    ],
+    "size": 10570
+  },
+  {
+    "path": "src/components/ui/checkbox.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-checkbox",
+        "names": ["* as CheckboxPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Check"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Checkbox"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Checkbox"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as CheckboxPrimitive from \"@radix-ui/react-checkbox\";",
+      "import { Check } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Checkbox = React.forwardRef<",
+      "  React.ElementRef<typeof CheckboxPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>",
+      ">(({ className, ...props }, ref) => (",
+      "  <CheckboxPrimitive.Root",
+      "    ref={ref}",
+      "    className={cn(",
+      "      \"grid place-content-center peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground\",",
+      "      className,",
+      "    )}",
+      "    {...props}",
+      "  >",
+      "    <CheckboxPrimitive.Indicator className={cn(\"grid place-content-center text-current\")}>",
+      "      <Check className=\"h-4 w-4\" />"
+    ],
+    "size": 1043
+  },
+  {
+    "path": "src/components/ui/collapsible.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@radix-ui/react-collapsible",
+        "names": ["* as CollapsiblePrimitive"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Collapsible", "CollapsibleTrigger", "CollapsibleContent"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Collapsible"
+      },
+      {
+        "kind": "variable",
+        "name": "CollapsibleTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "CollapsibleContent"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as CollapsiblePrimitive from \"@radix-ui/react-collapsible\";",
+      "",
+      "const Collapsible = CollapsiblePrimitive.Root;",
+      "",
+      "const CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;",
+      "",
+      "const CollapsibleContent = CollapsiblePrimitive.CollapsibleContent;",
+      "",
+      "export { Collapsible, CollapsibleTrigger, CollapsibleContent };",
+      ""
+    ],
+    "size": 335
+  },
+  {
+    "path": "src/components/ui/command.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-dialog",
+        "names": ["DialogProps"]
+      },
+      {
+        "module": "cmdk",
+        "names": ["CommandPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Search"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/dialog",
+        "names": ["Dialog", "DialogContent"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Command",
+          "CommandDialog",
+          "CommandInput",
+          "CommandList",
+          "CommandEmpty",
+          "CommandGroup",
+          "CommandItem",
+          "CommandShortcut",
+          "CommandSeparator"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Command"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandDialog"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandInput"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandList"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandEmpty"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandSeparator"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandItem"
+      },
+      {
+        "kind": "variable",
+        "name": "CommandShortcut"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import { type DialogProps } from \"@radix-ui/react-dialog\";",
+      "import { Command as CommandPrimitive } from \"cmdk\";",
+      "import { Search } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "import { Dialog, DialogContent } from \"@/components/ui/dialog\";",
+      "",
+      "const Command = React.forwardRef<",
+      "  React.ElementRef<typeof CommandPrimitive>,",
+      "  React.ComponentPropsWithoutRef<typeof CommandPrimitive>",
+      ">(({ className, ...props }, ref) => (",
+      "  <CommandPrimitive",
+      "    ref={ref}",
+      "    className={cn(",
+      "      \"flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground\",",
+      "      className,",
+      "    )}"
+    ],
+    "size": 4876
+  },
+  {
+    "path": "src/components/ui/context-menu.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-context-menu",
+        "names": ["* as ContextMenuPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Check", "ChevronRight", "Circle"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "ContextMenu",
+          "ContextMenuTrigger",
+          "ContextMenuContent",
+          "ContextMenuItem",
+          "ContextMenuCheckboxItem",
+          "ContextMenuRadioItem",
+          "ContextMenuLabel",
+          "ContextMenuSeparator",
+          "ContextMenuShortcut",
+          "ContextMenuGroup",
+          "ContextMenuPortal",
+          "ContextMenuSub",
+          "ContextMenuSubContent",
+          "ContextMenuSubTrigger",
+          "ContextMenuRadioGroup"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "ContextMenu"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuPortal"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuSub"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuRadioGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuSubTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuSubContent"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuContent"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuItem"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuCheckboxItem"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuRadioItem"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuSeparator"
+      },
+      {
+        "kind": "variable",
+        "name": "ContextMenuShortcut"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as ContextMenuPrimitive from \"@radix-ui/react-context-menu\";",
+      "import { Check, ChevronRight, Circle } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const ContextMenu = ContextMenuPrimitive.Root;",
+      "",
+      "const ContextMenuTrigger = ContextMenuPrimitive.Trigger;",
+      "",
+      "const ContextMenuGroup = ContextMenuPrimitive.Group;",
+      "",
+      "const ContextMenuPortal = ContextMenuPrimitive.Portal;",
+      "",
+      "const ContextMenuSub = ContextMenuPrimitive.Sub;",
+      "",
+      "const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;",
+      "",
+      "const ContextMenuSubTrigger = React.forwardRef<",
+      "  React.ElementRef<typeof ContextMenuPrimitive.SubTrigger>,"
+    ],
+    "size": 7360
+  },
+  {
+    "path": "src/components/ui/dialog.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-dialog",
+        "names": ["* as DialogPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["X"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Dialog",
+          "DialogPortal",
+          "DialogOverlay",
+          "DialogTrigger",
+          "DialogClose",
+          "DialogContent",
+          "DialogHeader",
+          "DialogFooter",
+          "DialogTitle",
+          "DialogDescription"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Dialog"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogPortal"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogClose"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogOverlay"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogContent"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogHeader"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogFooter"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogTitle"
+      },
+      {
+        "kind": "variable",
+        "name": "DialogDescription"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as DialogPrimitive from \"@radix-ui/react-dialog\";",
+      "import { X } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Dialog = DialogPrimitive.Root;",
+      "",
+      "const DialogTrigger = DialogPrimitive.Trigger;",
+      "",
+      "const DialogPortal = DialogPrimitive.Portal;",
+      "",
+      "const DialogClose = DialogPrimitive.Close;",
+      "",
+      "const DialogOverlay = React.forwardRef<",
+      "  React.ElementRef<typeof DialogPrimitive.Overlay>,",
+      "  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>",
+      ">(({ className, ...props }, ref) => ("
+    ],
+    "size": 3648
+  },
+  {
+    "path": "src/components/ui/drawer.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "vaul",
+        "names": ["DrawerPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Drawer",
+          "DrawerPortal",
+          "DrawerOverlay",
+          "DrawerTrigger",
+          "DrawerClose",
+          "DrawerContent",
+          "DrawerHeader",
+          "DrawerFooter",
+          "DrawerTitle",
+          "DrawerDescription"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Drawer"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerPortal"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerClose"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerOverlay"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerContent"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerHeader"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerFooter"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerTitle"
+      },
+      {
+        "kind": "variable",
+        "name": "DrawerDescription"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { Drawer as DrawerPrimitive } from \"vaul\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Drawer = ({",
+      "  shouldScaleBackground = true,",
+      "  ...props",
+      "}: React.ComponentProps<typeof DrawerPrimitive.Root>) => (",
+      "  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />",
+      ");",
+      "Drawer.displayName = \"Drawer\";",
+      "",
+      "const DrawerTrigger = DrawerPrimitive.Trigger;",
+      "",
+      "const DrawerPortal = DrawerPrimitive.Portal;",
+      "",
+      "const DrawerClose = DrawerPrimitive.Close;",
+      "",
+      "const DrawerOverlay = React.forwardRef<"
+    ],
+    "size": 2973
+  },
+  {
+    "path": "src/components/ui/dropdown-menu.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-dropdown-menu",
+        "names": ["* as DropdownMenuPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Check", "ChevronRight", "Circle"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "DropdownMenu",
+          "DropdownMenuTrigger",
+          "DropdownMenuContent",
+          "DropdownMenuItem",
+          "DropdownMenuCheckboxItem",
+          "DropdownMenuRadioItem",
+          "DropdownMenuLabel",
+          "DropdownMenuSeparator",
+          "DropdownMenuShortcut",
+          "DropdownMenuGroup",
+          "DropdownMenuPortal",
+          "DropdownMenuSub",
+          "DropdownMenuSubContent",
+          "DropdownMenuSubTrigger",
+          "DropdownMenuRadioGroup"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "DropdownMenu"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuPortal"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuSub"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuRadioGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuSubTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuSubContent"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuContent"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuItem"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuCheckboxItem"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuRadioItem"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuSeparator"
+      },
+      {
+        "kind": "variable",
+        "name": "DropdownMenuShortcut"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as DropdownMenuPrimitive from \"@radix-ui/react-dropdown-menu\";",
+      "import { Check, ChevronRight, Circle } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const DropdownMenu = DropdownMenuPrimitive.Root;",
+      "",
+      "const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;",
+      "",
+      "const DropdownMenuGroup = DropdownMenuPrimitive.Group;",
+      "",
+      "const DropdownMenuPortal = DropdownMenuPrimitive.Portal;",
+      "",
+      "const DropdownMenuSub = DropdownMenuPrimitive.Sub;",
+      "",
+      "const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;",
+      ""
+    ],
+    "size": 7565
+  },
+  {
+    "path": "src/components/ui/form.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-label",
+        "names": ["* as LabelPrimitive"]
+      },
+      {
+        "module": "@radix-ui/react-slot",
+        "names": ["Slot"]
+      },
+      {
+        "module": "react-hook-form",
+        "names": [
+          "Controller",
+          "FormProvider",
+          "useFormContext",
+          "ControllerProps",
+          "FieldPath",
+          "FieldValues"
+        ]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/label",
+        "names": ["Label"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "useFormField",
+          "Form",
+          "FormItem",
+          "FormLabel",
+          "FormControl",
+          "FormDescription",
+          "FormMessage",
+          "FormField"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Form"
+      },
+      {
+        "kind": "type",
+        "name": "FormFieldContextValue"
+      },
+      {
+        "kind": "variable",
+        "name": "FormFieldContext"
+      },
+      {
+        "kind": "variable",
+        "name": "FormField"
+      },
+      {
+        "kind": "variable",
+        "name": "useFormField"
+      },
+      {
+        "kind": "variable",
+        "name": "fieldContext"
+      },
+      {
+        "kind": "variable",
+        "name": "itemContext"
+      },
+      {
+        "kind": "variable",
+        "name": "fieldState"
+      },
+      {
+        "kind": "type",
+        "name": "FormItemContextValue"
+      },
+      {
+        "kind": "variable",
+        "name": "FormItemContext"
+      },
+      {
+        "kind": "variable",
+        "name": "FormItem"
+      },
+      {
+        "kind": "variable",
+        "name": "id"
+      },
+      {
+        "kind": "variable",
+        "name": "FormLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "FormControl"
+      },
+      {
+        "kind": "variable",
+        "name": "FormDescription"
+      },
+      {
+        "kind": "variable",
+        "name": "FormMessage"
+      },
+      {
+        "kind": "variable",
+        "name": "body"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as LabelPrimitive from \"@radix-ui/react-label\";",
+      "import { Slot } from \"@radix-ui/react-slot\";",
+      "import {",
+      "  Controller,",
+      "  FormProvider,",
+      "  useFormContext,",
+      "  type ControllerProps,",
+      "  type FieldPath,",
+      "  type FieldValues,",
+      "} from \"react-hook-form\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "import { Label } from \"@/components/ui/label\";",
+      "",
+      "const Form = FormProvider;",
+      "",
+      "type FormFieldContextValue<",
+      "  TFieldValues extends FieldValues = FieldValues,",
+      "  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,"
+    ],
+    "size": 4201
+  },
+  {
+    "path": "src/components/ui/hover-card.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-hover-card",
+        "names": ["* as HoverCardPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["HoverCard", "HoverCardTrigger", "HoverCardContent"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "HoverCard"
+      },
+      {
+        "kind": "variable",
+        "name": "HoverCardTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "HoverCardContent"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as HoverCardPrimitive from \"@radix-ui/react-hover-card\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const HoverCard = HoverCardPrimitive.Root;",
+      "",
+      "const HoverCardTrigger = HoverCardPrimitive.Trigger;",
+      "",
+      "const HoverCardContent = React.forwardRef<",
+      "  React.ElementRef<typeof HoverCardPrimitive.Content>,",
+      "  React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>",
+      ">(({ className, align = \"center\", sideOffset = 4, ...props }, ref) => (",
+      "  <HoverCardPrimitive.Content",
+      "    ref={ref}",
+      "    align={align}",
+      "    sideOffset={sideOffset}",
+      "    className={cn(",
+      "      \"z-50 w-64 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-hover-card-content-transform-origin)\",",
+      "      className,"
+    ],
+    "size": 1246
+  },
+  {
+    "path": "src/components/ui/input-otp.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "input-otp",
+        "names": ["OTPInput", "OTPInputContext"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Minus"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["InputOTP", "InputOTPGroup", "InputOTPSlot", "InputOTPSeparator"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "InputOTP"
+      },
+      {
+        "kind": "variable",
+        "name": "InputOTPGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "InputOTPSlot"
+      },
+      {
+        "kind": "variable",
+        "name": "inputOTPContext"
+      },
+      {
+        "kind": "variable",
+        "name": "InputOTPSeparator"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { OTPInput, OTPInputContext } from \"input-otp\";",
+      "import { Minus } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const InputOTP = React.forwardRef<",
+      "  React.ElementRef<typeof OTPInput>,",
+      "  React.ComponentPropsWithoutRef<typeof OTPInput>",
+      ">(({ className, containerClassName, ...props }, ref) => (",
+      "  <OTPInput",
+      "    ref={ref}",
+      "    containerClassName={cn(",
+      "      \"flex items-center gap-2 has-[:disabled]:opacity-50\",",
+      "      containerClassName,",
+      "    )}",
+      "    className={cn(\"disabled:cursor-not-allowed\", className)}",
+      "    {...props}",
+      "  />",
+      "));"
+    ],
+    "size": 2232
+  },
+  {
+    "path": "src/components/ui/input.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Input"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Input"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<\"input\">>(",
+      "  ({ className, type, ...props }, ref) => {",
+      "    return (",
+      "      <input",
+      "        type={type}",
+      "        className={cn(",
+      "          \"flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm\",",
+      "          className,",
+      "        )}",
+      "        ref={ref}",
+      "        {...props}",
+      "      />",
+      "    );",
+      "  },",
+      ");",
+      "Input.displayName = \"Input\";"
+    ],
+    "size": 776
+  },
+  {
+    "path": "src/components/ui/label.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-label",
+        "names": ["* as LabelPrimitive"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva", "VariantProps"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Label"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "labelVariants"
+      },
+      {
+        "kind": "variable",
+        "name": "Label"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as LabelPrimitive from \"@radix-ui/react-label\";",
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const labelVariants = cva(",
+      "  \"text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70\",",
+      ");",
+      "",
+      "const Label = React.forwardRef<",
+      "  React.ElementRef<typeof LabelPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & VariantProps<typeof labelVariants>",
+      ">(({ className, ...props }, ref) => (",
+      "  <LabelPrimitive.Root ref={ref} className={cn(labelVariants(), className)} {...props} />",
+      "));",
+      "Label.displayName = LabelPrimitive.Root.displayName;",
+      ""
+    ],
+    "size": 716
+  },
+  {
+    "path": "src/components/ui/menubar.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-menubar",
+        "names": ["* as MenubarPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Check", "ChevronRight", "Circle"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Menubar",
+          "MenubarMenu",
+          "MenubarTrigger",
+          "MenubarContent",
+          "MenubarItem",
+          "MenubarSeparator",
+          "MenubarLabel",
+          "MenubarCheckboxItem",
+          "MenubarRadioGroup",
+          "MenubarRadioItem",
+          "MenubarPortal",
+          "MenubarSubContent",
+          "MenubarSubTrigger",
+          "MenubarGroup",
+          "MenubarSub",
+          "MenubarShortcut"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "function",
+        "name": "MenubarMenu"
+      },
+      {
+        "kind": "function",
+        "name": "MenubarGroup"
+      },
+      {
+        "kind": "function",
+        "name": "MenubarPortal"
+      },
+      {
+        "kind": "function",
+        "name": "MenubarRadioGroup"
+      },
+      {
+        "kind": "function",
+        "name": "MenubarSub"
+      },
+      {
+        "kind": "variable",
+        "name": "Menubar"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarSubTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarSubContent"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarContent"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarItem"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarCheckboxItem"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarRadioItem"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarSeparator"
+      },
+      {
+        "kind": "variable",
+        "name": "MenubarShortcut"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as MenubarPrimitive from \"@radix-ui/react-menubar\";",
+      "import { Check, ChevronRight, Circle } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "function MenubarMenu({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Menu>) {",
+      "  return <MenubarPrimitive.Menu {...props} />;",
+      "}",
+      "",
+      "function MenubarGroup({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Group>) {",
+      "  return <MenubarPrimitive.Group {...props} />;",
+      "}",
+      "",
+      "function MenubarPortal({ ...props }: React.ComponentProps<typeof MenubarPrimitive.Portal>) {",
+      "  return <MenubarPrimitive.Portal {...props} />;",
+      "}",
+      "",
+      "function MenubarRadioGroup({ ...props }: React.ComponentProps<typeof MenubarPrimitive.RadioGroup>) {",
+      "  return <MenubarPrimitive.RadioGroup {...props} />;"
+    ],
+    "size": 8515
+  },
+  {
+    "path": "src/components/ui/navigation-menu.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-navigation-menu",
+        "names": ["* as NavigationMenuPrimitive"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ChevronDown"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "navigationMenuTriggerStyle",
+          "NavigationMenu",
+          "NavigationMenuList",
+          "NavigationMenuItem",
+          "NavigationMenuContent",
+          "NavigationMenuTrigger",
+          "NavigationMenuLink",
+          "NavigationMenuIndicator",
+          "NavigationMenuViewport"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "NavigationMenu"
+      },
+      {
+        "kind": "variable",
+        "name": "NavigationMenuList"
+      },
+      {
+        "kind": "variable",
+        "name": "NavigationMenuItem"
+      },
+      {
+        "kind": "variable",
+        "name": "navigationMenuTriggerStyle"
+      },
+      {
+        "kind": "variable",
+        "name": "NavigationMenuTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "NavigationMenuContent"
+      },
+      {
+        "kind": "variable",
+        "name": "NavigationMenuLink"
+      },
+      {
+        "kind": "variable",
+        "name": "NavigationMenuViewport"
+      },
+      {
+        "kind": "variable",
+        "name": "NavigationMenuIndicator"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as NavigationMenuPrimitive from \"@radix-ui/react-navigation-menu\";",
+      "import { cva } from \"class-variance-authority\";",
+      "import { ChevronDown } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const NavigationMenu = React.forwardRef<",
+      "  React.ElementRef<typeof NavigationMenuPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>",
+      ">(({ className, children, ...props }, ref) => (",
+      "  <NavigationMenuPrimitive.Root",
+      "    ref={ref}",
+      "    className={cn(\"relative z-10 flex max-w-max flex-1 items-center justify-center\", className)}",
+      "    {...props}",
+      "  >",
+      "    {children}",
+      "    <NavigationMenuViewport />",
+      "  </NavigationMenuPrimitive.Root>",
+      "));"
+    ],
+    "size": 5152
+  },
+  {
+    "path": "src/components/ui/pagination.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["ChevronLeft", "ChevronRight", "MoreHorizontal"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["ButtonProps", "buttonVariants"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Pagination",
+          "PaginationContent",
+          "PaginationLink",
+          "PaginationItem",
+          "PaginationPrevious",
+          "PaginationNext",
+          "PaginationEllipsis"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Pagination"
+      },
+      {
+        "kind": "variable",
+        "name": "PaginationContent"
+      },
+      {
+        "kind": "variable",
+        "name": "PaginationItem"
+      },
+      {
+        "kind": "type",
+        "name": "PaginationLinkProps"
+      },
+      {
+        "kind": "variable",
+        "name": "PaginationLink"
+      },
+      {
+        "kind": "variable",
+        "name": "PaginationPrevious"
+      },
+      {
+        "kind": "variable",
+        "name": "PaginationNext"
+      },
+      {
+        "kind": "variable",
+        "name": "PaginationEllipsis"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { ChevronLeft, ChevronRight, MoreHorizontal } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "import { ButtonProps, buttonVariants } from \"@/components/ui/button\";",
+      "",
+      "const Pagination = ({ className, ...props }: React.ComponentProps<\"nav\">) => (",
+      "  <nav",
+      "    role=\"navigation\"",
+      "    aria-label=\"pagination\"",
+      "    className={cn(\"mx-auto flex w-full justify-center\", className)}",
+      "    {...props}",
+      "  />",
+      ");",
+      "Pagination.displayName = \"Pagination\";",
+      "",
+      "const PaginationContent = React.forwardRef<HTMLUListElement, React.ComponentProps<\"ul\">>(",
+      "  ({ className, ...props }, ref) => (",
+      "    <ul ref={ref} className={cn(\"flex flex-row items-center gap-1\", className)} {...props} />",
+      "  ),"
+    ],
+    "size": 2739
+  },
+  {
+    "path": "src/components/ui/popover.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-popover",
+        "names": ["* as PopoverPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Popover", "PopoverTrigger", "PopoverContent", "PopoverAnchor"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Popover"
+      },
+      {
+        "kind": "variable",
+        "name": "PopoverTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "PopoverAnchor"
+      },
+      {
+        "kind": "variable",
+        "name": "PopoverContent"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as PopoverPrimitive from \"@radix-ui/react-popover\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Popover = PopoverPrimitive.Root;",
+      "",
+      "const PopoverTrigger = PopoverPrimitive.Trigger;",
+      "",
+      "const PopoverAnchor = PopoverPrimitive.Anchor;",
+      "",
+      "const PopoverContent = React.forwardRef<",
+      "  React.ElementRef<typeof PopoverPrimitive.Content>,",
+      "  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>",
+      ">(({ className, align = \"center\", sideOffset = 4, ...props }, ref) => (",
+      "  <PopoverPrimitive.Portal>",
+      "    <PopoverPrimitive.Content",
+      "      ref={ref}",
+      "      align={align}",
+      "      sideOffset={sideOffset}"
+    ],
+    "size": 1352
+  },
+  {
+    "path": "src/components/ui/progress.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-progress",
+        "names": ["* as ProgressPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Progress"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Progress"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as ProgressPrimitive from \"@radix-ui/react-progress\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Progress = React.forwardRef<",
+      "  React.ElementRef<typeof ProgressPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>",
+      ">(({ className, value, ...props }, ref) => (",
+      "  <ProgressPrimitive.Root",
+      "    ref={ref}",
+      "    className={cn(\"relative h-2 w-full overflow-hidden rounded-full bg-primary/20\", className)}",
+      "    {...props}",
+      "  >",
+      "    <ProgressPrimitive.Indicator",
+      "      className=\"h-full w-full flex-1 bg-primary transition-all\"",
+      "      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}",
+      "    />"
+    ],
+    "size": 781
+  },
+  {
+    "path": "src/components/ui/radio-group.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-radio-group",
+        "names": ["* as RadioGroupPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Circle"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["RadioGroup", "RadioGroupItem"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "RadioGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "RadioGroupItem"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as RadioGroupPrimitive from \"@radix-ui/react-radio-group\";",
+      "import { Circle } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const RadioGroup = React.forwardRef<",
+      "  React.ElementRef<typeof RadioGroupPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>",
+      ">(({ className, ...props }, ref) => {",
+      "  return <RadioGroupPrimitive.Root className={cn(\"grid gap-2\", className)} {...props} ref={ref} />;",
+      "});",
+      "RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;",
+      "",
+      "const RadioGroupItem = React.forwardRef<",
+      "  React.ElementRef<typeof RadioGroupPrimitive.Item>,",
+      "  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>",
+      ">(({ className, ...props }, ref) => {",
+      "  return (",
+      "    <RadioGroupPrimitive.Item"
+    ],
+    "size": 1405
+  },
+  {
+    "path": "src/components/ui/resizable.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "lucide-react",
+        "names": ["GripVertical"]
+      },
+      {
+        "module": "react-resizable-panels",
+        "names": ["Group", "Panel", "Separator"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["ResizablePanelGroup", "ResizablePanel", "ResizableHandle"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "ResizablePanelGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "ResizablePanel"
+      },
+      {
+        "kind": "variable",
+        "name": "ResizableHandle"
+      }
+    ],
+    "firstLines": [
+      "import { GripVertical } from \"lucide-react\";",
+      "import { Group, Panel, Separator } from \"react-resizable-panels\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const ResizablePanelGroup = ({ className, ...props }: React.ComponentProps<typeof Group>) => (",
+      "  <Group",
+      "    className={cn(\"flex h-full w-full data-[panel-group-direction=vertical]:flex-col\", className)}",
+      "    {...props}",
+      "  />",
+      ");",
+      "",
+      "const ResizablePanel = Panel;",
+      "",
+      "const ResizableHandle = ({",
+      "  withHandle,",
+      "  className,",
+      "  ...props",
+      "}: React.ComponentProps<typeof Separator> & {",
+      "  withHandle?: boolean;"
+    ],
+    "size": 1552
+  },
+  {
+    "path": "src/components/ui/scroll-area.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-scroll-area",
+        "names": ["* as ScrollAreaPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["ScrollArea", "ScrollBar"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "ScrollArea"
+      },
+      {
+        "kind": "variable",
+        "name": "ScrollBar"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as ScrollAreaPrimitive from \"@radix-ui/react-scroll-area\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const ScrollArea = React.forwardRef<",
+      "  React.ElementRef<typeof ScrollAreaPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>",
+      ">(({ className, children, ...props }, ref) => (",
+      "  <ScrollAreaPrimitive.Root",
+      "    ref={ref}",
+      "    className={cn(\"relative overflow-hidden\", className)}",
+      "    {...props}",
+      "  >",
+      "    <ScrollAreaPrimitive.Viewport className=\"h-full w-full rounded-[inherit]\">",
+      "      {children}",
+      "    </ScrollAreaPrimitive.Viewport>",
+      "    <ScrollBar />",
+      "    <ScrollAreaPrimitive.Corner />",
+      "  </ScrollAreaPrimitive.Root>"
+    ],
+    "size": 1635
+  },
+  {
+    "path": "src/components/ui/select.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-select",
+        "names": ["* as SelectPrimitive"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["Check", "ChevronDown", "ChevronUp"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Select",
+          "SelectGroup",
+          "SelectValue",
+          "SelectTrigger",
+          "SelectContent",
+          "SelectLabel",
+          "SelectItem",
+          "SelectSeparator",
+          "SelectScrollUpButton",
+          "SelectScrollDownButton"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Select"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectValue"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectScrollUpButton"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectScrollDownButton"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectContent"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectItem"
+      },
+      {
+        "kind": "variable",
+        "name": "SelectSeparator"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as SelectPrimitive from \"@radix-ui/react-select\";",
+      "import { Check, ChevronDown, ChevronUp } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Select = SelectPrimitive.Root;",
+      "",
+      "const SelectGroup = SelectPrimitive.Group;",
+      "",
+      "const SelectValue = SelectPrimitive.Value;",
+      "",
+      "const SelectTrigger = React.forwardRef<",
+      "  React.ElementRef<typeof SelectPrimitive.Trigger>,",
+      "  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>",
+      ">(({ className, children, ...props }, ref) => (",
+      "  <SelectPrimitive.Trigger",
+      "    ref={ref}"
+    ],
+    "size": 5749
+  },
+  {
+    "path": "src/components/ui/separator.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-separator",
+        "names": ["* as SeparatorPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Separator"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Separator"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as SeparatorPrimitive from \"@radix-ui/react-separator\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Separator = React.forwardRef<",
+      "  React.ElementRef<typeof SeparatorPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>",
+      ">(({ className, orientation = \"horizontal\", decorative = true, ...props }, ref) => (",
+      "  <SeparatorPrimitive.Root",
+      "    ref={ref}",
+      "    decorative={decorative}",
+      "    orientation={orientation}",
+      "    className={cn(",
+      "      \"shrink-0 bg-border\",",
+      "      orientation === \"horizontal\" ? \"h-[1px] w-full\" : \"h-full w-[1px]\",",
+      "      className,",
+      "    )}",
+      "    {...props}",
+      "  />"
+    ],
+    "size": 723
+  },
+  {
+    "path": "src/components/ui/sheet.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-dialog",
+        "names": ["* as SheetPrimitive"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva", "VariantProps"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["X"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Sheet",
+          "SheetPortal",
+          "SheetOverlay",
+          "SheetTrigger",
+          "SheetClose",
+          "SheetContent",
+          "SheetHeader",
+          "SheetFooter",
+          "SheetTitle",
+          "SheetDescription"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Sheet"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetClose"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetPortal"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetOverlay"
+      },
+      {
+        "kind": "variable",
+        "name": "sheetVariants"
+      },
+      {
+        "kind": "interface",
+        "name": "SheetContentProps"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetContent"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetHeader"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetFooter"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetTitle"
+      },
+      {
+        "kind": "variable",
+        "name": "SheetDescription"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as SheetPrimitive from \"@radix-ui/react-dialog\";",
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "import { X } from \"lucide-react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Sheet = SheetPrimitive.Root;",
+      "",
+      "const SheetTrigger = SheetPrimitive.Trigger;",
+      "",
+      "const SheetClose = SheetPrimitive.Close;",
+      "",
+      "const SheetPortal = SheetPrimitive.Portal;",
+      "",
+      "const SheetOverlay = React.forwardRef<",
+      "  React.ElementRef<typeof SheetPrimitive.Overlay>,",
+      "  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>"
+    ],
+    "size": 4248
+  },
+  {
+    "path": "src/components/ui/sidebar.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-slot",
+        "names": ["Slot"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva", "VariantProps"]
+      },
+      {
+        "module": "lucide-react",
+        "names": ["PanelLeft"]
+      },
+      {
+        "module": "@/hooks/use-mobile",
+        "names": ["useIsMobile"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/button",
+        "names": ["Button"]
+      },
+      {
+        "module": "@/components/ui/input",
+        "names": ["Input"]
+      },
+      {
+        "module": "@/components/ui/separator",
+        "names": ["Separator"]
+      },
+      {
+        "module": "@/components/ui/sheet",
+        "names": ["Sheet", "SheetContent", "SheetDescription", "SheetHeader", "SheetTitle"]
+      },
+      {
+        "module": "@/components/ui/skeleton",
+        "names": ["Skeleton"]
+      },
+      {
+        "module": "@/components/ui/tooltip",
+        "names": ["Tooltip", "TooltipContent", "TooltipProvider", "TooltipTrigger"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Sidebar",
+          "SidebarContent",
+          "SidebarFooter",
+          "SidebarGroup",
+          "SidebarGroupAction",
+          "SidebarGroupContent",
+          "SidebarGroupLabel",
+          "SidebarHeader",
+          "SidebarInput",
+          "SidebarInset",
+          "SidebarMenu",
+          "SidebarMenuAction",
+          "SidebarMenuBadge",
+          "SidebarMenuButton",
+          "SidebarMenuItem",
+          "SidebarMenuSkeleton",
+          "SidebarMenuSub",
+          "SidebarMenuSubButton",
+          "SidebarMenuSubItem",
+          "SidebarProvider",
+          "SidebarRail",
+          "SidebarSeparator",
+          "SidebarTrigger",
+          "useSidebar"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "SIDEBAR_COOKIE_NAME"
+      },
+      {
+        "kind": "variable",
+        "name": "SIDEBAR_COOKIE_MAX_AGE"
+      },
+      {
+        "kind": "variable",
+        "name": "SIDEBAR_WIDTH"
+      },
+      {
+        "kind": "variable",
+        "name": "SIDEBAR_WIDTH_MOBILE"
+      },
+      {
+        "kind": "variable",
+        "name": "SIDEBAR_WIDTH_ICON"
+      },
+      {
+        "kind": "variable",
+        "name": "SIDEBAR_KEYBOARD_SHORTCUT"
+      },
+      {
+        "kind": "type",
+        "name": "SidebarContextProps"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarContext"
+      },
+      {
+        "kind": "function",
+        "name": "useSidebar"
+      },
+      {
+        "kind": "variable",
+        "name": "context"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarProvider"
+      },
+      {
+        "kind": "variable",
+        "name": "isMobile"
+      },
+      {
+        "kind": "variable",
+        "name": "open"
+      },
+      {
+        "kind": "variable",
+        "name": "setOpen"
+      },
+      {
+        "kind": "variable",
+        "name": "openState"
+      },
+      {
+        "kind": "variable",
+        "name": "toggleSidebar"
+      },
+      {
+        "kind": "variable",
+        "name": "handleKeyDown"
+      },
+      {
+        "kind": "variable",
+        "name": "state"
+      },
+      {
+        "kind": "variable",
+        "name": "contextValue"
+      },
+      {
+        "kind": "variable",
+        "name": "Sidebar"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarRail"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarInset"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarInput"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarHeader"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarFooter"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarSeparator"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarContent"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarGroupLabel"
+      },
+      {
+        "kind": "variable",
+        "name": "Comp"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarGroupAction"
+      },
+      {
+        "kind": "variable",
+        "name": "Comp"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarGroupContent"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenu"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuItem"
+      },
+      {
+        "kind": "variable",
+        "name": "sidebarMenuButtonVariants"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuButton"
+      },
+      {
+        "kind": "variable",
+        "name": "Comp"
+      },
+      {
+        "kind": "variable",
+        "name": "button"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuAction"
+      },
+      {
+        "kind": "variable",
+        "name": "Comp"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuBadge"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuSkeleton"
+      },
+      {
+        "kind": "variable",
+        "name": "width"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuSub"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuSubItem"
+      },
+      {
+        "kind": "variable",
+        "name": "SidebarMenuSubButton"
+      },
+      {
+        "kind": "variable",
+        "name": "Comp"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import { Slot } from \"@radix-ui/react-slot\";",
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "import { PanelLeft } from \"lucide-react\";",
+      "",
+      "import { useIsMobile } from \"@/hooks/use-mobile\";",
+      "import { cn } from \"@/lib/utils\";",
+      "import { Button } from \"@/components/ui/button\";",
+      "import { Input } from \"@/components/ui/input\";",
+      "import { Separator } from \"@/components/ui/separator\";",
+      "import {",
+      "  Sheet,",
+      "  SheetContent,",
+      "  SheetDescription,",
+      "  SheetHeader,",
+      "  SheetTitle,",
+      "} from \"@/components/ui/sheet\";",
+      "import { Skeleton } from \"@/components/ui/skeleton\";",
+      "import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from \"@/components/ui/tooltip\";",
+      ""
+    ],
+    "size": 23975
+  },
+  {
+    "path": "src/components/ui/skeleton.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Skeleton"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "function",
+        "name": "Skeleton"
+      }
+    ],
+    "firstLines": [
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {",
+      "  return <div className={cn(\"animate-pulse rounded-md bg-primary/10\", className)} {...props} />;",
+      "}",
+      "",
+      "export { Skeleton };",
+      ""
+    ],
+    "size": 239
+  },
+  {
+    "path": "src/components/ui/slider.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-slider",
+        "names": ["* as SliderPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Slider"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Slider"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as SliderPrimitive from \"@radix-ui/react-slider\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Slider = React.forwardRef<",
+      "  React.ElementRef<typeof SliderPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>",
+      ">(({ className, ...props }, ref) => (",
+      "  <SliderPrimitive.Root",
+      "    ref={ref}",
+      "    className={cn(\"relative flex w-full touch-none select-none items-center\", className)}",
+      "    {...props}",
+      "  >",
+      "    <SliderPrimitive.Track className=\"relative h-1.5 w-full grow overflow-hidden rounded-full bg-primary/20\">",
+      "      <SliderPrimitive.Range className=\"absolute h-full bg-primary\" />",
+      "    </SliderPrimitive.Track>",
+      "    <SliderPrimitive.Thumb className=\"block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50\" />",
+      "  </SliderPrimitive.Root>",
+      "));"
+    ],
+    "size": 1025
+  },
+  {
+    "path": "src/components/ui/sonner.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "sonner",
+        "names": ["Sonner"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Toaster"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "type",
+        "name": "ToasterProps"
+      },
+      {
+        "kind": "variable",
+        "name": "Toaster"
+      }
+    ],
+    "firstLines": [
+      "import { Toaster as Sonner } from \"sonner\";",
+      "",
+      "type ToasterProps = React.ComponentProps<typeof Sonner>;",
+      "",
+      "const Toaster = ({ ...props }: ToasterProps) => {",
+      "  return (",
+      "    <Sonner",
+      "      className=\"toaster group\"",
+      "      toastOptions={{",
+      "        classNames: {",
+      "          toast:",
+      "            \"group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg\",",
+      "          description: \"group-[.toast]:text-muted-foreground\",",
+      "          actionButton: \"group-[.toast]:bg-primary group-[.toast]:text-primary-foreground\",",
+      "          cancelButton: \"group-[.toast]:bg-muted group-[.toast]:text-muted-foreground\",",
+      "        },",
+      "      }}",
+      "      {...props}",
+      "    />",
+      "  );"
+    ],
+    "size": 734
+  },
+  {
+    "path": "src/components/ui/switch.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-switch",
+        "names": ["* as SwitchPrimitives"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Switch"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Switch"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as SwitchPrimitives from \"@radix-ui/react-switch\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Switch = React.forwardRef<",
+      "  React.ElementRef<typeof SwitchPrimitives.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>",
+      ">(({ className, ...props }, ref) => (",
+      "  <SwitchPrimitives.Root",
+      "    className={cn(",
+      "      \"peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input\",",
+      "      className,",
+      "    )}",
+      "    {...props}",
+      "    ref={ref}",
+      "  >",
+      "    <SwitchPrimitives.Thumb",
+      "      className={cn(",
+      "        \"pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0\","
+    ],
+    "size": 1156
+  },
+  {
+    "path": "src/components/ui/table.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": [
+          "Table",
+          "TableHeader",
+          "TableBody",
+          "TableFooter",
+          "TableHead",
+          "TableRow",
+          "TableCell",
+          "TableCaption"
+        ]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Table"
+      },
+      {
+        "kind": "variable",
+        "name": "TableHeader"
+      },
+      {
+        "kind": "variable",
+        "name": "TableBody"
+      },
+      {
+        "kind": "variable",
+        "name": "TableFooter"
+      },
+      {
+        "kind": "variable",
+        "name": "TableRow"
+      },
+      {
+        "kind": "variable",
+        "name": "TableHead"
+      },
+      {
+        "kind": "variable",
+        "name": "TableCell"
+      },
+      {
+        "kind": "variable",
+        "name": "TableCaption"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(",
+      "  ({ className, ...props }, ref) => (",
+      "    <div className=\"relative w-full overflow-auto\">",
+      "      <table ref={ref} className={cn(\"w-full caption-bottom text-sm\", className)} {...props} />",
+      "    </div>",
+      "  ),",
+      ");",
+      "Table.displayName = \"Table\";",
+      "",
+      "const TableHeader = React.forwardRef<",
+      "  HTMLTableSectionElement,",
+      "  React.HTMLAttributes<HTMLTableSectionElement>",
+      ">(({ className, ...props }, ref) => (",
+      "  <thead ref={ref} className={cn(\"[&_tr]:border-b\", className)} {...props} />",
+      "));",
+      "TableHeader.displayName = \"TableHeader\";"
+    ],
+    "size": 2820
+  },
+  {
+    "path": "src/components/ui/tabs.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-tabs",
+        "names": ["* as TabsPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Tabs", "TabsList", "TabsTrigger", "TabsContent"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Tabs"
+      },
+      {
+        "kind": "variable",
+        "name": "TabsList"
+      },
+      {
+        "kind": "variable",
+        "name": "TabsTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "TabsContent"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as TabsPrimitive from \"@radix-ui/react-tabs\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Tabs = TabsPrimitive.Root;",
+      "",
+      "const TabsList = React.forwardRef<",
+      "  React.ElementRef<typeof TabsPrimitive.List>,",
+      "  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>",
+      ">(({ className, ...props }, ref) => (",
+      "  <TabsPrimitive.List",
+      "    ref={ref}",
+      "    className={cn(",
+      "      \"inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground\",",
+      "      className,",
+      "    )}",
+      "    {...props}",
+      "  />",
+      "));"
+    ],
+    "size": 1934
+  },
+  {
+    "path": "src/components/ui/textarea.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Textarea"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Textarea"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const Textarea = React.forwardRef<HTMLTextAreaElement, React.ComponentProps<\"textarea\">>(",
+      "  ({ className, ...props }, ref) => {",
+      "    return (",
+      "      <textarea",
+      "        className={cn(",
+      "          \"flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm\",",
+      "          className,",
+      "        )}",
+      "        ref={ref}",
+      "        {...props}",
+      "      />",
+      "    );",
+      "  },",
+      ");",
+      "Textarea.displayName = \"Textarea\";",
+      ""
+    ],
+    "size": 677
+  },
+  {
+    "path": "src/components/ui/toggle-group.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-toggle-group",
+        "names": ["* as ToggleGroupPrimitive"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["VariantProps"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      },
+      {
+        "module": "@/components/ui/toggle",
+        "names": ["toggleVariants"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["ToggleGroup", "ToggleGroupItem"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "ToggleGroupContext"
+      },
+      {
+        "kind": "variable",
+        "name": "ToggleGroup"
+      },
+      {
+        "kind": "variable",
+        "name": "ToggleGroupItem"
+      },
+      {
+        "kind": "variable",
+        "name": "context"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as ToggleGroupPrimitive from \"@radix-ui/react-toggle-group\";",
+      "import { type VariantProps } from \"class-variance-authority\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "import { toggleVariants } from \"@/components/ui/toggle\";",
+      "",
+      "const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({",
+      "  size: \"default\",",
+      "  variant: \"default\",",
+      "});",
+      "",
+      "const ToggleGroup = React.forwardRef<",
+      "  React.ElementRef<typeof ToggleGroupPrimitive.Root>,",
+      "  React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &",
+      "    VariantProps<typeof toggleVariants>",
+      ">(({ className, variant, size, children, ...props }, ref) => (",
+      "  <ToggleGroupPrimitive.Root"
+    ],
+    "size": 1752
+  },
+  {
+    "path": "src/components/ui/toggle.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-toggle",
+        "names": ["* as TogglePrimitive"]
+      },
+      {
+        "module": "class-variance-authority",
+        "names": ["cva", "VariantProps"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Toggle", "toggleVariants"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "toggleVariants"
+      },
+      {
+        "kind": "variable",
+        "name": "Toggle"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "import * as TogglePrimitive from \"@radix-ui/react-toggle\";",
+      "import { cva, type VariantProps } from \"class-variance-authority\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const toggleVariants = cva(",
+      "  \"inline-flex items-center justify-center gap-2 rounded-md text-sm font-medium cursor-pointer transition-colors hover:bg-muted hover:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed data-[state=on]:bg-accent data-[state=on]:text-accent-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0\",",
+      "  {",
+      "    variants: {",
+      "      variant: {",
+      "        default: \"bg-transparent\",",
+      "        outline:",
+      "          \"border border-input bg-transparent shadow-sm hover:bg-accent hover:text-accent-foreground\",",
+      "      },",
+      "      size: {",
+      "        default: \"h-9 px-2 min-w-9\",",
+      "        sm: \"h-8 px-1.5 min-w-8\",",
+      "        lg: \"h-10 px-2.5 min-w-10\",",
+      "      },"
+    ],
+    "size": 1534
+  },
+  {
+    "path": "src/components/ui/tooltip.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      },
+      {
+        "module": "@radix-ui/react-tooltip",
+        "names": ["* as TooltipPrimitive"]
+      },
+      {
+        "module": "@/lib/utils",
+        "names": ["cn"]
+      }
+    ],
+    "exports": [
+      {
+        "module": null,
+        "names": ["Tooltip", "TooltipTrigger", "TooltipContent", "TooltipProvider"]
+      }
+    ],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "TooltipProvider"
+      },
+      {
+        "kind": "variable",
+        "name": "Tooltip"
+      },
+      {
+        "kind": "variable",
+        "name": "TooltipTrigger"
+      },
+      {
+        "kind": "variable",
+        "name": "TooltipContent"
+      }
+    ],
+    "firstLines": [
+      "\"use client\";",
+      "",
+      "import * as React from \"react\";",
+      "import * as TooltipPrimitive from \"@radix-ui/react-tooltip\";",
+      "",
+      "import { cn } from \"@/lib/utils\";",
+      "",
+      "const TooltipProvider = TooltipPrimitive.Provider;",
+      "",
+      "const Tooltip = TooltipPrimitive.Root;",
+      "",
+      "const TooltipTrigger = TooltipPrimitive.Trigger;",
+      "",
+      "const TooltipContent = React.forwardRef<",
+      "  React.ElementRef<typeof TooltipPrimitive.Content>,",
+      "  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>",
+      ">(({ className, sideOffset = 4, ...props }, ref) => (",
+      "  <TooltipPrimitive.Portal>",
+      "    <TooltipPrimitive.Content",
+      "      ref={ref}"
+    ],
+    "size": 1278
+  },
+  {
+    "path": "src/hooks/use-mobile.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["* as React"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "MOBILE_BREAKPOINT"
+      },
+      {
+        "kind": "export function",
+        "name": "useIsMobile"
+      },
+      {
+        "kind": "variable",
+        "name": "mql"
+      },
+      {
+        "kind": "variable",
+        "name": "onChange"
+      }
+    ],
+    "firstLines": [
+      "import * as React from \"react\";",
+      "",
+      "const MOBILE_BREAKPOINT = 768;",
+      "",
+      "export function useIsMobile() {",
+      "  const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined);",
+      "",
+      "  React.useEffect(() => {",
+      "    const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);",
+      "    const onChange = () => {",
+      "      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);",
+      "    };",
+      "    mql.addEventListener(\"change\", onChange);",
+      "    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);",
+      "    return () => mql.removeEventListener(\"change\", onChange);",
+      "  }, []);",
+      "",
+      "  return !!isMobile;",
+      "}",
+      ""
+    ],
+    "size": 576
+  },
+  {
+    "path": "src/lib/error-capture.ts",
+    "ext": ".ts",
+    "imports": [],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "lastCapturedError"
+      },
+      {
+        "kind": "variable",
+        "name": "TTL_MS"
+      },
+      {
+        "kind": "function",
+        "name": "record"
+      },
+      {
+        "kind": "variable",
+        "name": "CAUSE_DEPTH_LIMIT"
+      },
+      {
+        "kind": "variable",
+        "name": "DESCRIPTION_LENGTH_LIMIT"
+      },
+      {
+        "kind": "export function",
+        "name": "describeError"
+      },
+      {
+        "kind": "variable",
+        "name": "parts"
+      },
+      {
+        "kind": "variable",
+        "name": "current"
+      },
+      {
+        "kind": "variable",
+        "name": "label"
+      },
+      {
+        "kind": "variable",
+        "name": "status"
+      },
+      {
+        "kind": "function",
+        "name": "describeStatus"
+      },
+      {
+        "kind": "variable",
+        "name": "value"
+      },
+      {
+        "kind": "function",
+        "name": "safeStringify"
+      },
+      {
+        "kind": "function",
+        "name": "isErrorLike"
+      },
+      {
+        "kind": "variable",
+        "name": "originalConsoleError"
+      },
+      {
+        "kind": "variable",
+        "name": "expanded"
+      },
+      {
+        "kind": "export function",
+        "name": "consumeLastCapturedError"
+      }
+    ],
+    "firstLines": [
+      "// Captures the original Error out-of-band so server.ts can recover the stack",
+      "// when h3 has already swallowed the throw into a generic 500 Response.",
+      "",
+      "let lastCapturedError: { error: unknown; at: number } | undefined;",
+      "const TTL_MS = 5_000;",
+      "",
+      "function record(error: unknown) {",
+      "  lastCapturedError = { error, at: Date.now() };",
+      "}",
+      "",
+      "// h3's HTTPError serializes to {\"status\":500,\"unhandled\":true,\"message\":\"HTTPError\"} —",
+      "// no stack, no cause — so a plain console.error(error) reaches the log pipeline with",
+      "// the failure detail stripped. Expand Error-like args into a string that keeps the",
+      "// message, stack, and the full cause chain.",
+      "const CAUSE_DEPTH_LIMIT = 5;",
+      "const DESCRIPTION_LENGTH_LIMIT = 8_000;",
+      "",
+      "export function describeError(error: unknown): string {",
+      "  const parts: string[] = [];",
+      "  let current: unknown = error;"
+    ],
+    "size": 2890
+  },
+  {
+    "path": "src/lib/error-page.ts",
+    "ext": ".ts",
+    "imports": [],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "export function",
+        "name": "renderErrorPage"
+      }
+    ],
+    "firstLines": [
+      "export function renderErrorPage(): string {",
+      "  return `<!doctype html>",
+      "<html lang=\"en\">",
+      "  <head>",
+      "    <meta charset=\"utf-8\" />",
+      "    <title>This page didn't load</title>",
+      "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />",
+      "    <style>",
+      "      body { font: 15px/1.5 system-ui, -apple-system, sans-serif; background: #fafafa; color: #111; display: grid; place-items: center; min-height: 100vh; margin: 0; padding: 1.5rem; }",
+      "      .card { max-width: 28rem; width: 100%; text-align: center; padding: 2rem; }",
+      "      h1 { font-size: 1.25rem; margin: 0 0 0.5rem; }",
+      "      p { color: #4b5563; margin: 0 0 1.5rem; }",
+      "      .actions { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }",
+      "      a, button { padding: 0.5rem 1rem; border-radius: 0.375rem; font: inherit; cursor: pointer; text-decoration: none; border: 1px solid transparent; }",
+      "      .primary { background: #111; color: #fff; }",
+      "      .secondary { background: #fff; color: #111; border-color: #d1d5db; }",
+      "    </style>",
+      "  </head>",
+      "  <body>",
+      "    <div class=\"card\">"
+    ],
+    "size": 1371
+  },
+  {
+    "path": "src/lib/lovable-error-reporting.ts",
+    "ext": ".ts",
+    "imports": [],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "type",
+        "name": "LovableErrorOptions"
+      },
+      {
+        "kind": "type",
+        "name": "LovableEvents"
+      },
+      {
+        "kind": "interface",
+        "name": "Window"
+      },
+      {
+        "kind": "export function",
+        "name": "reportLovableError"
+      },
+      {
+        "kind": "variable",
+        "name": "message"
+      },
+      {
+        "kind": "variable",
+        "name": "stack"
+      }
+    ],
+    "firstLines": [
+      "type LovableErrorOptions = {",
+      "  mechanism?: \"manual\" | \"onerror\" | \"unhandledrejection\" | \"react_error_boundary\";",
+      "  handled?: boolean;",
+      "  severity?: \"error\" | \"warning\" | \"info\";",
+      "};",
+      "",
+      "type LovableEvents = {",
+      "  captureException?: (",
+      "    error: unknown,",
+      "    context?: Record<string, unknown>,",
+      "    options?: LovableErrorOptions,",
+      "  ) => void;",
+      "};",
+      "",
+      "declare global {",
+      "  interface Window {",
+      "    __lovableEvents?: LovableEvents;",
+      "    __lovableReportRuntimeError?: (payload: {",
+      "      message: string;",
+      "      stack?: string;"
+    ],
+    "size": 1739
+  },
+  {
+    "path": "src/lib/site.ts",
+    "ext": ".ts",
+    "imports": [],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "export variable",
+        "name": "SITE"
+      },
+      {
+        "kind": "export variable",
+        "name": "NAV_LINKS"
+      }
+    ],
+    "firstLines": [
+      "export const SITE = {",
+      "  name: \"D&C Innovacion\",",
+      "  tagline: \"Personalizamos tus ideas con grabado láser, impresión 3D y productos únicos.\",",
+      "  whatsapp: \"618 444 4686\",",
+      "  whatsappUrl: \"https://wa.me/526184444686\",",
+      "  facebook: \"https://www.facebook.com/profile.php?id=61567450161287\",",
+      "  instagram:",
+      "    \"https://www.instagram.com/cdinovacion?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==\",",
+      "  city: \"Durango, México\",",
+      "} as const;",
+      "",
+      "export const NAV_LINKS = [",
+      "  { label: \"Inicio\", href: \"#inicio\" },",
+      "  { label: \"Servicios\", href: \"#servicios\" },",
+      "  { label: \"Galería\", href: \"#galeria\" },",
+      "  { label: \"Nosotros\", href: \"#nosotros\" },",
+      "  { label: \"Contacto\", href: \"#contacto\" },",
+      "] as const;",
+      ""
+    ],
+    "size": 694
+  },
+  {
+    "path": "src/lib/utils.ts",
+    "ext": ".ts",
+    "imports": [
+      {
+        "module": "clsx",
+        "names": ["clsx", "ClassValue"]
+      },
+      {
+        "module": "tailwind-merge",
+        "names": ["twMerge"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "export function",
+        "name": "cn"
+      }
+    ],
+    "firstLines": [
+      "import { clsx, type ClassValue } from \"clsx\";",
+      "import { twMerge } from \"tailwind-merge\";",
+      "",
+      "export function cn(...inputs: ClassValue[]) {",
+      "  return twMerge(clsx(inputs));",
+      "}",
+      ""
+    ],
+    "size": 169
+  },
+  {
+    "path": "src/main.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "react",
+        "names": ["default"]
+      },
+      {
+        "module": "react-dom/client",
+        "names": ["default"]
+      },
+      {
+        "module": "@tanstack/react-router",
+        "names": ["RouterProvider", "createRouter"]
+      },
+      {
+        "module": "./routeTree.gen",
+        "names": ["routeTree"]
+      },
+      {
+        "module": "@tanstack/react-query",
+        "names": ["QueryClient", "QueryClientProvider"]
+      },
+      {
+        "module": "./styles.css",
+        "names": []
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "queryClient"
+      },
+      {
+        "kind": "variable",
+        "name": "router"
+      },
+      {
+        "kind": "interface",
+        "name": "Register"
+      }
+    ],
+    "firstLines": [
+      "import React from \"react\";",
+      "import ReactDOM from \"react-dom/client\";",
+      "import { RouterProvider, createRouter } from \"@tanstack/react-router\";",
+      "",
+      "import { routeTree } from \"./routeTree.gen\";",
+      "import { QueryClient, QueryClientProvider } from \"@tanstack/react-query\";",
+      "import \"./styles.css\";",
+      "",
+      "const queryClient = new QueryClient();",
+      "",
+      "const router = createRouter({",
+      "  routeTree,",
+      "  context: { queryClient },",
+      "  defaultPreload: \"intentual\",",
+      "  defaultPreloadStaleTime: 0,",
+      "});",
+      "",
+      "declare module \"@tanstack/react-router\" {",
+      "  interface Register {",
+      "    router: typeof router;"
+    ],
+    "size": 783
+  },
+  {
+    "path": "src/router.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@tanstack/react-query",
+        "names": ["QueryClient"]
+      },
+      {
+        "module": "@tanstack/react-router",
+        "names": ["createRouter"]
+      },
+      {
+        "module": "./routeTree.gen",
+        "names": ["routeTree"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "export variable",
+        "name": "getRouter"
+      },
+      {
+        "kind": "variable",
+        "name": "queryClient"
+      },
+      {
+        "kind": "variable",
+        "name": "router"
+      }
+    ],
+    "firstLines": [
+      "import { QueryClient } from \"@tanstack/react-query\";",
+      "import { createRouter } from \"@tanstack/react-router\";",
+      "import { routeTree } from \"./routeTree.gen\";",
+      "",
+      "export const getRouter = () => {",
+      "  const queryClient = new QueryClient();",
+      "",
+      "  const router = createRouter({",
+      "    routeTree,",
+      "    context: { queryClient },",
+      "    scrollRestoration: true,",
+      "    defaultPreloadStaleTime: 0,",
+      "  });",
+      "",
+      "  return router;",
+      "};",
+      ""
+    ],
+    "size": 394
+  },
+  {
+    "path": "src/routes/index.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@tanstack/react-router",
+        "names": ["createFileRoute"]
+      },
+      {
+        "module": "react",
+        "names": ["lazy", "Suspense"]
+      },
+      {
+        "module": "@/components/site/Navbar",
+        "names": ["Navbar"]
+      },
+      {
+        "module": "@/components/site/Hero",
+        "names": ["Hero"]
+      },
+      {
+        "module": "@/components/site/Services",
+        "names": ["Services"]
+      },
+      {
+        "module": "@/components/site/Gallery",
+        "names": ["Gallery"]
+      },
+      {
+        "module": "@/components/site/Footer",
+        "names": ["Footer"]
+      },
+      {
+        "module": "@/components/site/ScrollToTop",
+        "names": ["ScrollToTop"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "Process"
+      },
+      {
+        "kind": "variable",
+        "name": "Testimonials"
+      },
+      {
+        "kind": "variable",
+        "name": "FAQ"
+      },
+      {
+        "kind": "variable",
+        "name": "Contact"
+      },
+      {
+        "kind": "variable",
+        "name": "ChatWidget"
+      },
+      {
+        "kind": "variable",
+        "name": "title"
+      },
+      {
+        "kind": "variable",
+        "name": "description"
+      },
+      {
+        "kind": "export variable",
+        "name": "Route"
+      },
+      {
+        "kind": "function",
+        "name": "Index"
+      }
+    ],
+    "firstLines": [
+      "import { createFileRoute } from \"@tanstack/react-router\";",
+      "import { lazy, Suspense } from \"react\";",
+      "",
+      "import { Navbar } from \"@/components/site/Navbar\";",
+      "import { Hero } from \"@/components/site/Hero\";",
+      "import { Services } from \"@/components/site/Services\";",
+      "import { Gallery } from \"@/components/site/Gallery\";",
+      "import { Footer } from \"@/components/site/Footer\";",
+      "import { ScrollToTop } from \"@/components/site/ScrollToTop\";",
+      "",
+      "const Process = lazy(() =>",
+      "  import(\"@/components/site/Process\").then((m) => ({ default: m.Process })),",
+      ");",
+      "const Testimonials = lazy(() =>",
+      "  import(\"@/components/site/Testimonials\").then((m) => ({ default: m.Testimonials })),",
+      ");",
+      "const FAQ = lazy(() => import(\"@/components/site/FAQ\").then((m) => ({ default: m.FAQ })));",
+      "const Contact = lazy(() =>",
+      "  import(\"@/components/site/Contact\").then((m) => ({ default: m.Contact })),",
+      ");"
+    ],
+    "size": 2626
+  },
+  {
+    "path": "src/routes/README.md",
+    "ext": ".md",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "# Routes",
+      "",
+      "TanStack Start uses **file-based routing**. Every `.tsx` file in this directory",
+      "defines a route. Do **not** create `src/pages/`, `src/routes/_app/index.tsx`, or",
+      "`app/layout.tsx` — those are Next.js / Remix conventions. The only root layout",
+      "is `src/routes/__root.tsx`.",
+      "",
+      "## Conventions",
+      "",
+      "| File                     | URL                                                     |",
+      "| ------------------------ | ------------------------------------------------------- |",
+      "| `index.tsx`              | `/`                                                     |",
+      "| `about.tsx`              | `/about`                                                |",
+      "| `users/index.tsx`        | `/users`                                                |",
+      "| `users/$id.tsx`          | `/users/:id` (dynamic — bare `$`, no curly braces)      |",
+      "| `posts/{-$category}.tsx` | `/posts/:category?` (optional segment)                  |",
+      "| `files/$.tsx`            | `/files/*` (splat — read via `_splat` param, never `*`) |",
+      "| `_layout.tsx`            | layout route (renders children via `<Outlet />`)        |",
+      "| `__root.tsx`             | app shell — wraps every page; preserve `<Outlet />`     |",
+      ""
+    ],
+    "size": 1227
+  },
+  {
+    "path": "src/routes/__root.tsx",
+    "ext": ".tsx",
+    "imports": [
+      {
+        "module": "@tanstack/react-query",
+        "names": ["QueryClient", "QueryClientProvider"]
+      },
+      {
+        "module": "@tanstack/react-router",
+        "names": [
+          "Outlet",
+          "Link",
+          "createRootRouteWithContext",
+          "useRouter",
+          "HeadContent",
+          "Scripts"
+        ]
+      },
+      {
+        "module": "react",
+        "names": ["useEffect", "ReactNode"]
+      },
+      {
+        "module": "../styles.css?url",
+        "names": ["default"]
+      },
+      {
+        "module": "../lib/lovable-error-reporting",
+        "names": ["reportLovableError"]
+      },
+      {
+        "module": "@/components/ui/sonner",
+        "names": ["Toaster"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "function",
+        "name": "NotFoundComponent"
+      },
+      {
+        "kind": "function",
+        "name": "ErrorComponent"
+      },
+      {
+        "kind": "variable",
+        "name": "router"
+      },
+      {
+        "kind": "export variable",
+        "name": "Route"
+      },
+      {
+        "kind": "function",
+        "name": "RootShell"
+      },
+      {
+        "kind": "function",
+        "name": "RootComponent"
+      }
+    ],
+    "firstLines": [
+      "import { QueryClient, QueryClientProvider } from \"@tanstack/react-query\";",
+      "import {",
+      "  Outlet,",
+      "  Link,",
+      "  createRootRouteWithContext,",
+      "  useRouter,",
+      "  HeadContent,",
+      "  Scripts,",
+      "} from \"@tanstack/react-router\";",
+      "import { useEffect, type ReactNode } from \"react\";",
+      "",
+      "import appCss from \"../styles.css?url\";",
+      "import { reportLovableError } from \"../lib/lovable-error-reporting\";",
+      "import { Toaster } from \"@/components/ui/sonner\";",
+      "",
+      "function NotFoundComponent() {",
+      "  return (",
+      "    <div className=\"flex min-h-screen items-center justify-center bg-background px-4\">",
+      "      <div className=\"max-w-md text-center\">",
+      "        <h1 className=\"text-7xl font-bold text-foreground\">404</h1>"
+    ],
+    "size": 5336
+  },
+  {
+    "path": "src/routeTree.gen.ts",
+    "ext": ".ts",
+    "imports": [
+      {
+        "module": "./routes/__root",
+        "names": ["rootRouteImport"]
+      },
+      {
+        "module": "./routes/index",
+        "names": ["IndexRouteImport"]
+      },
+      {
+        "module": "./router.tsx",
+        "names": ["getRouter"]
+      },
+      {
+        "module": "./start.ts",
+        "names": ["startInstance"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "IndexRoute"
+      },
+      {
+        "kind": "interface",
+        "name": "FileRoutesByFullPath"
+      },
+      {
+        "kind": "interface",
+        "name": "FileRoutesByTo"
+      },
+      {
+        "kind": "interface",
+        "name": "FileRoutesById"
+      },
+      {
+        "kind": "interface",
+        "name": "FileRouteTypes"
+      },
+      {
+        "kind": "interface",
+        "name": "RootRouteChildren"
+      },
+      {
+        "kind": "interface",
+        "name": "FileRoutesByPath"
+      },
+      {
+        "kind": "variable",
+        "name": "rootRouteChildren"
+      },
+      {
+        "kind": "export variable",
+        "name": "routeTree"
+      },
+      {
+        "kind": "interface",
+        "name": "Register"
+      }
+    ],
+    "firstLines": [
+      "/* eslint-disable */",
+      "",
+      "// @ts-nocheck",
+      "",
+      "// noinspection JSUnusedGlobalSymbols",
+      "",
+      "// This file was automatically generated by TanStack Router.",
+      "// You should NOT make any changes in this file as it will be overwritten.",
+      "// Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.",
+      "",
+      "import { Route as rootRouteImport } from './routes/__root'",
+      "import { Route as IndexRouteImport } from './routes/index'",
+      "",
+      "const IndexRoute = IndexRouteImport.update({",
+      "  id: '/',",
+      "  path: '/',",
+      "  getParentRoute: () => rootRouteImport,",
+      "} as any)",
+      "",
+      "export interface FileRoutesByFullPath {"
+    ],
+    "size": 1797
+  },
+  {
+    "path": "src/server.ts",
+    "ext": ".ts",
+    "imports": [
+      {
+        "module": "./lib/error-capture",
+        "names": []
+      },
+      {
+        "module": "./lib/error-capture",
+        "names": ["consumeLastCapturedError"]
+      },
+      {
+        "module": "./lib/error-page",
+        "names": ["renderErrorPage"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "type",
+        "name": "ServerEntry"
+      },
+      {
+        "kind": "variable",
+        "name": "serverEntryPromise"
+      },
+      {
+        "kind": "function",
+        "name": "getServerEntry"
+      },
+      {
+        "kind": "function",
+        "name": "normalizeCatastrophicSsrResponse"
+      },
+      {
+        "kind": "variable",
+        "name": "contentType"
+      },
+      {
+        "kind": "variable",
+        "name": "body"
+      },
+      {
+        "kind": "function",
+        "name": "isH3SwallowedErrorBody"
+      },
+      {
+        "kind": "variable",
+        "name": "payload"
+      },
+      {
+        "kind": "variable",
+        "name": "handler"
+      },
+      {
+        "kind": "variable",
+        "name": "response"
+      }
+    ],
+    "firstLines": [
+      "import \"./lib/error-capture\";",
+      "",
+      "import { consumeLastCapturedError } from \"./lib/error-capture\";",
+      "import { renderErrorPage } from \"./lib/error-page\";",
+      "",
+      "type ServerEntry = {",
+      "  fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;",
+      "};",
+      "",
+      "let serverEntryPromise: Promise<ServerEntry> | undefined;",
+      "",
+      "async function getServerEntry(): Promise<ServerEntry> {",
+      "  if (!serverEntryPromise) {",
+      "    serverEntryPromise = import(\"@tanstack/react-start/server-entry\").then(",
+      "      (m) => (m.default ?? m) as ServerEntry,",
+      "    );",
+      "  }",
+      "  return serverEntryPromise;",
+      "}",
+      ""
+    ],
+    "size": 2046
+  },
+  {
+    "path": "src/start.ts",
+    "ext": ".ts",
+    "imports": [
+      {
+        "module": "@tanstack/react-start",
+        "names": ["createStart", "createCsrfMiddleware", "createMiddleware"]
+      },
+      {
+        "module": "./lib/error-page",
+        "names": ["renderErrorPage"]
+      }
+    ],
+    "exports": [],
+    "decls": [
+      {
+        "kind": "variable",
+        "name": "errorMiddleware"
+      },
+      {
+        "kind": "variable",
+        "name": "csrfMiddleware"
+      },
+      {
+        "kind": "export variable",
+        "name": "startInstance"
+      }
+    ],
+    "firstLines": [
+      "import { createStart, createCsrfMiddleware, createMiddleware } from \"@tanstack/react-start\";",
+      "",
+      "import { renderErrorPage } from \"./lib/error-page\";",
+      "",
+      "const errorMiddleware = createMiddleware().server(async ({ next }) => {",
+      "  try {",
+      "    return await next();",
+      "  } catch (error) {",
+      "    if (error != null && typeof error === \"object\" && \"statusCode\" in error) {",
+      "      throw error;",
+      "    }",
+      "    console.error(error);",
+      "    return new Response(renderErrorPage(), {",
+      "      status: 500,",
+      "      headers: { \"content-type\": \"text/html; charset=utf-8\" },",
+      "    });",
+      "  }",
+      "});",
+      "",
+      "// Start installs this automatically when src/start.ts is absent; defining the"
+    ],
+    "size": 944
+  },
+  {
+    "path": "src/styles.css",
+    "ext": ".css",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "@import \"tailwindcss\" source(none);",
+      "@source \"../src\";",
+      "@import \"tw-animate-css\";",
+      "",
+      "@custom-variant dark (&:is(.dark *));",
+      "",
+      "/*",
+      " * D&C Innovación design system.",
+      " * Neutral premium palette (white / near-black / greys) with a single wine accent",
+      " * taken from the brand logo. All colors in oklch.",
+      " */",
+      "",
+      "@theme inline {",
+      "  --radius-sm: calc(var(--radius) - 4px);",
+      "  --radius-md: calc(var(--radius) - 2px);",
+      "  --radius-lg: var(--radius);",
+      "  --radius-xl: calc(var(--radius) + 4px);",
+      "  --radius-2xl: calc(var(--radius) + 8px);",
+      "  --radius-3xl: calc(var(--radius) + 12px);",
+      "  --radius-4xl: calc(var(--radius) + 16px);"
+    ],
+    "size": 5804
+  },
+  {
+    "path": "tsconfig.json",
+    "ext": ".json",
+    "imports": [],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "{",
+      "  \"include\": [\"src/**/*.ts\", \"src/**/*.tsx\", \"vite.config.ts\", \"eslint.config.js\"],",
+      "  \"compilerOptions\": {",
+      "    \"target\": \"ES2022\",",
+      "    \"jsx\": \"react-jsx\",",
+      "    \"module\": \"ESNext\",",
+      "    \"lib\": [\"ES2022\", \"DOM\", \"DOM.Iterable\"],",
+      "    \"types\": [\"vite/client\"],",
+      "",
+      "    \"moduleResolution\": \"Bundler\",",
+      "    \"allowImportingTsExtensions\": true,",
+      "    \"verbatimModuleSyntax\": false,",
+      "    \"noEmit\": true,",
+      "",
+      "    \"skipLibCheck\": true,",
+      "    \"strict\": true,",
+      "    \"noUnusedLocals\": false,",
+      "    \"noUnusedParameters\": false,",
+      "    \"noFallthroughCasesInSwitch\": true,",
+      "    \"noImplicitOverride\": true,"
+    ],
+    "size": 820
+  },
+  {
+    "path": "vite.config.ts",
+    "ext": ".ts",
+    "imports": [
+      {
+        "module": "@lovable.dev/vite-tanstack-config",
+        "names": ["defineConfig"]
+      }
+    ],
+    "exports": [],
+    "decls": [],
+    "firstLines": [
+      "// @lovable.dev/vite-tanstack-config already includes the following — do NOT add them manually",
+      "// or the app will break with duplicate plugins:",
+      "//   - TanStack devtools (dev-only, first), tanstackStart, viteReact, tailwindcss, tsConfigPaths,",
+      "//     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,",
+      "//     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).",
+      "// You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.",
+      "import { defineConfig } from \"@lovable.dev/vite-tanstack-config\";",
+      "",
+      "export default defineConfig({",
+      "  server: {",
+      "    watch: {",
+      "      ignored: [\"**/.output/**\", \"**/.wrangler/**\"],",
+      "    },",
+      "  },",
+      "  tanstackStart: {",
+      "    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).",
+      "    // nitro/vite builds from this",
+      "    server: { entry: \"server\" },",
+      "  },",
+      "});"
+    ],
+    "size": 908
+  }
+]

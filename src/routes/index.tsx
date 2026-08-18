@@ -1,34 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
 
-import { Navbar } from "@/components/site/Navbar";
-import { Hero } from "@/components/site/Hero";
-import { Services } from "@/components/site/Services";
-import { Gallery } from "@/components/site/Gallery";
-import { Footer } from "@/components/site/Footer";
-import { ScrollToTop } from "@/components/site/ScrollToTop";
-import { CustomCursor } from "@/components/site/CustomCursor";
+import { HomePage } from "@/pages/site-pages";
 
-const AIDesigner = lazy(() =>
-  import("@/components/site/AIDesigner").then((m) => ({ default: m.AIDesigner })),
-);
-const Process = lazy(() =>
-  import("@/components/site/Process").then((m) => ({ default: m.Process })),
-);
-const Testimonials = lazy(() =>
-  import("@/components/site/Testimonials").then((m) => ({ default: m.Testimonials })),
-);
-const FAQ = lazy(() => import("@/components/site/FAQ").then((m) => ({ default: m.FAQ })));
-const Contact = lazy(() =>
-  import("@/components/site/Contact").then((m) => ({ default: m.Contact })),
-);
-const ChatWidget = lazy(() =>
-  import("@/components/site/ChatWidget").then((m) => ({ default: m.ChatWidget })),
-);
-
-const title = "D&C Innovación | Grabado láser, impresión 3D y vasos personalizados";
+const title = "DYC | Personalización premium";
 const description =
-  "Personalizamos vasos, termos, tazas, llaveros y regalos empresariales con grabado láser e impresión 3D. Diseño a medida y entrega rápida en Durango y todo México.";
+  "Personalizamos productos, regalos y piezas de diseño con grabado láser e impresión 3D. Soluciones a medida con atención y creatividad.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,7 +22,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "LocalBusiness",
-          name: "D&C Innovación",
+          name: "DYC",
           description,
           telephone: "+52 618 444 4686",
           areaServed: "México",
@@ -56,31 +32,5 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: Index,
+  component: HomePage,
 });
-
-function Index() {
-  return (
-    <div className="min-h-screen bg-background">
-      <CustomCursor />
-      <Navbar />
-      <main>
-        <Hero />
-        <Services />
-        <Gallery />
-        <Suspense fallback={<div className="h-40" />}>
-          <AIDesigner />
-          <Process />
-          <Testimonials />
-          <FAQ />
-          <Contact />
-        </Suspense>
-      </main>
-      <Footer />
-      <ScrollToTop />
-      <Suspense fallback={null}>
-        <ChatWidget />
-      </Suspense>
-    </div>
-  );
-}

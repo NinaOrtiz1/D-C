@@ -35,14 +35,18 @@ export function FAQ() {
       <div className="mx-auto max-w-3xl px-5 sm:px-8">
         <SectionHeading eyebrow="Preguntas frecuentes" title="Resolvemos tus dudas" />
 
-        <Reveal delay={0.1} className="mt-12">
-          <Accordion type="single" collapsible className="w-full">
+        <Reveal delay={0.1} className="mt-16">
+          <Accordion type="single" collapsible className="w-full space-y-2">
             {faqs.map((faq, i) => (
-              <AccordionItem key={faq.q} value={`item-${i}`} className="border-border">
-                <AccordionTrigger className="py-5 text-left font-display text-base font-semibold hover:no-underline sm:text-lg">
+              <AccordionItem
+                key={faq.q}
+                value={`item-${i}`}
+                className="rounded-2xl border border-border bg-card/70 px-2 shadow-soft"
+              >
+                <AccordionTrigger className="py-4 text-left font-display text-base font-semibold hover:no-underline sm:text-lg">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
+                <AccordionContent className="pb-4 text-sm leading-relaxed text-muted-foreground">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>

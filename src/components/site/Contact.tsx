@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Facebook, Instagram, Mail, MapPin, MessageCircle, Music2, Send } from "lucide-react";
+import { Facebook, Instagram, MapPin, MessageCircle, Send } from "lucide-react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
@@ -21,7 +21,6 @@ import { SITE } from "@/lib/site";
 
 const schema = z.object({
   name: z.string().min(2, "Escribe tu nombre completo."),
-  email: z.string().email("Ingresa un correo válido."),
   phone: z.string().min(10, "Ingresa un teléfono de 10 dígitos.").max(15),
   message: z.string().min(10, "Cuéntanos un poco más sobre tu idea."),
 });
@@ -32,14 +31,13 @@ const socials = [
   { icon: Facebook, label: "Facebook", href: SITE.facebook },
   { icon: MessageCircle, label: "WhatsApp", href: SITE.whatsappUrl },
   { icon: Instagram, label: "Instagram", href: SITE.instagram },
-  { icon: Music2, label: "TikTok", href: SITE.tiktok },
 ];
 
 export function Contact() {
   const [sending, setSending] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", email: "", phone: "", message: "" },
+    defaultValues: { name: "", phone: "", message: "" },
   });
 
   // Preparado para conectarse a un endpoint del backend (Express + PostgreSQL).
@@ -56,7 +54,7 @@ export function Contact() {
   return (
     <section
       id="contacto"
-      className="scroll-mt-24 border-t border-border bg-muted/40 py-24 md:py-32"
+      className="scroll-mt-24 border-t border-border bg-muted/40 py-24 md:py-32 lg:py-36"
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
@@ -67,10 +65,10 @@ export function Contact() {
 
         <div className="mt-14 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
           <Reveal direction="right">
-            <div className="flex h-full flex-col gap-6 rounded-3xl border border-border bg-card p-8 shadow-soft">
+            <div className="flex h-full flex-col gap-10 rounded-[2rem] border border-border bg-card p-10 shadow-soft">
               <div>
-                <h3 className="font-display text-xl font-semibold">Habla con nosotros</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <h3 className="font-display text-2xl font-semibold">Habla con nosotros</h3>
+                <p className="mt-2 text-[0.95rem] text-muted-foreground sm:text-base">
                   Atención directa, sin intermediarios.
                 </p>
               </div>
@@ -79,7 +77,7 @@ export function Contact() {
                 href={SITE.whatsappUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center gap-4 rounded-2xl border border-border p-4 transition-colors hover:border-wine/40"
+                className="group flex items-center gap-4 rounded-[1.35rem] border border-border p-4 transition-all duration-300 hover:-translate-y-1 hover:border-wine/40 hover:bg-wine-soft/40"
               >
                 <span className="inline-flex size-11 items-center justify-center rounded-xl bg-wine-soft text-wine">
                   <MessageCircle className="size-5" />
@@ -90,20 +88,7 @@ export function Contact() {
                 </span>
               </a>
 
-              <a
-                href={`mailto:${SITE.email}`}
-                className="group flex items-center gap-4 rounded-2xl border border-border p-4 transition-colors hover:border-wine/40"
-              >
-                <span className="inline-flex size-11 items-center justify-center rounded-xl bg-wine-soft text-wine">
-                  <Mail className="size-5" />
-                </span>
-                <span>
-                  <span className="block text-xs text-muted-foreground">Correo</span>
-                  <span className="block font-medium">{SITE.email}</span>
-                </span>
-              </a>
-
-              <div className="flex items-center gap-4 rounded-2xl border border-border p-4">
+              <div className="flex items-center gap-4 rounded-[1.35rem] border border-border p-4">
                 <span className="inline-flex size-11 items-center justify-center rounded-xl bg-wine-soft text-wine">
                   <MapPin className="size-5" />
                 </span>
@@ -113,7 +98,7 @@ export function Contact() {
                 </span>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {socials.map((s) => (
                   <a
                     key={s.label}
@@ -129,14 +114,14 @@ export function Contact() {
               </div>
 
               {/* Espacio reservado para Google Maps */}
-              <div className="mt-auto flex min-h-40 items-center justify-center rounded-2xl border border-dashed border-border bg-muted/60 text-center text-xs text-muted-foreground">
+              <div className="mt-auto flex min-h-40 items-center justify-center rounded-[1.35rem] border border-dashed border-border bg-muted/60 px-4 text-center text-sm text-muted-foreground">
                 Mapa de Google Maps disponible próximamente
               </div>
             </div>
           </Reveal>
 
           <Reveal direction="left" delay={0.1}>
-            <div className="rounded-3xl border border-border bg-card p-8 shadow-soft">
+            <div className="rounded-[1.75rem] border border-border bg-card p-8 shadow-soft">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5" noValidate>
                   <div className="grid gap-5 sm:grid-cols-2">
@@ -147,7 +132,11 @@ export function Contact() {
                         <FormItem>
                           <FormLabel>Nombre</FormLabel>
                           <FormControl>
-                            <Input placeholder="Tu nombre" className="h-11 rounded-xl" {...field} />
+                            <Input
+                              placeholder="Tu nombre"
+                              className="h-12 rounded-xl text-base"
+                              {...field}
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -163,7 +152,7 @@ export function Contact() {
                             <Input
                               inputMode="tel"
                               placeholder="618 000 0000"
-                              className="h-11 rounded-xl"
+                              className="h-12 rounded-xl text-base"
                               {...field}
                             />
                           </FormControl>
@@ -175,25 +164,6 @@ export function Contact() {
 
                   <FormField
                     control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Correo electrónico</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="tucorreo@ejemplo.com"
-                            className="h-11 rounded-xl"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
                     name="message"
                     render={({ field }) => (
                       <FormItem>
@@ -202,7 +172,7 @@ export function Contact() {
                           <Textarea
                             rows={5}
                             placeholder="Ej. 30 vasos con logotipo grabado para un evento en octubre."
-                            className="resize-none rounded-xl"
+                            className="resize-none rounded-xl text-base"
                             {...field}
                           />
                         </FormControl>

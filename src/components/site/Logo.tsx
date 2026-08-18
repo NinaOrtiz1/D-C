@@ -1,7 +1,7 @@
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.png?url";
 
 export function Logo({
-  className = "h-9 w-9",
+  className = "h-10 w-10 sm:h-11 sm:w-11",
   withName = true,
   nameClassName = "",
 }: {
@@ -10,17 +10,21 @@ export function Logo({
   nameClassName?: string;
 }) {
   return (
-    <span className="flex items-center gap-2.5">
+    <span className="flex items-center gap-3 sm:gap-4">
       <img
         src={logo}
-        alt="Logotipo de D&C Innovación"
+        alt="Logotipo de DYC"
         width={1024}
         height={1024}
+        loading="lazy"
+        decoding="async"
         className={`${className} object-contain`}
       />
       {withName ? (
-        <span className={`font-display text-base font-semibold tracking-tight ${nameClassName}`}>
-          D&C <span className="text-wine">Innovación</span>
+        <span
+          className={`font-display text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight ${nameClassName}`}
+        >
+          <span className="text-aether">DYC</span>
         </span>
       ) : null}
     </span>

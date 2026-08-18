@@ -5,68 +5,63 @@ import { MessageSquare, Send, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { apiUrl } from "@/lib/api";
 
 type Message = { id: string; role: "bot" | "user"; text: string };
 
-const WELCOME = `Hola. Soy el asistente virtual de D&C Innovación.
+const WELCOME = `¡Hola! 👋 Soy el asistente virtual de DYC.
 
 Puedo ayudarte con:
-• Cotizaciones
-• Grabado láser
-• Vasos personalizados
-• Impresión 3D
-• Diseños
+• Cotizaciones y precios
+• Grabado láser y personalización
+• Productos y diseños a medida
 • Tiempo de entrega
-• Métodos de pago`;
+• Información general del negocio`;
 
 const QUICK = [
-  "¿Cuánto cuesta un vaso personalizado?",
+  "¿Qué servicios ofrecen?",
+  "¿Puedo cotizar un producto personalizado?",
   "¿Cuánto tardan en entregar?",
-  "¿Qué métodos de pago aceptan?",
 ];
 
-/**
- * Respuestas simuladas. El componente está preparado para sustituir esta
- * función por una llamada al backend conectado a OpenAI.
- */
+
 function getReply(input: string): string {
   const t = input.toLowerCase();
 
-  if (t.includes("precio") || t.includes("cuesta") || t.includes("cotiz") || t.includes("vaso")) {
-    return `Buenos días.
-Somos D&C Innovación.
+  if (t.includes("precio") || t.includes("cuesta") || t.includes("cotiz") || t.includes("vaso") || t.includes("personaliz")) {
+    return `¡Claro! En DYC cotizamos según el tipo de producto, la cantidad y el nivel de detalle del diseño.
 
-Un precio aproximado sería:
-Vaso: $200 MXN
-Diseño personalizado: $70 MXN
-
-Precio estimado: $270 MXN
-
-Este precio puede variar dependiendo del diseño solicitado.`;
+Te recomiendo enviarnos una referencia o una idea general para darte una propuesta más precisa. También puedes escribirnos por WhatsApp al 618 444 4686.`;
   }
-  if (t.includes("tarda") || t.includes("entrega") || t.includes("tiempo")) {
-    return `Los pedidos individuales se entregan entre 2 y 5 días hábiles.
-Para pedidos empresariales por volumen definimos una fecha al confirmar la cantidad.`;
+  if (t.includes("tarda") || t.includes("entrega") || t.includes("tiempo") || t.includes("envio") || t.includes("envío")) {
+    return `Los tiempos de entrega dependen del tipo de producto y la cantidad solicitada. En pedidos personales suele estar entre 2 y 5 días hábiles, y en proyectos mayores se confirma según el volumen.`;
   }
-  if (t.includes("pago") || t.includes("tarjeta") || t.includes("transferencia")) {
-    return `Aceptamos efectivo, transferencia bancaria y pago con tarjeta.
-En pedidos grandes solicitamos un anticipo del 50%.`;
+  if (t.includes("pago") || t.includes("tarjeta") || t.includes("transferencia") || t.includes("anticipo")) {
+    return `Podemos revisar la opción de pago que mejor te convenga según tu pedido. En compras más grandes, normalmente se solicita un anticipo para confirmar la producción.`;
   }
   if (t.includes("láser") || t.includes("laser") || t.includes("grabado")) {
-    return `Realizamos grabado láser en metal, madera, acrílico y vidrio.
-El grabado es permanente y alcanza un detalle de hasta 0.1 mm.`;
+    return `Sí, en DYC trabajamos con grabado láser y personalización en distintos materiales. Podemos ayudarte a definir la mejor opción según tu producto y estilo.`;
   }
   if (t.includes("3d") || t.includes("impresión") || t.includes("impresion")) {
-    return `Imprimimos piezas 3D a medida: prototipos, figuras y refacciones.
-Envíanos tu archivo STL o descríbenos la pieza y te cotizamos.`;
+    return `Sí, también trabajamos con impresión 3D a medida para piezas, prototipos y proyectos personalizados. Si compartes la idea o una referencia, te ayudamos a evaluarla.`;
   }
   if (t.includes("envío") || t.includes("envio")) {
     return `Entregamos en Durango y enviamos a todo México por paquetería.
 El costo del envío se calcula al momento de la cotización.`;
   }
-  return `Gracias por escribir. Con gusto te ayudamos.
-¿Podrías darme más detalles del producto que quieres personalizar (tipo, cantidad y diseño)?
-También puedes escribirnos por WhatsApp al 618 444 4686.`;
+  if (t.includes("hola") || t.includes("buenos") || t.includes("buenas") || t.includes("saludos") || t.includes("qué tal") || t.includes("como estas") || t.includes("quien eres") || t.includes("quién eres") || t.includes("que haces") || t.includes("ayuda")) {
+    return `¡Hola! 👋 Soy el asistente virtual de DYC y puedo ayudarte con cotizaciones, diseños, tiempos de entrega y más. ¿Qué necesitas hoy?`;
+  }
+
+  if (t.includes("gracias") || t.includes("thank you")) {
+    return `¡Con gusto! Estoy aquí para ayudarte con lo que necesites en DYC.`;
+  }
+
+  if (t.includes("adios") || t.includes("hasta luego") || t.includes("bye")) {
+    return `¡Hasta luego! Si necesitas más ayuda con tus proyectos personalizados, aquí estoy.`;
+  }
+
+  return `Gracias por escribir. Con gusto te ayudamos a definir el mejor proyecto para ti. Cuéntanos un poco más sobre lo que buscas y te orientamos mejor.`;
 }
 
 export function ChatWidget() {
@@ -87,17 +82,33 @@ export function ChatWidget() {
     if (open) inputRef.current?.focus();
   }, [open]);
 
-  const send = (text: string) => {
+  const send = async (text: string) => {
     const value = text.trim();
     if (!value || typing) return;
+
     setMessages((m) => [...m, { id: `u-${Date.now()}`, role: "user", text: value }]);
     setInput("");
     setTyping(true);
-    window.setTimeout(() => {
+
+    try {
+      const response = await fetch(apiUrl('/chat'), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: value }),
+      });
+
+      const data = await response.json().catch(() => null);
+      const responseText = data?.data?.response ?? data?.response ?? getReply(value);
+
+      setMessages((m) => [...m, { id: `b-${Date.now()}`, role: "bot", text: responseText }]);
+    } catch {
       setMessages((m) => [...m, { id: `b-${Date.now()}`, role: "bot", text: getReply(value) }]);
+    } finally {
       setTyping(false);
       inputRef.current?.focus();
-    }, 900);
+    }
   };
 
   return (
@@ -111,7 +122,7 @@ export function ChatWidget() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Cerrar chat" : "Abrir chat con el asistente virtual"}
         aria-expanded={open}
-        className="fixed right-5 bottom-5 z-[60] inline-flex size-14 items-center justify-center rounded-full bg-wine text-wine-foreground shadow-float"
+        className="fixed right-5 bottom-5 z-60 inline-flex size-14 items-center justify-center rounded-full bg-wine text-wine-foreground shadow-float"
       >
         {open ? <X className="size-6" /> : <MessageSquare className="size-6" />}
       </motion.button>
@@ -123,13 +134,13 @@ export function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            aria-label="Asistente virtual de D&C Innovación"
-            className="fixed right-4 bottom-24 z-[60] flex h-[min(560px,72vh)] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-float"
+            aria-label="Asistente virtual de DYC"
+            className="fixed right-4 bottom-24 z-60 flex h-[min(560px,72vh)] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-[1.75rem] border border-border bg-card/95 shadow-float backdrop-blur"
           >
-            <header className="flex items-center gap-3 border-b border-border px-4 py-3.5">
+            <header className="flex items-center gap-3 border-b border-border bg-background/70 px-4 py-3.5">
               <Logo className="h-8 w-8" withName={false} />
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold">D&C Innovación</p>
+                <p className="truncate text-sm font-semibold">DYC</p>
                 <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />
                   En línea
@@ -138,7 +149,7 @@ export function ChatWidget() {
             </header>
 
             <div
-              className="flex-1 space-y-3 overflow-y-auto bg-muted/40 px-4 py-4"
+              className="flex-1 space-y-3 overflow-y-auto bg-[radial-gradient(circle_at_top_left,rgba(148,40,67,0.08),transparent_45%),rgba(255,255,255,0.45)] px-4 py-4"
               role="log"
               aria-live="polite"
             >
@@ -198,7 +209,7 @@ export function ChatWidget() {
                 e.preventDefault();
                 send(input);
               }}
-              className="flex items-center gap-2 border-t border-border p-3"
+              className="flex items-center gap-2 border-t border-border bg-background/70 p-3"
             >
               <Input
                 ref={inputRef}

@@ -25,7 +25,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="nosotros" className="scroll-mt-24 border-t border-border py-24 md:py-32">
+    <section id="nosotros" className="scroll-mt-24 border-t border-border py-24 md:py-32 lg:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Cómo trabajamos"
@@ -33,7 +33,7 @@ export function Process() {
           description="Somos un taller de personalización que combina tecnología y trato cercano. Así acompañamos cada pedido."
         />
 
-        <div className="relative mt-16 md:mt-20">
+        <div className="relative mt-18 md:mt-24">
           <span
             aria-hidden
             className="absolute top-0 left-[15px] hidden h-full w-px bg-border md:left-1/2 md:block"
@@ -47,12 +47,12 @@ export function Process() {
                   className={i % 2 === 0 ? "md:pr-4 md:text-right" : "md:order-2 md:pl-4"}
                 >
                   <motion.div
-                    whileHover={{ y: -4 }}
-                    className="rounded-3xl border border-border bg-card p-6 shadow-soft"
+                    whileHover={{ y: -4, scale: 1.01 }}
+                    className="rounded-[1.6rem] border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:border-wine/30 hover:shadow-float"
                   >
                     <span className="font-display text-sm font-semibold text-wine">0{i + 1}</span>
-                    <h3 className="mt-2 font-display text-xl font-semibold">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    <h3 className="mt-2 font-display text-2xl font-semibold">{step.title}</h3>
+                    <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
                       {step.text}
                     </p>
                   </motion.div>

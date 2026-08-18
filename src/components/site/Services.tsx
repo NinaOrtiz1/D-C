@@ -38,7 +38,7 @@ const services = [
 
 export function Services() {
   return (
-    <section id="servicios" className="scroll-mt-24 border-t border-border py-24 md:py-32">
+    <section id="servicios" className="scroll-mt-24 border-t border-border py-24 md:py-32 lg:py-36">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
         <SectionHeading
           eyebrow="Servicios"
@@ -46,19 +46,19 @@ export function Services() {
           description="Combinamos maquinaria de precisión con diseño cuidado para convertir tus ideas en productos que se sienten premium."
         />
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-18 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <Reveal key={service.title} delay={i * 0.08}>
               <motion.article
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -8, scale: 1.01 }}
                 transition={{ type: "spring", stiffness: 260, damping: 22 }}
-                className="group h-full rounded-3xl border border-border bg-card p-8 shadow-soft transition-shadow duration-300 hover:shadow-float"
+                className="group h-full rounded-[2.2rem] border border-border bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float sm:p-10"
               >
-                <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-wine-soft text-wine transition-colors duration-300 group-hover:bg-wine group-hover:text-wine-foreground">
+                <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-wine-soft text-wine transition-all duration-300 group-hover:bg-wine group-hover:text-wine-foreground">
                   <service.icon className="size-5" aria-hidden />
                 </span>
-                <h3 className="mt-6 font-display text-xl font-semibold">{service.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                <h3 className="mt-6 font-display text-2xl font-semibold">{service.title}</h3>
+                <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground sm:text-base">
                   {service.description}
                 </p>
                 <span className="mt-6 block h-px w-10 bg-wine transition-all duration-300 group-hover:w-20" />
