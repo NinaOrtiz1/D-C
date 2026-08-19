@@ -12,6 +12,8 @@ import {
   X,
 } from "lucide-react";
 
+import { versionedImageUrl } from "@/lib/image-url";
+
 export type ViewerImage = {
   src: string;
   alt: string;
@@ -30,6 +32,7 @@ type InteractiveImageProps = {
   className?: string;
   imageClassName?: string;
   loading?: "eager" | "lazy";
+  version?: string | number;
 };
 
 type Point = { x: number; y: number };
@@ -419,11 +422,21 @@ export function InteractiveImage({
   className = "",
   imageClassName = "",
   loading = "lazy",
+  version,
 }: InteractiveImageProps) {
   const [failed, setFailed] = useState(false);
+  const resolvedSrc = versionedImageUrl(src, version);
+
+  if (!resolvedSrc) {
+    return (
+      <span className={`flex min-h-32 w-full items-center justify-center bg-linear-to-br from-wine-soft to-muted px-4 text-center text-sm font-medium text-muted-foreground ${className}`}>
+        Imagen no disponible
+      </span>
+    );
+  }
 
   return (
-    <ImageGallery images={[{ src, alt }]}>
+    <ImageGallery images={[{ src: resolvedSrc, alt }]}>
       {({ open }) => (
         <button
           type="button"
@@ -437,7 +450,7 @@ export function InteractiveImage({
             </span>
           ) : (
             <img
-              src={src}
+              src={resolvedSrc}
               alt={alt}
               loading={loading}
               decoding="async"

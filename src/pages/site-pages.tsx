@@ -67,7 +67,7 @@ export function HomePage() {
                   imageClassName="relative h-[440px] w-full object-cover sm:h-[520px]"
                 />
               </div>
-              <div className="absolute -left-3 bottom-6 rounded-2xl border border-border bg-background/90 p-4 shadow-premium backdrop-blur-sm">
+              <div className="relative mt-4 w-fit rounded-2xl border border-border bg-background/90 p-4 shadow-premium backdrop-blur-sm lg:absolute lg:-left-3 lg:bottom-6 lg:mt-0">
                 <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   Especialidad
                 </div>
