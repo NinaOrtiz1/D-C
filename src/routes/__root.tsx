@@ -4,8 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
+  useLocation,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -15,23 +14,24 @@ import { Toaster } from "@/components/ui/sonner";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { ScrollToTop } from "@/components/site/ScrollToTop";
-import { ChatWidget } from "@/components/site/ChatWidget";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
+    <div className="app-frame flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="admin-panel premium-card max-w-md rounded-[2rem] p-8 text-center shadow-premium sm:p-10">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          Parece que esta idea todavía no existe.
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          La página que buscas no existe o cambió de lugar.
         </p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-float"
           >
-            Go home
+            Volver al inicio
           </Link>
         </div>
       </div>
@@ -47,13 +47,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
+    <div className="app-frame flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="admin-panel premium-card max-w-md rounded-[2rem] p-8 text-center shadow-premium sm:p-10">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Esta página no pudo cargar
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Ocurrió un problema inesperado. Puedes intentarlo de nuevo o volver al inicio.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -61,15 +61,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-float"
           >
-            Try again
+            Intentar de nuevo
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-xl border border-input bg-background/80 px-5 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:bg-accent hover:shadow-soft"
           >
-            Go home
+            Volver al inicio
           </a>
         </div>
       </div>
@@ -82,23 +82,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DYC" },
+      { title: "DYC Innovación | Personalización, Grabado Láser e Impresión 3D" },
       {
         name: "description",
-        content: "Productos personalizados, grabado láser, impresión 3D y diseño a medida con DYC.",
+        content:
+          "Transformamos tus ideas en productos personalizados mediante diseño, grabado láser e impresión 3D.",
       },
-      { name: "author", content: "DYC" },
+      { name: "author", content: "DYC Innovación" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "DYC" },
-      { name: "twitter:title", content: "DYC" },
+      { property: "og:title", content: "DYC Innovación | Personalización y fabricación a medida" },
+      { name: "twitter:title", content: "DYC Innovación | Personalización y fabricación a medida" },
       {
         property: "og:description",
-        content: "Productos personalizados, grabado láser, impresión 3D y diseño a medida con DYC.",
+        content:
+          "Transformamos tus ideas en productos personalizados mediante diseño, grabado láser e impresión 3D.",
       },
       {
         name: "twitter:description",
-        content: "Productos personalizados, grabado láser, impresión 3D y diseño a medida con DYC.",
+        content:
+          "Transformamos tus ideas en productos personalizados mediante diseño, grabado láser e impresión 3D.",
       },
       {
         property: "og:image",
@@ -133,21 +136,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
+  return <>{children}</>;
 }
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const { pathname } = useLocation();
+  const isAdminRoute = pathname.startsWith("/admin");
 
   useEffect(() => {
     try {
@@ -169,14 +164,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-background text-foreground">
-        <Navbar />
-        <main className="pt-20">
+      <div className="app-frame min-h-screen bg-background text-foreground">
+        {!isAdminRoute ? <Navbar /> : null}
+        <main className={isAdminRoute ? "app-main" : "app-main pt-20"}>
           <Outlet />
         </main>
-        <Footer />
-        <ScrollToTop />
-        <ChatWidget />
+        {!isAdminRoute ? <Footer /> : null}
+        {!isAdminRoute ? <ScrollToTop /> : null}
       </div>
       <Toaster position="top-center" richColors />
     </QueryClientProvider>

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
+import { useState, type PointerEvent } from "react";
 import { ArrowRight, CheckCircle2, Layers3, ShieldCheck, Star, TrendingUp } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -9,9 +10,18 @@ import { productCatalog, serviceCatalog, siteStats } from "@/lib/site-data";
 import { SITE, SOCIALS } from "@/lib/site";
 
 export function HomePage() {
+  const [heroTilt, setHeroTilt] = useState({ x: 0, y: 0 });
+
+  const handleHeroPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 8;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -8;
+    setHeroTilt({ x: y, y: x });
+  };
+
   return (
     <div className="site-shell">
-      <section className="section-panel overflow-hidden px-4 py-8 sm:px-6 lg:px-8">
+      <section className="section-panel premium-border overflow-hidden px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
@@ -20,7 +30,9 @@ export function HomePage() {
                 Personalización premium
               </div>
               <h1 className="mt-6 font-display text-5xl leading-none text-balance-tight sm:text-6xl lg:text-[5rem]">
-                <span className="text-wine">DYC</span>
+                <span className="bg-linear-to-r from-aether via-purple to-gold bg-clip-text text-transparent">
+                  DYC
+                </span>
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
                 Diseñamos regalos, productos corporativos y piezas personalizadas con precisión,
@@ -41,9 +53,9 @@ export function HomePage() {
                 {siteStats.map((item) => (
                   <div
                     key={item.label}
-                    className="rounded-2xl border border-border/80 bg-card/85 p-4 shadow-premium ring-1 ring-white/40"
+                    className="admin-shine rounded-2xl border border-border/80 bg-card/85 p-4 shadow-premium ring-1 ring-white/40"
                   >
-                    <div className="font-display text-2xl font-semibold text-wine">
+                    <div className="font-display text-2xl font-semibold text-gold">
                       {item.value}
                     </div>
                     <div className="mt-1 text-sm text-muted-foreground">{item.label}</div>
@@ -55,10 +67,18 @@ export function HomePage() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="relative"
+              className="premium-perspective relative"
+              onPointerMove={handleHeroPointerMove}
+              onPointerLeave={() => setHeroTilt({ x: 0, y: 0 })}
             >
-              <div className="relative overflow-hidden rounded-[2rem] border border-border/80 bg-card p-3 shadow-premium">
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.12),transparent_30%)]" />
+              <motion.div
+                animate={{ rotateX: heroTilt.x, rotateY: heroTilt.y }}
+                transition={{ type: "spring", stiffness: 180, damping: 22, mass: 0.7 }}
+                className="premium-3d admin-shine relative overflow-hidden rounded-[2rem] premium-border bg-card p-3 shadow-premium"
+              >
+                <div className="premium-orb premium-orb-one" aria-hidden />
+                <div className="premium-orb premium-orb-two" aria-hidden />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,color-mix(in_srgb,var(--color-aether)_18%,transparent),transparent_28%),radial-gradient(circle_at_bottom_right,color-mix(in_srgb,var(--color-gold)_12%,transparent),transparent_30%)]" />
                 <InteractiveImage
                   src={productCatalog[0]?.image ?? ""}
                   alt="Productos personalizados"
@@ -66,14 +86,75 @@ export function HomePage() {
                   className="relative z-10 overflow-hidden rounded-[1.5rem]"
                   imageClassName="relative h-[440px] w-full object-cover sm:h-[520px]"
                 />
-              </div>
+                <div className="premium-glass-chip absolute right-7 top-7 z-20">
+                  <span className="size-2 animate-pulse rounded-full bg-emerald-400" />
+                  Hecho a medida
+                </div>
+              </motion.div>
               <div className="relative mt-4 w-fit rounded-2xl border border-border bg-background/90 p-4 shadow-premium backdrop-blur-sm lg:absolute lg:-left-3 lg:bottom-6 lg:mt-0">
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                <div className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
                   Especialidad
                 </div>
                 <div className="mt-2 font-display text-xl font-semibold">Grabado láser</div>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <div className="premium-marquee" aria-label="Especialidades de DYC">
+        <div className="premium-marquee-track">
+          {[
+            "Diseño a medida",
+            "Grabado láser",
+            "Impresión 3D",
+            "Acabados premium",
+            "Envíos nacionales",
+          ].map((item) => (
+            <span key={item}>
+              <span className="size-1.5 rounded-full bg-gold" />
+              {item}
+            </span>
+          ))}
+          {[
+            "Diseño a medida",
+            "Grabado láser",
+            "Impresión 3D",
+            "Acabados premium",
+            "Envíos nacionales",
+          ].map((item) => (
+            <span key={`repeat-${item}`}>
+              <span className="size-1.5 rounded-full bg-gold" />
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section className="relative overflow-hidden px-4 py-24 sm:px-6 lg:px-8">
+        <div className="premium-grid-glow pointer-events-none absolute inset-0" aria-hidden />
+        <div className="relative mx-auto max-w-7xl">
+          <SectionHeading
+            eyebrow="Nuestro proceso"
+            title="De una idea a una pieza que se siente especial"
+            description="Cada etapa está pensada para que el resultado tenga intención, precisión y un acabado memorable."
+          />
+          <div className="mt-14 grid gap-5 md:grid-cols-4">
+            {[
+              ["01", "Imaginamos", "Escuchamos tu idea y definimos el estilo ideal."],
+              ["02", "Diseñamos", "Convertimos referencias en una propuesta clara."],
+              ["03", "Producimos", "Cuidamos materiales, detalle y consistencia."],
+              ["04", "Entregamos", "Tu pieza llega lista para sorprender."],
+            ].map(([number, title, text], index) => (
+              <Reveal key={number} delay={index * 0.08}>
+                <article className="premium-step premium-card relative rounded-[1.6rem] border border-border/80 bg-card/90 p-6 shadow-premium">
+                  <span className="font-display text-5xl font-semibold text-gold/35">{number}</span>
+                  <div className="mt-8 size-2 rounded-full bg-aether shadow-[0_0_18px_var(--color-aether)]" />
+                  <h3 className="mt-4 font-display text-2xl font-semibold">{title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-muted-foreground">{text}</p>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -88,7 +169,7 @@ export function HomePage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {serviceCatalog.map((item, index) => (
               <Reveal key={item.title} delay={index * 0.08}>
-                <article className="group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float">
+                <article className="premium-card group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:-translate-y-2 hover:border-wine/30 hover:shadow-float">
                   <div className="overflow-hidden">
                     <InteractiveImage
                       src={item.image}
@@ -143,7 +224,7 @@ export function HomePage() {
               },
             ].map(({ icon: Icon, title, text }, index) => (
               <Reveal key={title} delay={index * 0.06}>
-                <article className="rounded-[1.6rem] border border-border/80 bg-card p-6 shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-wine/25 hover:shadow-float">
+                <article className="premium-card rounded-[1.6rem] border border-border/80 bg-card p-6 shadow-premium transition-all duration-300 hover:-translate-y-2 hover:border-wine/25 hover:shadow-float">
                   <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-wine-soft text-wine">
                     <Icon className="size-5" />
                   </span>
@@ -161,7 +242,7 @@ export function HomePage() {
 
 export function ProductsPage() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="site-page-section mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Productos"
         title="Catálogo de piezas personalizadas"
@@ -170,7 +251,7 @@ export function ProductsPage() {
       <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {productCatalog.map((product, index) => (
           <Reveal key={product.id} delay={index * 0.05}>
-            <div className="overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-wine/30 hover:shadow-float">
+            <div className="admin-shine overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:border-wine/30 hover:shadow-float">
               <InteractiveImage
                 src={product.image}
                 alt={product.name}
@@ -216,7 +297,7 @@ export function ProductsPage() {
 
 export function ServicesPage() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="site-page-section mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Servicios"
         title="Especialistas en personalización y diseño"
@@ -225,7 +306,7 @@ export function ServicesPage() {
       <div className="mt-12 grid gap-6 lg:grid-cols-3">
         {serviceCatalog.map((item, index) => (
           <Reveal key={item.title} delay={index * 0.08}>
-            <article className="overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium">
+            <article className="admin-shine overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium">
               <InteractiveImage
                 src={item.image}
                 alt={item.title}
@@ -266,7 +347,7 @@ export function ServicesPage() {
 
 export function AboutPage() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="site-page-section mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-center">
         <div className="overflow-hidden rounded-[2rem] border border-border bg-card p-3 shadow-float">
           <InteractiveImage
@@ -311,7 +392,7 @@ export function GalleryPage() {
   const galleryItems = productCatalog.concat(productCatalog);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="site-page-section mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Galería"
         title="Trabajos que muestran nuestra identidad"
@@ -326,7 +407,7 @@ export function GalleryPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.04 }}
-                className="overflow-hidden rounded-[1.7rem] border border-border/80 bg-card shadow-premium"
+                className="admin-shine overflow-hidden rounded-[1.7rem] border border-border/80 bg-card shadow-premium"
               >
                 <button
                   type="button"
@@ -361,7 +442,7 @@ export function GalleryPage() {
 
 export function FAQPage() {
   return (
-    <section className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="site-page-section mx-auto max-w-4xl px-4 py-24 sm:px-6 lg:px-8">
       <SectionHeading
         eyebrow="Preguntas frecuentes"
         title="Todo lo que necesitas saber antes de pedir tu proyecto"
@@ -386,7 +467,7 @@ export function FAQPage() {
           },
         ].map((item, index) => (
           <Reveal key={item.q} delay={index * 0.05}>
-            <div className="rounded-[1.5rem] border border-border/80 bg-card p-5 shadow-premium">
+            <div className="admin-shine rounded-[1.5rem] border border-border/80 bg-card p-5 shadow-premium">
               <h3 className="font-display text-xl font-semibold">{item.q}</h3>
               <p className="mt-2 text-base leading-7 text-muted-foreground">{item.a}</p>
             </div>
@@ -399,9 +480,9 @@ export function FAQPage() {
 
 export function ContactPage() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="site-page-section mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-[2rem] border border-border bg-card p-8 shadow-soft">
+        <div className="admin-panel rounded-[2rem] p-8 shadow-premium">
           <SectionHeading eyebrow="Contacto" title="Hablemos de tu proyecto" align="left" />
           <div className="mt-8 space-y-4 text-muted-foreground">
             <p>
@@ -429,34 +510,37 @@ export function ContactPage() {
             ))}
           </div>
         </div>
-        <div className="rounded-[2rem] border border-border bg-card p-8 shadow-soft">
+        <form
+          className="admin-panel rounded-[2rem] p-8 shadow-premium"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <div className="grid gap-5 md:grid-cols-2">
             <div>
               <label className="mb-2 block text-sm font-medium">Nombre</label>
               <input
-                className="h-12 w-full rounded-xl border border-border bg-background px-4"
+                className="h-13 w-full rounded-xl border border-border bg-background px-4 shadow-soft transition-shadow focus:border-aether focus:shadow-float focus:outline-none"
                 placeholder="Tu nombre"
               />
             </div>
             <div>
               <label className="mb-2 block text-sm font-medium">Teléfono</label>
               <input
-                className="h-12 w-full rounded-xl border border-border bg-background px-4"
+                className="h-13 w-full rounded-xl border border-border bg-background px-4 shadow-soft transition-shadow focus:border-aether focus:shadow-float focus:outline-none"
                 placeholder="618 000 0000"
               />
             </div>
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-medium">Mensaje</label>
               <textarea
-                className="min-h-32 w-full rounded-xl border border-border bg-background px-4 py-3"
+                className="min-h-36 w-full rounded-xl border border-border bg-background px-4 py-3 shadow-soft transition-shadow focus:border-aether focus:shadow-float focus:outline-none"
                 placeholder="Cuéntanos sobre tu producto o proyecto"
               />
             </div>
           </div>
-          <Button variant="wine" size="xl" className="mt-6 w-full rounded-full">
+          <Button type="submit" variant="wine" size="xl" className="mt-6 w-full rounded-full">
             Enviar solicitud
           </Button>
-        </div>
+        </form>
       </div>
     </section>
   );

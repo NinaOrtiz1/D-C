@@ -4,15 +4,21 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev:server\" \"vite dev\"",
+    "dev": "concurrently \"npm run dev:server\" \"vite dev --host 0.0.0.0\"",
+    "dev:frontend": "vite dev --host 0.0.0.0 --port 5173",
     "dev:server": "tsx server/index.ts",
+    "start": "tsx server/index.ts",
     "build": "vite build && npm run build:server",
     "build:server": "tsc -p server/tsconfig.json",
     "build:dev": "vite build --mode development",
-    "preview": "vite preview",
+    "preview": "vite preview --host 0.0.0.0",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "seed": "tsx server/seed.ts"
+    "seed": "tsx server/seed.ts",
+    "test": "vitest run",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -47,6 +53,7 @@
     "@tanstack/react-router": "^1.170.18",
     "@tanstack/react-start": "^1.168.32",
     "@tanstack/router-plugin": "^1.168.23",
+    "antd": "^6.6.3",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -95,12 +102,14 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^15.15.0",
+    "jsdom": "^27.0.0",
+    "mongodb-memory-server": "^8.11.0",
     "nitro": "3.0.260603-beta",
     "prettier": "^3.7.3",
     "tsx": "^4.23.10",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
     "vite": "^8.2.0",
-    "mongodb-memory-server": "^8.11.0"
+    "vitest": "^3.2.4"
   }
 }

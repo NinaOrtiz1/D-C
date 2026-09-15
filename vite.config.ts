@@ -1,8 +1,9 @@
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "vite";
 
-export default defineConfig({
+const backendTarget = process.env["VITE_API_TARGET"] ?? "http://localhost:4000";
+
+export default {
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -10,15 +11,22 @@ export default defineConfig({
     },
   },
   server: {
+    host: "0.0.0.0",
+    port: 5173,
     watch: {
       ignored: ["**/.output/**", "**/.wrangler/**"],
     },
     proxy: {
       "/api": {
-        target: "http://localhost:4000",
+        target: backendTarget,
         changeOrigin: true,
         secure: false,
       },
     },
   },
-});
+  test: {
+    environment: "jsdom",
+    globals: true,
+    setupFiles: [],
+  },
+};

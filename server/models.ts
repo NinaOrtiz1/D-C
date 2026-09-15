@@ -6,12 +6,20 @@ const userSchema = new Schema(
     correo: { type: String, required: true, unique: true, lowercase: true, trim: true },
     email: { type: String, lowercase: true, trim: true },
     password: { type: String, required: true },
-    rol: { type: String, enum: ["admin", "editor", "cliente"], default: "cliente" },
-    role: { type: String, enum: ["admin", "editor", "cliente"], default: "cliente" },
+    rol: { type: String, enum: ["admin", "editor", "cliente", "plus"], default: "cliente" },
+    role: { type: String, enum: ["admin", "editor", "cliente", "plus"], default: "cliente" },
     telefono: { type: String, default: "" },
     phone: { type: String, default: "" },
     foto: { type: String, default: "" },
     avatar: { type: String, default: "" },
+    documento: { type: String, default: "", trim: true },
+    fechaNacimiento: { type: Date, default: null },
+    direccion: { type: String, default: "", trim: true },
+    ciudad: { type: String, default: "", trim: true },
+    estado: { type: String, default: "", trim: true },
+    codigoPostal: { type: String, default: "", trim: true },
+    empresa: { type: String, default: "", trim: true },
+    notas: { type: String, default: "" },
     activo: { type: Boolean, default: true },
     ultimoLogin: { type: Date, default: null },
     lastLogin: { type: Date, default: null },
@@ -42,6 +50,9 @@ const productSchema = new Schema(
     precio: { type: Number, required: true, min: 0 },
     price: { type: Number, min: 0 },
     stock: { type: Number, required: true, min: 0, default: 0 },
+    stockMinimo: { type: Number, min: 0, default: 0 },
+    sku: { type: String, default: "", trim: true, uppercase: true },
+    disponible: { type: Boolean, default: true },
     categoria: { type: Schema.Types.ObjectId, ref: "Category" },
     category: { type: Schema.Types.ObjectId, ref: "Category" },
     marca: { type: String, default: "" },
@@ -194,6 +205,58 @@ const contactSchema = new Schema(
   { timestamps: true },
 );
 
+const orderItemSchema = new Schema(
+  {
+    producto: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+    nombre: { type: String, required: true, trim: true },
+    cantidad: { type: Number, required: true, min: 1 },
+    precioUnitario: { type: Number, required: true, min: 0 },
+    total: { type: Number, required: true, min: 0 },
+  },
+  { _id: false },
+);
+
+const orderSchema = new Schema(
+  {
+    usuario: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    items: { type: [orderItemSchema], required: true, validate: (items: unknown[]) => items.length > 0 },
+    subtotal: { type: Number, required: true, min: 0 },
+    total: { type: Number, required: true, min: 0 },
+    moneda: { type: String, default: "MXN" },
+    estado: {
+      type: String,
+      enum: [
+        "pendiente",
+        "confirmado",
+        "en_preparacion",
+        "en_produccion",
+        "listo",
+        "enviado",
+        "entregado",
+        "cancelado",
+      ],
+      default: "pendiente",
+    },
+    origen: {
+      type: String,
+      enum: ["WEB", "MERCADO_LIBRE", "MANUAL"],
+      default: "WEB",
+    },
+    datosEntrega: {
+      nombre: { type: String, required: true, trim: true },
+      telefono: { type: String, default: "" },
+      direccion: { type: String, required: true, trim: true },
+      ciudad: { type: String, default: "" },
+      estado: { type: String, default: "" },
+      codigoPostal: { type: String, default: "" },
+    },
+    notas: { type: String, default: "" },
+    esPedidoGrande: { type: Boolean, default: false },
+    requiereCotizacion: { type: Boolean, default: false },
+  },
+  { timestamps: true },
+);
+
 const activityLogSchema = new Schema(
   {
     usuario: { type: Schema.Types.ObjectId, ref: "User" },
@@ -208,6 +271,21 @@ const activityLogSchema = new Schema(
     date: { type: Date, default: Date.now },
     ip: { type: String, default: "" },
     userAgent: { type: String, default: "" },
+  },
+  { timestamps: true },
+);
+
+const inventoryMovementSchema = new Schema(
+  {
+    producto: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+    cantidad: { type: Number, required: true, min: 1 },
+    tipo: { type: String, enum: ["entrada", "salida", "ajuste"], required: true },
+    motivo: { type: String, required: true, trim: true, maxlength: 240 },
+    usuario: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    pedido: { type: Schema.Types.ObjectId, ref: "Order" },
+    stockAnterior: { type: Number, required: true, min: 0 },
+    stockPosterior: { type: Number, required: true, min: 0 },
+    fecha: { type: Date, default: Date.now },
   },
   { timestamps: true },
 );
@@ -240,10 +318,13 @@ export const SocialNetwork =
 export const SiteConfig =
   mongoose.models.SiteConfig || mongoose.model("SiteConfig", siteConfigSchema);
 export const Contact = mongoose.models.Contact || mongoose.model("Contact", contactSchema);
+export const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 export const ActivityLog =
   mongoose.models.ActivityLog || mongoose.model("ActivityLog", activityLogSchema);
 export const LoginHistory =
   mongoose.models.LoginHistory || mongoose.model("LoginHistory", loginHistorySchema);
+export const InventoryMovement =
+  mongoose.models.InventoryMovement || mongoose.model("InventoryMovement", inventoryMovementSchema);
 
 export type UserType = InferSchemaType<typeof userSchema>;
 export type ProductType = InferSchemaType<typeof productSchema>;
@@ -256,5 +337,6 @@ export type FAQType = InferSchemaType<typeof faqSchema>;
 export type SocialNetworkType = InferSchemaType<typeof socialNetworkSchema>;
 export type SiteConfigType = InferSchemaType<typeof siteConfigSchema>;
 export type ContactType = InferSchemaType<typeof contactSchema>;
+export type OrderType = InferSchemaType<typeof orderSchema>;
 export type ActivityLogType = InferSchemaType<typeof activityLogSchema>;
 export type LoginHistoryType = InferSchemaType<typeof loginHistorySchema>;

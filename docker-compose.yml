@@ -1,0 +1,101 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dyc-backend
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET es obligatorio}
+      ADMIN_PIN: ${ADMIN_PIN:?ADMIN_PIN es obligatorio}
+      MONGODB_URI: ${MONGODB_URI:?MONGODB_URI es obligatorio}
+      CLIENT_URL: ${CLIENT_URL:-http://localhost:5173}
+      APP_URL: ${APP_URL:-http://localhost:4000}
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:4000/api}
+      PYTHON_CHAT_SERVICE_URL: ${PYTHON_CHAT_SERVICE_URL:-http://python-service:8001}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:?SEED_ADMIN_PASSWORD es obligatorio}
+      SEED_EDITOR_PASSWORD: ${SEED_EDITOR_PASSWORD:?SEED_EDITOR_PASSWORD es obligatorio}
+      SEED_CLIENT_PASSWORD: ${SEED_CLIENT_PASSWORD:?SEED_CLIENT_PASSWORD es obligatorio}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
+      ADMIN_NOTIFICATION_EMAIL: ${ADMIN_NOTIFICATION_EMAIL:-}
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - dyc-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"fetch('http://localhost:4000/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))\"",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 25s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: dyc-frontend
+    environment:
+      VITE_API_TARGET: ${VITE_API_TARGET:-http://backend:4000}
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:4000/api}
+      HOST: 0.0.0.0
+      PORT: 5173
+      NODE_ENV: development
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    networks:
+      - dyc-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "node -e \"fetch('http://localhost:5173').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))\"",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+  python-service:
+    build:
+      context: ./python_service
+      dockerfile: Dockerfile
+    container_name: dyc-python-service
+    environment:
+      PYTHONUNBUFFERED: "1"
+      MONGODB_URI: ${MONGODB_URI:?MONGODB_URI es obligatorio}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      AI_PROVIDER: ${AI_PROVIDER:-openai}
+    ports:
+      - "8001:8001"
+    networks:
+      - dyc-network
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8001/health').read()\"",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
+
+networks:
+  dyc-network:
+    driver: bridge

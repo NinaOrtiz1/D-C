@@ -1,16 +1,14 @@
 import path from "node:path";
 
 import cors from "cors";
-import dotenv from "dotenv";
 import express from "express";
 
+import "./config.js";
 import { connectDatabase, disconnectDatabase, getMongoDbUriForLogs } from "./database.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import apiRouter from "./routes/api.js";
 import authRouter from "./routes/auth.js";
-
-dotenv.config();
-dotenv.config({ path: ".env.local", override: false });
+import { seedDatabaseIfNeeded } from "./seed.js";
 
 export const app = express();
 const port = Number(process.env.PORT ?? 4000);
@@ -20,8 +18,12 @@ const allowedOrigins = [
   process.env.APP_URL,
   process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
   "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
   "http://localhost:8080",
   "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174",
+  "http://127.0.0.1:5175",
   "http://127.0.0.1:8080",
 ].filter(Boolean) as string[];
 
@@ -59,6 +61,7 @@ app.use(errorHandler);
 export async function startLocalServer() {
   try {
     await connectDatabase();
+    await seedDatabaseIfNeeded();
     console.log(`MongoDB URI configurada: ${getMongoDbUriForLogs()}`);
 
     const server = app.listen(port, () => {
@@ -76,7 +79,9 @@ export async function startLocalServer() {
     process.on("SIGTERM", shutdown);
   } catch (error) {
     console.error("El backend no pudo arrancar porque la conexión a MongoDB Atlas falló.");
-    console.error(error instanceof Error ? error.message : "Error desconocido al iniciar el backend.");
+    console.error(
+      error instanceof Error ? error.message : "Error desconocido al iniciar el backend.",
+    );
     process.exit(1);
   }
 }

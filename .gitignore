@@ -17,7 +17,12 @@ dist-ssr
 *.local
 .env
 .env.*
-uploads/
+!.env.example
+cookie.txt
+
+# Runtime uploads
+uploads/*
+!uploads/.gitkeep
 
 # Wrangler / Cloudflare
 .wrangler/

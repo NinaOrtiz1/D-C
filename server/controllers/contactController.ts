@@ -1,6 +1,11 @@
 import type { Request, Response } from "express";
 
 import { Contact } from "../models.js";
+import {
+  escapeHtml,
+  getAdminNotificationEmail,
+  sendEmail,
+} from "../services/emailService.js";
 import { sendError, sendSuccess } from "../utils/api.js";
 
 export async function createContact(req: Request, res: Response) {
@@ -21,6 +26,16 @@ export async function createContact(req: Request, res: Response) {
       origen: "web",
       leido: false,
     });
+
+    const notificationEmail = getAdminNotificationEmail();
+    if (notificationEmail) {
+      void sendEmail({
+        to: notificationEmail,
+        subject: `Nuevo contacto de ${nombre}`,
+        replyTo: correo || undefined,
+        html: `<h2>Nuevo mensaje de contacto</h2><p><strong>Nombre:</strong> ${escapeHtml(nombre)}</p><p><strong>Correo:</strong> ${escapeHtml(correo || "No proporcionado")}</p><p><strong>Teléfono:</strong> ${escapeHtml(String(req.body.telefono ?? req.body.phone ?? "No proporcionado"))}</p><p>${escapeHtml(mensaje)}</p>`,
+      }).catch((error) => console.error("No se pudo enviar la notificación de contacto", error));
+    }
 
     return sendSuccess(res, "Mensaje de contacto guardado correctamente.", contact);
   } catch (error) {

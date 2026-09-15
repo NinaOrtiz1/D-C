@@ -1,5 +1,5 @@
-import { Button } from '../ui/button';
-import { Package, FolderPlus, Users, BarChart3, Settings, RefreshCw } from 'lucide-react';
+import { Button } from "../ui/button";
+import { Package, FolderPlus, Users, BarChart3, Settings, RefreshCw } from "lucide-react";
 
 interface QuickActionsProps {
   onAddProduct?: () => void;
@@ -21,25 +21,32 @@ export function QuickActions({
   isRefreshing = false,
 }: QuickActionsProps) {
   const actions = [
-    { icon: Package, label: 'Agregar producto', action: onAddProduct },
-    { icon: FolderPlus, label: 'Nueva categoría', action: onAddCategory },
-    { icon: Users, label: 'Administrar usuarios', action: onManageUsers },
-    { icon: BarChart3, label: 'Ver inventario', action: onViewInventory },
-    { icon: Settings, label: 'Configuración', action: onSettings },
+    { icon: Package, label: "Agregar producto", action: onAddProduct },
+    { icon: FolderPlus, label: "Nueva categoría", action: onAddCategory },
+    { icon: Users, label: "Administrar usuarios", action: onManageUsers },
+    { icon: BarChart3, label: "Ver inventario", action: onViewInventory },
+    { icon: Settings, label: "Configuración", action: onSettings },
   ];
 
   return (
-    <div className="rounded-xl border border-border/40 bg-card/50 backdrop-blur-sm p-6 shadow-soft">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="font-display text-lg font-bold text-foreground">Acciones rápidas</h3>
+    <div className="relative overflow-hidden rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-soft backdrop-blur-sm sm:p-6">
+      <div className="pointer-events-none absolute -right-8 -top-12 size-36 rounded-full bg-purple/10 blur-2xl" />
+      <div className="relative mb-5 flex items-center justify-between">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-aether">Productividad</p>
+          <h3 className="mt-1 flex items-center gap-2 font-display text-xl font-bold text-foreground">
+            <Settings className="size-5 text-aether" />
+            Acciones rápidas
+          </h3>
+        </div>
         <Button
           size="sm"
           variant="ghost"
           onClick={onRefresh}
           disabled={isRefreshing}
-          className="gap-2"
+          className="gap-2 rounded-xl border border-border/70 bg-background/70"
         >
-          <RefreshCw className={`size-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+          <RefreshCw className={`size-4 ${isRefreshing ? "animate-spin" : ""}`} />
         </Button>
       </div>
 
@@ -50,12 +57,12 @@ export function QuickActions({
             <button
               key={item.label}
               onClick={item.action}
-              className="group flex flex-col items-center justify-center gap-2 rounded-lg border border-border/40 bg-background/50 p-4 hover:bg-background hover:border-aether/50 transition-all hover:shadow-soft"
+              className="admin-shine group flex min-h-32 flex-col items-center justify-center gap-3 rounded-2xl border border-border/70 bg-background/60 p-4 text-sm shadow-soft transition-all hover:-translate-y-1 hover:border-aether/50 hover:bg-background hover:shadow-float"
             >
-              <div className="p-2 rounded-lg bg-aether/10 group-hover:bg-aether/20 transition-colors">
-                <Icon className="size-5 text-aether" />
+              <div className="rounded-xl bg-aether/10 p-3 shadow-soft transition-colors group-hover:bg-aether/20">
+                <Icon className="size-6 text-aether" />
               </div>
-              <span className="text-xs font-medium text-center text-muted-foreground group-hover:text-foreground transition-colors">
+              <span className="text-sm font-semibold text-center text-muted-foreground group-hover:text-foreground transition-colors">
                 {item.label}
               </span>
             </button>
