@@ -106,7 +106,7 @@ export function AdminPinModal() {
         className="dyc-pin-modal"
         title={
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-aether/10 text-aether">
+            <div className="dyc-glow flex size-10 items-center justify-center rounded-xl bg-aether/10 text-aether">
               <ShieldCheck className="size-5" />
             </div>
             <div>
@@ -128,7 +128,7 @@ export function AdminPinModal() {
       >
         <div className="space-y-4 pb-2 pt-2">
           <div className="relative overflow-hidden rounded-2xl border border-aether/20 bg-gradient-to-br from-aether/10 via-background to-purple/10 p-4 shadow-soft">
-            <div className="pointer-events-none absolute -right-5 -top-7 size-24 rounded-full bg-aether/15 blur-xl" />
+            <div className="pointer-events-none absolute -right-5 -top-7 size-24 rounded-full bg-electric/20 blur-xl" />
             <div className="relative flex items-start gap-3">
               <div className="mt-0.5 flex size-10 items-center justify-center rounded-xl bg-aether text-aether-foreground shadow-float">
                 <LockKeyhole className="size-4" />
@@ -153,7 +153,7 @@ export function AdminPinModal() {
             status={error ? "error" : ""}
             autoFocus
             maxLength={8}
-            className="!h-14 !rounded-2xl !border-input !bg-background !px-4 !text-lg !shadow-soft"
+            className={`dyc-pin-field !h-14 !rounded-2xl !border-input !bg-background !px-4 !text-lg !shadow-soft ${error ? "dyc-pin-shake" : ""}`}
           />
 
           {error ? (

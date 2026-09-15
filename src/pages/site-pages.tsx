@@ -29,10 +29,8 @@ export function HomePage() {
                 <Star className="size-3.5 text-wine" />
                 Personalización premium
               </div>
-              <h1 className="mt-6 font-display text-5xl leading-none text-balance-tight sm:text-6xl lg:text-[5rem]">
-                <span className="bg-linear-to-r from-aether via-purple to-gold bg-clip-text text-transparent">
-                  DYC
-                </span>
+              <h1 className="dyc-gradient-text mt-6 font-display text-5xl leading-none text-balance-tight sm:text-6xl lg:text-[5rem]">
+                DYC
               </h1>
               <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
                 Diseñamos regalos, productos corporativos y piezas personalizadas con precisión,
@@ -53,7 +51,7 @@ export function HomePage() {
                 {siteStats.map((item) => (
                   <div
                     key={item.label}
-                    className="admin-shine rounded-2xl border border-border/80 bg-card/85 p-4 shadow-premium ring-1 ring-white/40"
+                    className="admin-shine dyc-glow rounded-2xl border border-border/80 bg-card/85 p-4 shadow-premium ring-1 ring-white/40 transition-transform duration-300 hover:-translate-y-1"
                   >
                     <div className="font-display text-2xl font-semibold text-gold">
                       {item.value}
@@ -169,7 +167,15 @@ export function HomePage() {
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {serviceCatalog.map((item, index) => (
               <Reveal key={item.title} delay={index * 0.08}>
-                <article className="premium-card group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:-translate-y-2 hover:border-wine/30 hover:shadow-float">
+                <article
+                  className={`premium-card group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:-translate-y-2 hover:shadow-float ${
+                    index === 0
+                      ? "hover:border-pink/50"
+                      : index === 1
+                        ? "hover:border-wine/50"
+                        : "hover:border-cyan/50"
+                  }`}
+                >
                   <div className="overflow-hidden">
                     <InteractiveImage
                       src={item.image}
@@ -224,7 +230,7 @@ export function HomePage() {
               },
             ].map(({ icon: Icon, title, text }, index) => (
               <Reveal key={title} delay={index * 0.06}>
-                <article className="premium-card rounded-[1.6rem] border border-border/80 bg-card p-6 shadow-premium transition-all duration-300 hover:-translate-y-2 hover:border-wine/25 hover:shadow-float">
+                <article className="premium-card rounded-[1.6rem] border border-border/80 bg-card p-6 shadow-premium transition-all duration-300 hover:-translate-y-2 hover:border-electric/35 hover:shadow-float">
                   <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-wine-soft text-wine">
                     <Icon className="size-5" />
                   </span>
@@ -233,6 +239,32 @@ export function HomePage() {
                 </article>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden px-4 pb-24 sm:px-6 lg:px-8">
+        <div className="dyc-glow relative mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-linear-to-br from-wine via-purple to-electric px-6 py-14 text-white shadow-float sm:px-12 sm:py-16">
+          <div className="pointer-events-none absolute -right-20 -top-24 size-72 rounded-full border border-white/20 bg-cyan/20 blur-2xl" />
+          <div className="pointer-events-none absolute -bottom-28 left-1/3 size-80 rounded-full border border-white/15 bg-pink/20 blur-3xl" />
+          <div className="relative flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-[0.24em] text-gold-soft">
+                Tu próxima pieza empieza aquí
+              </p>
+              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight sm:text-5xl">
+                Hagamos que tu idea se vuelva imposible de olvidar.
+              </h2>
+              <p className="mt-4 max-w-xl text-base leading-7 text-white/75 sm:text-lg">
+                Cuéntanos qué imaginas y te acompañamos desde el primer boceto hasta la entrega.
+              </p>
+            </div>
+            <Button asChild variant="outline" size="xl" className="shrink-0 border-white/40 bg-white text-wine hover:bg-gold-soft hover:text-wine">
+              <Link to="/contacto">
+                Empezar proyecto
+                <ArrowRight />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -251,12 +283,12 @@ export function ProductsPage() {
       <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {productCatalog.map((product, index) => (
           <Reveal key={product.id} delay={index * 0.05}>
-            <div className="admin-shine overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:border-wine/30 hover:shadow-float">
+            <div className="premium-card admin-shine group overflow-hidden rounded-[1.8rem] border border-border/80 bg-card shadow-premium transition-all duration-300 hover:border-electric/40 hover:shadow-float">
               <InteractiveImage
                 src={product.image}
                 alt={product.name}
                 className="overflow-hidden"
-                imageClassName="h-60 w-full object-cover"
+                imageClassName="h-60 w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="p-6">
                 <div className="flex items-center justify-between gap-3">

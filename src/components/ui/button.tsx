@@ -16,9 +16,9 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 hover:shadow-soft",
         ghost: "hover:bg-accent hover:text-accent-foreground hover:shadow-sm",
         link: "text-primary underline-offset-4 hover:underline",
-        wine: "bg-aether text-aether-foreground shadow-[0_14px_30px_-16px_color-mix(in_srgb,var(--color-aether)_85%,transparent)] hover:bg-aether/90 hover:shadow-float",
+        wine: "bg-linear-to-r from-aether via-purple to-electric text-white shadow-[0_14px_30px_-16px_color-mix(in_srgb,var(--color-aether)_85%,transparent)] hover:from-purple hover:via-electric hover:to-cyan hover:shadow-float",
         wineGhost:
-          "border border-aether/20 bg-aether-soft text-aether hover:bg-aether-soft/80 hover:border-aether/30",
+          "border border-aether/25 bg-background/80 text-aether backdrop-blur-sm hover:border-electric/45 hover:bg-electric-soft hover:text-purple hover:shadow-soft",
       },
       size: {
         default: "h-10 px-4 py-2",
