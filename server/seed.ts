@@ -15,68 +15,101 @@ function getSeedPassword(name: string) {
   return password;
 }
 
-async function seed() {
+export async function seedDatabaseIfNeeded() {
   await connectDatabase();
-
-  const hasUsers = await User.countDocuments();
-  if (hasUsers > 0) {
-    console.log("La base de datos ya tiene usuarios; se omite la inicialización del seed para no borrar datos existentes.");
-    process.exit(0);
-  }
+  const hasUsers = Boolean(await User.exists({}));
 
   const adminPassword = await hashPassword(getSeedPassword("SEED_ADMIN_PASSWORD"));
   const editorPassword = await hashPassword(getSeedPassword("SEED_EDITOR_PASSWORD"));
   const clientPassword = await hashPassword(getSeedPassword("SEED_CLIENT_PASSWORD"));
 
-  const admin = await User.create({
-    nombre: "Administrador",
-    correo: "admin@dcinnovacion.mx",
-    email: "admin@dcinnovacion.mx",
-    password: adminPassword,
-    rol: "admin",
-    role: "admin",
-    telefono: "6180000000",
-    foto: "",
-    activo: true,
-    ultimoLogin: new Date(),
-  });
-
-  const editor = await User.create({
-    nombre: "Editor",
-    correo: "editor@dcinnovacion.mx",
-    email: "editor@dcinnovacion.mx",
-    password: editorPassword,
-    rol: "editor",
-    role: "editor",
-    telefono: "6180000001",
-    foto: "",
-    activo: true,
-  });
-
-  const clients = await User.insertMany([
+  const admin = await User.findOneAndUpdate(
+    { correo: "admin@dcinnovacion.mx" },
     {
-      nombre: "Cliente Uno",
-      correo: "cliente1@dcinnovacion.mx",
-      email: "cliente1@dcinnovacion.mx",
-      password: clientPassword,
-      rol: "cliente",
-      role: "cliente",
-      telefono: "6180000002",
-      foto: "",
-      activo: true,
+      $setOnInsert: {
+        nombre: "Administrador",
+      },
+      $set: {
+        email: "admin@dcinnovacion.mx",
+        password: adminPassword,
+        rol: "admin",
+        role: "admin",
+        telefono: "6180000000",
+        foto: "",
+        activo: true,
+        ultimoLogin: new Date(),
+      },
     },
+    { upsert: true, new: true },
+  );
+
+  const editor = await User.findOneAndUpdate(
+    { correo: "editor@dcinnovacion.mx" },
     {
-      nombre: "Cliente Dos",
-      correo: "cliente2@dcinnovacion.mx",
-      email: "cliente2@dcinnovacion.mx",
-      password: clientPassword,
-      rol: "cliente",
-      role: "cliente",
-      telefono: "6180000003",
-      foto: "",
-      activo: true,
+      $setOnInsert: {
+        nombre: "Editor",
+      },
+      $set: {
+        email: "editor@dcinnovacion.mx",
+        password: editorPassword,
+        rol: "editor",
+        role: "editor",
+        telefono: "6180000001",
+        foto: "",
+        activo: true,
+      },
     },
-  ]);
+    { upsert: true, new: true },
+  );
+
+  const clientOne = await User.findOneAndUpdate(
+    { correo: "cliente1@dcinnovacion.mx" },
+    {
+      $setOnInsert: {
+        nombre: "Cliente Uno",
+      },
+      $set: {
+        email: "cliente1@dcinnovacion.mx",
+        password: clientPassword,
+        rol: "cliente",
+        role: "cliente",
+        telefono: "6180000002",
+        foto: "",
+        activo: true,
+      },
+    },
+    { upsert: true, new: true },
+  );
+
+  const clientTwo = await User.findOneAndUpdate(
+    { correo: "cliente2@dcinnovacion.mx" },
+    {
+      $setOnInsert: {
+        nombre: "Cliente Dos",
+      },
+      $set: {
+        email: "cliente2@dcinnovacion.mx",
+        password: clientPassword,
+        rol: "cliente",
+        role: "cliente",
+        telefono: "6180000003",
+        foto: "",
+        activo: true,
+      },
+    },
+    { upsert: true, new: true },
+  );
+
+  const clients = [clientOne, clientTwo];
+
+  if (!admin || !editor || !clientOne || !clientTwo) {
+    throw new Error("No se pudieron preparar los usuarios base del sistema.");
+  }
+
+  if (hasUsers) {
+    console.log("La base de datos ya tenía usuarios; se actualizaron las cuentas base sin duplicar contenido.");
+    return false;
+  }
 
   const categories = await Category.insertMany([
     { nombre: "Vasos", descripcion: "Vasos premium personalizados", activo: true },
@@ -87,24 +120,24 @@ async function seed() {
   ]);
 
   const products = await Product.insertMany([
-    { nombre: "Vaso térmico premium", descripcion: "Vaso térmico de acero con diseño premium", precio: 420, stock: 18, categoria: categories[0]._id, marca: "Aether", modelo: "VT-01", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Termo de doble pared", descripcion: "Termo para regalo corporativo", precio: 560, stock: 9, categoria: categories[1]._id, marca: "Aether", modelo: "TR-12", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Caja de regalo deluxe", descripcion: "Caja premium para obsequios", precio: 320, stock: 12, categoria: categories[2]._id, marca: "Aether", modelo: "RG-08", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Placa grabada", descripcion: "Placa con grabado láser y detalles premium", precio: 360, stock: 14, categoria: categories[3]._id, marca: "Aether", modelo: "PG-04", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Llavero corporativo", descripcion: "Llavero para eventos y promociones", precio: 180, stock: 30, categoria: categories[4]._id, marca: "Aether", modelo: "LK-16", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Mug personalizado", descripcion: "Mug blanco con impresión personalizada", precio: 260, stock: 22, categoria: categories[0]._id, marca: "Aether", modelo: "MG-20", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Botella deportiva", descripcion: "Botella con acabado sobrio y elegante", precio: 290, stock: 15, categoria: categories[1]._id, marca: "Aether", modelo: "BD-07", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Mousepad grabado", descripcion: "Accesorio de escritorio premium", precio: 240, stock: 11, categoria: categories[3]._id, marca: "Aether", modelo: "MS-09", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Agenda corporativa", descripcion: "Agenda de cuero con logo", precio: 480, stock: 8, categoria: categories[2]._id, marca: "Aether", modelo: "AG-11", imagenes: ["/uploads/demo.jpg"], activo: true },
-    { nombre: "Cenicero de cristal", descripcion: "Pieza para marcas premium", precio: 610, stock: 7, categoria: categories[4]._id, marca: "Aether", modelo: "CN-02", imagenes: ["/uploads/demo.jpg"], activo: true },
+    { nombre: "Vaso térmico premium", descripcion: "Vaso térmico de acero con diseño premium", precio: 420, stock: 18, categoria: categories[0]._id, marca: "DYC Innovación", modelo: "VT-01", imagenes: [], activo: true },
+    { nombre: "Termo de doble pared", descripcion: "Termo para regalo corporativo", precio: 560, stock: 9, categoria: categories[1]._id, marca: "DYC Innovación", modelo: "TR-12", imagenes: [], activo: true },
+    { nombre: "Caja de regalo deluxe", descripcion: "Caja premium para obsequios", precio: 320, stock: 12, categoria: categories[2]._id, marca: "DYC Innovación", modelo: "RG-08", imagenes: [], activo: true },
+    { nombre: "Placa grabada", descripcion: "Placa con grabado láser y detalles premium", precio: 360, stock: 14, categoria: categories[3]._id, marca: "DYC Innovación", modelo: "PG-04", imagenes: [], activo: true },
+    { nombre: "Llavero corporativo", descripcion: "Llavero para eventos y promociones", precio: 180, stock: 30, categoria: categories[4]._id, marca: "DYC Innovación", modelo: "LK-16", imagenes: [], activo: true },
+    { nombre: "Mug personalizado", descripcion: "Mug blanco con impresión personalizada", precio: 260, stock: 22, categoria: categories[0]._id, marca: "DYC Innovación", modelo: "MG-20", imagenes: [], activo: true },
+    { nombre: "Botella deportiva", descripcion: "Botella con acabado sobrio y elegante", precio: 290, stock: 15, categoria: categories[1]._id, marca: "DYC Innovación", modelo: "BD-07", imagenes: [], activo: true },
+    { nombre: "Mousepad grabado", descripcion: "Accesorio de escritorio premium", precio: 240, stock: 11, categoria: categories[3]._id, marca: "DYC Innovación", modelo: "MS-09", imagenes: [], activo: true },
+    { nombre: "Agenda corporativa", descripcion: "Agenda de cuero con logo", precio: 480, stock: 8, categoria: categories[2]._id, marca: "DYC Innovación", modelo: "AG-11", imagenes: [], activo: true },
+    { nombre: "Cenicero de cristal", descripcion: "Pieza para marcas premium", precio: 610, stock: 7, categoria: categories[4]._id, marca: "DYC Innovación", modelo: "CN-02", imagenes: [], activo: true },
   ]);
 
   await News.insertMany([
-    { titulo: "Nuevo catálogo para temporada", contenido: "Hemos lanzado una nueva colección para regalos corporativos.", imagen: "/uploads/demo.jpg", autor: "D&C Innovación", fecha: new Date(), activo: true },
-    { titulo: "Grabado láser en promociones", contenido: "El grabado láser sigue siendo una de las opciones más solicitadas.", imagen: "/uploads/demo.jpg", autor: "D&C Innovación", fecha: new Date(), activo: true },
-    { titulo: "Personalización para eventos", contenido: "Creamos obsequios para convenciones, conferencias y más.", imagen: "/uploads/demo.jpg", autor: "D&C Innovación", fecha: new Date(), activo: true },
-    { titulo: "Nuevos materiales premium", contenido: "Exploramos acabados premium y detalles de alta gama.", imagen: "/uploads/demo.jpg", autor: "D&C Innovación", fecha: new Date(), activo: true },
-    { titulo: "Diseño para marcas", contenido: "Acompañamos marcas con productos que refuerzan su identidad.", imagen: "/uploads/demo.jpg", autor: "D&C Innovación", fecha: new Date(), activo: true },
+    { titulo: "Nuevo catálogo para temporada", contenido: "Hemos lanzado una nueva colección para regalos corporativos.", imagen: "", autor: "D&C Innovación", fecha: new Date(), activo: true },
+    { titulo: "Grabado láser en promociones", contenido: "El grabado láser sigue siendo una de las opciones más solicitadas.", imagen: "", autor: "D&C Innovación", fecha: new Date(), activo: true },
+    { titulo: "Personalización para eventos", contenido: "Creamos obsequios para convenciones, conferencias y más.", imagen: "", autor: "D&C Innovación", fecha: new Date(), activo: true },
+    { titulo: "Nuevos materiales premium", contenido: "Exploramos acabados premium y detalles de alta gama.", imagen: "", autor: "D&C Innovación", fecha: new Date(), activo: true },
+    { titulo: "Diseño para marcas", contenido: "Acompañamos marcas con productos que refuerzan su identidad.", imagen: "", autor: "D&C Innovación", fecha: new Date(), activo: true },
   ]);
 
   await FAQ.insertMany([
@@ -124,15 +157,15 @@ async function seed() {
   ]);
 
   await Slider.insertMany([
-    { titulo: "Personalización premium", descripcion: "Regalos, marca y detalles con distinción.", imagen: "/uploads/demo.jpg", botonTexto: "Ver catálogo", botonLink: "/productos", orden: 1, activo: true },
-    { titulo: "Producción ágil", descripcion: "Desde conceptos hasta entrega final.", imagen: "/uploads/demo.jpg", botonTexto: "Cotizar", botonLink: "/contacto", orden: 2, activo: true },
-    { titulo: "Diseño para marcas", descripcion: "Productos para negocios y eventos.", imagen: "/uploads/demo.jpg", botonTexto: "Ver servicios", botonLink: "/servicios", orden: 3, activo: true },
+    { titulo: "Personalización premium", descripcion: "Regalos, marca y detalles con distinción.", imagen: "", botonTexto: "Ver catálogo", botonLink: "/productos", orden: 1, activo: true },
+    { titulo: "Producción ágil", descripcion: "Desde conceptos hasta entrega final.", imagen: "", botonTexto: "Cotizar", botonLink: "/contacto", orden: 2, activo: true },
+    { titulo: "Diseño para marcas", descripcion: "Productos para negocios y eventos.", imagen: "", botonTexto: "Ver servicios", botonLink: "/servicios", orden: 3, activo: true },
   ]);
 
   await Banner.insertMany([
-    { titulo: "Oferta especial", descripcion: "Regalos para empresas", imagen: "/uploads/demo.jpg", enlace: "/productos", activo: true },
-    { titulo: "Nuevos materiales", descripcion: "Personalización premium en cada detalle", imagen: "/uploads/demo.jpg", enlace: "/servicios", activo: true },
-    { titulo: "Eventos y promociones", descripcion: "Diseños para marcas y regalos corporativos", imagen: "/uploads/demo.jpg", enlace: "/contacto", activo: true },
+    { titulo: "Oferta especial", descripcion: "Regalos para empresas", imagen: "", enlace: "/productos", activo: true },
+    { titulo: "Nuevos materiales", descripcion: "Personalización premium en cada detalle", imagen: "", enlace: "/servicios", activo: true },
+    { titulo: "Eventos y promociones", descripcion: "Diseños para marcas y regalos corporativos", imagen: "", enlace: "/contacto", activo: true },
   ]);
 
   await SiteConfig.create({
@@ -172,10 +205,18 @@ async function seed() {
   ]);
 
   console.log("Seed ejecutado correctamente.");
-  process.exit(0);
+  return true;
 }
 
-seed().catch((error) => {
-  console.error("Error ejecutando el seed:", error);
-  process.exit(1);
-});
+export async function seed() {
+  return seedDatabaseIfNeeded();
+}
+
+if (process.argv[1] && /seed\.(ts|js)$/.test(process.argv[1])) {
+  seed()
+    .then(() => process.exit(0))
+    .catch((error) => {
+      console.error("Error ejecutando el seed:", error);
+      process.exit(1);
+    });
+}

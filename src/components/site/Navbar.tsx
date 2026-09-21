@@ -31,7 +31,9 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled || open ? "border-b border-border bg-background/85 shadow-soft backdrop-blur-xl" : "bg-transparent"
+        scrolled || open
+          ? "border-b border-border bg-background/85 shadow-soft backdrop-blur-xl"
+          : "bg-transparent"
       }`}
     >
       <nav
@@ -47,7 +49,10 @@ export function Navbar() {
             <li key={link.to}>
               <Link
                 to={link.to}
-                className="relative rounded-full px-3.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-aether-soft hover:text-aether"
+                activeProps={{
+                  className: "bg-aether-soft text-aether shadow-soft",
+                }}
+                className="relative rounded-full px-3.5 py-2 text-sm font-medium text-muted-foreground transition-all hover:-translate-y-0.5 hover:bg-aether-soft hover:text-aether"
               >
                 {link.label}
               </Link>
@@ -91,7 +96,8 @@ export function Navbar() {
                   <Link
                     to={link.to}
                     onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-3 text-base font-medium transition-colors hover:bg-muted"
+                    activeProps={{ className: "bg-aether-soft text-aether" }}
+                    className="block rounded-xl px-3 py-3 text-base font-semibold transition-all hover:bg-muted"
                   >
                     {link.label}
                   </Link>

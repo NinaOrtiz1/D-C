@@ -44,7 +44,12 @@ export function getMongoDbUriForLogs() {
   return sanitizeMongoUri(uri);
 }
 
-let memoryServer: any = null;
+type MemoryServer = {
+  getUri(): string;
+  stop(): Promise<void>;
+};
+
+let memoryServer: MemoryServer | null = null;
 let connectionPromise: Promise<typeof mongoose> | null = null;
 
 export async function connectDatabase() {
@@ -57,26 +62,15 @@ export async function connectDatabase() {
       const mongoUri = getMongoUri();
 
       if (!mongoUri) {
-        if (process.env.VERCEL === "1") {
-          throw new Error("MONGODB_URI no está configurada en el entorno de Vercel.");
-        }
+        throw new Error(
+          "MONGODB_URI no está configurada. Añade una URI válida de MongoDB Atlas en el archivo .env antes de iniciar el backend.",
+        );
+      }
 
-        try {
-          const { MongoMemoryServer } = await import("mongodb-memory-server");
-          memoryServer = await MongoMemoryServer.create();
-          const memoryUri = memoryServer.getUri();
-
-          await mongoose.connect(memoryUri, {
-            dbName: "aether",
-            serverSelectionTimeoutMS: 15000,
-          });
-
-          console.warn("MONGODB_URI no encontrada. Conectado a MongoDB en memoria para desarrollo.");
-          return mongoose;
-        } catch (error) {
-          console.error("No se pudo iniciar MongoDB en memoria.");
-          throw error;
-        }
+      if (!/^mongodb(?:\+srv)?:\/\//i.test(mongoUri)) {
+        throw new Error(
+          "MONGODB_URI inválida. Debe comenzar con mongodb:// o mongodb+srv:// y apuntar a MongoDB Atlas.",
+        );
       }
 
       try {
@@ -91,7 +85,9 @@ export async function connectDatabase() {
         const message = error instanceof Error ? error.message : "Error desconocido";
         const safeMessage = sanitizeMongoUri(message);
 
-        console.error("No se pudo conectar a MongoDB Atlas. Revisa MONGODB_URI y las credenciales.");
+        console.error(
+          "No se pudo conectar a MongoDB Atlas. Revisa MONGODB_URI y las credenciales.",
+        );
         console.error(`Detalle: ${safeMessage}`);
         throw error;
       }

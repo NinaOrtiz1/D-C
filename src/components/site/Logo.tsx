@@ -22,9 +22,11 @@ export function Logo({
       />
       {withName ? (
         <span
-          className={`font-display text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight ${nameClassName}`}
+          className={`font-display text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl ${nameClassName}`}
         >
-          <span className="text-aether">DYC</span>
+          <span className="bg-linear-to-r from-aether via-purple to-gold bg-clip-text text-transparent">
+            D<span className="inline-block text-[1.12em] leading-none">Y</span>C
+          </span>
         </span>
       ) : null}
     </span>

@@ -1,10 +1,10 @@
-import { Clock, User, Package, Plus, Edit2, Trash2 } from 'lucide-react';
-import { Skeleton } from '../ui/skeleton';
+import { Clock, User, Package, Plus, Edit2, Trash2 } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 interface Activity {
   id: string;
   action: string;
-  type: 'add' | 'edit' | 'delete' | 'login';
+  type: "add" | "edit" | "delete" | "login";
   user?: string;
   timestamp: string;
   details?: string;
@@ -23,16 +23,26 @@ const actionIcons = {
 };
 
 const actionColors = {
-  add: 'bg-success/10 text-success',
-  edit: 'bg-warning/10 text-warning',
-  delete: 'bg-destructive/10 text-destructive',
-  login: 'bg-aether/10 text-aether',
+  add: "bg-success/10 text-success",
+  edit: "bg-warning/10 text-warning",
+  delete: "bg-destructive/10 text-destructive",
+  login: "bg-aether/10 text-aether",
 };
 
 export function ActivityFeed({ activities, isLoading }: ActivityFeedProps) {
   return (
-    <div className="rounded-xl border border-border/40 bg-card/50 backdrop-blur-sm p-6 shadow-soft">
-      <h3 className="font-display text-lg font-bold text-foreground mb-4">Actividad reciente</h3>
+    <div className="rounded-[1.5rem] border border-border/70 bg-card p-5 shadow-soft backdrop-blur-sm sm:p-6">
+      <div className="mb-5 flex items-center justify-between">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-success">Seguimiento</p>
+          <h3 className="mt-1 font-display text-xl font-bold text-foreground">
+            Actividad reciente
+          </h3>
+        </div>
+        <div className="rounded-xl bg-success/10 p-2.5 text-success">
+          <Clock className="size-4" />
+        </div>
+      </div>
 
       {isLoading ? (
         <div className="space-y-4">
@@ -58,14 +68,16 @@ export function ActivityFeed({ activities, isLoading }: ActivityFeedProps) {
             const colorClass = actionColors[activity.type];
 
             return (
-              <div key={activity.id} className="flex gap-4">
+              <div key={activity.id} className="relative flex gap-4">
                 {/* Timeline line */}
                 {index < activities.length - 1 && (
                   <div className="absolute left-8 top-full h-8 w-0.5 bg-gradient-to-b from-border to-transparent" />
                 )}
 
                 {/* Icon */}
-                <div className={`relative flex-shrink-0 flex items-center justify-center size-10 rounded-full ${colorClass}`}>
+                <div
+                  className={`relative flex-shrink-0 flex items-center justify-center size-10 rounded-full ${colorClass}`}
+                >
                   <Icon className="size-4" />
                 </div>
 

@@ -119,7 +119,9 @@ function Lightbox({ images, index, onClose, onChange }: {
     setShareMessage("");
     resetView();
 
-    const adjacentImages = [images[index - 1], images[index + 1]].filter(Boolean);
+    const adjacentImages = [images[index - 1], images[index + 1]].filter(
+      (image): image is ViewerImage => Boolean(image),
+    );
     const preloaded = adjacentImages.map((adjacent) => {
       const preloadedImage = new Image();
       preloadedImage.src = adjacent.src;
@@ -180,7 +182,9 @@ function Lightbox({ images, index, onClose, onChange }: {
 
     if (pointerMap.current.size === 2) {
       const points = Array.from(pointerMap.current.values());
-      pinchStartDistanceRef.current = getDistance(points[0], points[1]);
+      const [firstPoint, secondPoint] = points;
+      if (!firstPoint || !secondPoint) return;
+      pinchStartDistanceRef.current = getDistance(firstPoint, secondPoint);
       pinchStartZoomRef.current = zoom;
       dragStartRef.current = null;
       return;
@@ -197,7 +201,9 @@ function Lightbox({ images, index, onClose, onChange }: {
 
     if (pointerMap.current.size === 2 && pinchStartDistanceRef.current) {
       const points = Array.from(pointerMap.current.values());
-      const distance = getDistance(points[0], points[1]);
+      const [firstPoint, secondPoint] = points;
+      if (!firstPoint || !secondPoint) return;
+      const distance = getDistance(firstPoint, secondPoint);
       setZoomLevel(pinchStartZoomRef.current * (distance / pinchStartDistanceRef.current));
       return;
     }

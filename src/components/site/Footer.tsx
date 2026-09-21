@@ -1,13 +1,14 @@
 import { Link } from "@tanstack/react-router";
 
 import { Logo } from "@/components/site/Logo";
+import { AdminPinModal } from "@/components/site/AdminPinModal";
 import { NAV_LINKS, SITE, SOCIALS } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border py-16">
+    <footer className="dyc-footer relative overflow-hidden border-t border-border bg-[radial-gradient(circle_at_15%_20%,color-mix(in_srgb,var(--color-gold)_10%,transparent),transparent_28%),radial-gradient(circle_at_90%_80%,color-mix(in_srgb,var(--color-aether)_10%,transparent),transparent_30%),var(--color-foreground)] py-16">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <div className="rounded-[2.2rem] border border-border bg-card/70 p-10 shadow-soft sm:p-12">
+        <div className="admin-panel premium-card rounded-[2.2rem] p-8 shadow-premium sm:p-12">
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr]">
             <div>
               <Logo className="h-10 w-10 sm:h-11 sm:w-11" />
@@ -38,7 +39,7 @@ export function Footer() {
                   <li key={l.to}>
                     <Link
                       to={l.to}
-                      className="text-sm text-muted-foreground transition-colors hover:text-wine"
+                      className="inline-flex rounded-md py-0.5 text-sm text-muted-foreground transition-all hover:translate-x-1 hover:text-wine"
                     >
                       {l.label}
                     </Link>
@@ -62,10 +63,11 @@ export function Footer() {
           </div>
 
           <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground sm:flex-row">
-            <p>
-              © {new Date().getFullYear()} {SITE.name}. Todos los derechos reservados.
+            <p>© 2026 DYC. Todos los derechos reservados.</p>
+            <p className="cursor-pointer select-none rounded-md px-2 py-1 transition-colors hover:text-wine">
+              Hecho con precisión en {SITE.city}.
             </p>
-            <p>Hecho con precisión en {SITE.city}.</p>
+            <AdminPinModal />
           </div>
         </div>
       </div>

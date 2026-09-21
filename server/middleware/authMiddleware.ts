@@ -3,14 +3,29 @@ import type { NextFunction, Request, Response } from "express";
 import { verifyToken } from "../auth.js";
 import { User } from "../models.js";
 
+type RequestUser = {
+  id: string;
+  role: string;
+  email?: string;
+  nombre?: string;
+};
+
+type RequestWithUser = Request & { user?: RequestUser };
+
 export async function authMiddleware(req: Request, res: Response, next: NextFunction) {
   const authorization = req.headers.authorization;
+  const bearerToken = authorization?.startsWith("Bearer ")
+    ? authorization.replace("Bearer ", "").trim()
+    : "";
+  const cookieToken = req.headers.cookie
+    ?.split(";")
+    .map((value) => value.trim().split("="))
+    .find(([name]) => name === "auth_token")?.[1];
+  const token = bearerToken || cookieToken;
 
-  if (!authorization || !authorization.startsWith("Bearer ")) {
+  if (!token) {
     return res.status(401).json({ success: false, message: "Token de autenticación requerido." });
   }
-
-  const token = authorization.replace("Bearer ", "").trim();
 
   try {
     const decoded = verifyToken(token);
@@ -24,7 +39,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
       return res.status(401).json({ success: false, message: "Usuario inactivo." });
     }
 
-    (req as any).user = {
+    (req as RequestWithUser).user = {
       id: String(user._id),
       role: user.rol ?? user.role ?? "cliente",
       email: user.correo ?? user.email,
@@ -39,7 +54,7 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
 
 export function roleMiddleware(allowedRoles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
-    const currentUser = (req as any).user;
+    const currentUser = (req as RequestWithUser).user;
 
     if (!currentUser || !allowedRoles.includes(currentUser.role)) {
       return res.status(403).json({

@@ -21,7 +21,6 @@ export const NAV_LINKS = [
   { label: "Galería", to: "/galeria" },
   { label: "FAQ", to: "/faq" },
   { label: "Contacto", to: "/contacto" },
-  { label: "Administración", to: "/admin" },
 ] as const;
 
 export const SOCIALS: Array<{
