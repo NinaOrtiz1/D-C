@@ -1165,7 +1165,7 @@ export default function AdminPage() {
               {showProductForm ? (
                 <form
                   onSubmit={handleCreateProduct}
-                  className="admin-panel grid gap-4 rounded-2xl p-5 md:grid-cols-2"
+                  className="admin-form-panel product-form admin-panel grid gap-4 rounded-2xl p-5 md:grid-cols-2"
                 >
                   <input
                     required
@@ -1367,7 +1367,7 @@ export default function AdminPage() {
                 </Alert>
               ) : null}
 
-              <form onSubmit={handleInventoryMovement} className="admin-panel grid gap-4 rounded-2xl p-5 md:grid-cols-4">
+              <form onSubmit={handleInventoryMovement} className="admin-form-panel inventory-form admin-panel grid gap-4 rounded-2xl p-5 md:grid-cols-4">
                 <select
                   required
                   value={inventoryForm.productId}
@@ -1608,7 +1608,7 @@ export default function AdminPage() {
               {showUserForm ? (
                 <form
                   onSubmit={handleCreateUser}
-                  className="admin-panel grid gap-4 rounded-2xl p-5 md:grid-cols-2"
+                  className="admin-form-panel user-form admin-panel grid gap-4 rounded-2xl p-5 md:grid-cols-2"
                 >
                   <input
                     required
